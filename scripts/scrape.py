@@ -26,6 +26,7 @@ ANNOUNCEMENT_ID = "2106845241357824205"  # Oct 5: "Over the next 28 days..."
 TOTAL_DAYS = 28
 SITE_URL = "https://codexy.fyi"  # custom domain (CNAME); no trailing slash
 SITE_SHARE_TEXT = "Tracking Tibo's 28-day Codex shipping sprint"
+CF_BEACON_TOKEN = "ce3e870636f3415c8020c3187dfd9319"  # Cloudflare Web Analytics
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_PATH = os.path.join(ROOT, "data", "days.json")
@@ -595,6 +596,7 @@ def render(log):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{{"token": "{CF_BEACON_TOKEN}"}}'></script>
 <style>{CSS}</style>
 </head>
 <body>
