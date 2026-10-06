@@ -24,7 +24,7 @@ import urllib.request
 HANDLE = "thsottiaux"
 ANNOUNCEMENT_ID = "2106845241357824205"  # Oct 5: "Over the next 28 days..."
 TOTAL_DAYS = 28
-SITE_URL = "https://genuifx.github.io/codex-28-days/"
+SITE_URL = "https://codex28days.site"  # custom domain (CNAME); no trailing slash
 SITE_SHARE_TEXT = "Tracking Tibo's 28-day Codex shipping sprint"
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -301,7 +301,7 @@ def fmt_date(s):
 
 
 def day_url(day):
-    return f"{SITE_URL}#day-{day}"
+    return f"{SITE_URL}/#day-{day}"
 
 
 def tweet_intent(text, url):
@@ -345,7 +345,7 @@ def poster_data(entries, latest_day):
             "stats": [fmt_int(e.get(k)) for k in ("likes", "reposts", "replies", "views")],
             "url": day_url(e["day"]),
         })
-    data = {"total": TOTAL_DAYS, "latest": latest_day, "site": SITE_URL, "handle": HANDLE,
+    data = {"total": TOTAL_DAYS, "latest": latest_day, "site": f"{SITE_URL}/", "handle": HANDLE,
             "leaf": LEAF_PATH, "entries": items}
     # Safe inside <script type="application/json">: no "</" can close the tag early.
     return json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
@@ -458,7 +458,7 @@ for(var r=0;r<m;r++)for(var k=0;k<m;k++)if(g.isDark(r,k))x.fillRect(ox+(k+1)*cel
 var maxW=hasQR?qx-X0-36:CW,parts=url.replace(/^https?:\/\//,'').split('/'),host=parts.shift(),path='/'+parts.join('/');
 var ps=fitPx(x,cta,18,maxW);pxText(x,cta,X0,y+16,ps,C.redInk);
 var us=36;x.font=F(us,'700');while(us>20&&Math.max(x.measureText(host).width,x.measureText(path).width)>maxW){us-=2;x.font=F(us,'700')}
-x.textBaseline='top';x.fillStyle=C.ink;x.fillText(host,X0,y+62);x.fillStyle=C.red;x.fillText(path,X0,y+62+us*1.3);
+x.textBaseline='top';x.fillStyle=C.ink;x.fillText(host,X0,y+62);if(path!=='/'){x.fillStyle=C.red;x.fillText(path,X0,y+62+us*1.3)}
 x.font=F(22);x.fillStyle=C.mut;x.fillText(tail,X0,H-48-26-24)}
 
 /* --- posters --- */
@@ -584,12 +584,12 @@ def render(log):
 <meta property="og:title" content="Codex: 28 Days of Shipping">
 <meta property="og:description" content="Every daily Codex ship from Tibo's 28-day sprint, tracked day by day.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="{SITE_URL}">
+<meta property="og:url" content="{SITE_URL}/">
 <meta property="og:site_name" content="Codex: 28 Days of Shipping">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Codex: 28 Days of Shipping">
 <meta name="twitter:description" content="Every daily Codex ship from Tibo's 28-day sprint, tracked day by day.">
-<link rel="canonical" href="{SITE_URL}">
+<link rel="canonical" href="{SITE_URL}/">
 <meta name="theme-color" content="#faf8f3">
 <link rel="icon" href="{favicon}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -627,7 +627,7 @@ def render(log):
 <section class="share-site" id="share" aria-labelledby="share-title">
 <h2 id="share-title" class="px">INVITE A PLAYER</h2>
 <p>Know someone who lives in Codex? Send them the tracker.</p>
-<div class="share">{share_tags(SITE_SHARE_TEXT, SITE_URL, "Codex: 28 Days of Shipping", "site", "SITE POSTER")}</div>
+<div class="share">{share_tags(SITE_SHARE_TEXT, f"{SITE_URL}/", "Codex: 28 Days of Shipping", "site", "SITE POSTER")}</div>
 </section>
 <footer class="site-foot">
 <p class="px">GAME SAVED</p>
