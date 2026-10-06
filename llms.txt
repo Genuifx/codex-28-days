@@ -1,0 +1,71 @@
+# Codex: 28 Days of Shipping
+
+> Unofficial day-by-day archive of Tibo (@thsottiaux, OpenAI Codex lead)'s 28-day Codex shipping sprint (Oct 5 – Nov 1, 2026): every daily ship, full original English text plus a Chinese machine translation. Site: https://codexy.fyi/ · Data: https://codexy.fyi/data/days.json
+
+## FAQ
+
+- **What is the Codex 28-day sprint?** A 28-day run (Oct 5 – Nov 1, 2026) in which the OpenAI Codex team ships one clear improvement for most users every day, or a full reset.
+- **Who is Tibo?** Tibo (Thibault Sottiaux, @thsottiaux on X) leads Codex at OpenAI and announces each day's ship.
+- **How often is this tracker updated?** Automatically twice a day (02:00 and 14:00 UTC), pulling Tibo's new public Day N posts.
+- **Is this official?** No. This is an unofficial fan-made tracker and is not affiliated with OpenAI.
+- **Where do the translations come from?** The Chinese text is machine-translated from the original English posts and is for reference only.
+
+## Ship log
+
+### Kickoff announcement: Over the next 28 days, each day we’ll either ship one thing that is a clear…
+
+- Date: Oct 04, 2026 · 20:33 UTC
+- Original post: https://x.com/thsottiaux/status/2106845241357824205
+- Permalink: https://codexy.fyi/#day-0
+
+English (original):
+
+Over the next 28 days, each day we’ll either ship one thing that is a clear improvement and relevant for most codex/work users or ship a full reset. Let the improvements begin.
+
+中文（机器翻译，仅供参考）:
+
+在接下来的 28 天里，每天我们要么发布一项明显改进且与大多数 Codex/工作用户相关的内容，要么发布完全重置的内容。让改进开始吧。
+
+### Day 1: We have optimized the default speed to be ~50% faster across GPT-6 Astra and…
+
+- Date: Oct 05, 2026 · 17:20 UTC
+- Original post: https://x.com/thsottiaux/status/2107158998495748264
+- Permalink: https://codexy.fyi/#day-1
+
+English (original):
+
+Day 1/
+
+We have optimized the default speed to be ~50% faster across GPT-6 Astra and GPT-6.1 Sol through the subscription across all our products and partners using Sign in With ChatGPT (including OpenCode, Pi, Amp, Devin, ...).
+
+No changes needed on your end and this should be felt within the next two hours.
+
+中文（机器翻译，仅供参考）:
+
+Day 1/
+
+通过使用“使用 ChatGPT 登录”（包括 OpenCode、Pi、Amp、Devin 等）订阅我们的所有产品和合作伙伴，我们已将 GPT-6 Astra 和 GPT-6.1 Sol 的默认速度优化了约 50%。
+
+您无需进行任何更改，并且应该会在接下来的两个小时内感受到这一点。
+
+### Day 2.1: We have made Auto-review free for all users signed in through a ChatGPT…
+
+- Date: Oct 06, 2026 · 07:13 UTC
+- Original post: https://x.com/thsottiaux/status/2107368734981517634
+- Permalink: https://codexy.fyi/#day-2.1
+
+English (original):
+
+Day 2.1/
+
+We have made Auto-review free for all users signed in through a ChatGPT account. You can enable it in settings > permissions > auto-review. Auto-review improves upon the default sandbox setting that requires you to approve everything, which is prone to decision fatigue unless you spend a lot of time configuring specific rules.
+
+It allows you to run long tasks while having a second agent review all actions taken by the primary agent. Its only goal is to prevent high-risk actions from being taken and to protect against unwanted actions that are not aligned with the original user intent. This  Auto-review feature is now free and does not draw usage from your plan.
+
+中文（机器翻译，仅供参考）:
+
+Day 2.1/
+
+我们为所有通过 ChatGPT 帐户登录的用户免费提供自动审核。您可以在“设置”>“权限”>“自动审核”中启用它。自动审核改进了默认沙箱设置，默认沙箱设置要求您批准所有内容，这很容易导致决策疲劳，除非您花费大量时间配置特定规则。
+
+它允许您运行长时间任务，同时让第二个代理审查主要代理采取的所有操作。其唯一目标是防止采取高风险操作，并防止与原始用户意图不一致的不需要的操作。此自动审核功能现在是免费的，不会占用您的计划的使用量。

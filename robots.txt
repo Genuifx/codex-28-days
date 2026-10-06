@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://codexy.fyi/sitemap.xml

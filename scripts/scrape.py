@@ -209,6 +209,20 @@ I18N = {
         "h1": "Codex: 28 Days<br>of <span>Shipping</span>",
         "lede": f"Unofficial daily tracker of {_LEDE_LINK}'s\n28-day Codex improvement sprint (Oct 5 – Nov 1, 2026). "
                 "One entry per ship, newest first.",
+        "hook": "Tibo ships daily. We log every single one — in English and Chinese.",
+        "save_tag": "★ SAVE",
+        "save_line": "Bookmark this: the only day-by-day archive of the 28-day sprint.",
+        "faq_title": "FAQ",
+        "faq_q1": "What is the Codex 28-day sprint?",
+        "faq_a1": "A 28-day run (Oct 5 – Nov 1, 2026) in which the OpenAI Codex team ships one clear improvement for most users every day, or a full reset.",
+        "faq_q2": "Who is Tibo?",
+        "faq_a2": f"Tibo (Thibault Sottiaux, @{HANDLE} on X) leads Codex at OpenAI and announces each day's ship.",
+        "faq_q3": "How often is this tracker updated?",
+        "faq_a3": "Automatically twice a day (02:00 and 14:00 UTC), pulling Tibo's new public Day N posts.",
+        "faq_q4": "Is this official?",
+        "faq_a4": "No. This is an unofficial fan-made tracker and is not affiliated with OpenAI.",
+        "faq_q5": "Where do the translations come from?",
+        "faq_a5": "The Chinese text is machine-translated from the original English posts and is for reference only.",
         "xp_count": "{n} / {t} SHIPPED",
         "xp_aria": "Sprint progress",
         "prog": "Day {d} of {t} tracked · updated {now}",
@@ -282,6 +296,20 @@ I18N = {
         "h1": "Codex：28 天<br><span>连续发布</span>",
         "lede": f"非官方每日追踪站，记录 {_LEDE_LINK} 为期 28 天的 Codex 改进冲刺"
                 "（2026 年 10 月 5 日 – 11 月 1 日）。每次发布一条，最新的在最前。",
+        "hook": "Codex 负责人每天发一条改进，我们一条不落地全记录，还翻成中文。",
+        "save_tag": "★ 收藏",
+        "save_line": "收藏这一页：28 天冲刺唯一逐日存档。",
+        "faq_title": "常见问题",
+        "faq_q1": "这是什么活动？",
+        "faq_a1": "OpenAI Codex 团队为期 28 天（2026 年 10 月 5 日 – 11 月 1 日）的冲刺：每天发布一项对大多数用户有明显帮助的改进，或一次完全重置。",
+        "faq_q2": "Tibo 是谁？",
+        "faq_a2": f"Tibo（Thibault Sottiaux，X 账号 @{HANDLE}）是 OpenAI Codex 负责人，每天由他公布当天的发布。",
+        "faq_q3": "多久更新一次？",
+        "faq_a3": "每天自动更新两次（北京时间 10:00 和 22:00），抓取 Tibo 新发的公开 Day N 推文。",
+        "faq_q4": "这是官方的吗？",
+        "faq_a4": "不是。这是粉丝做的非官方追踪站，与 OpenAI 无关。",
+        "faq_q5": "中文译文哪来的？",
+        "faq_a5": "中文由英文原帖机器翻译而来，仅供参考。",
         "xp_count": "已发布 {n} / {t}",
         "xp_aria": "冲刺进度",
         "prog": "已追踪到第 {d} 天（共 {t} 天）· 更新于 {now}",
@@ -399,6 +427,9 @@ a:focus-visible{outline:2px solid var(--red);outline-offset:3px}
 .hero h1 span{color:var(--red)}
 .lede{margin:0;max-width:560px;color:var(--mut);font-size:var(--fs-body)}
 .lede a{text-decoration:none;border-bottom:1px solid currentColor}
+.hook{margin:14px 0 0;max-width:560px;color:var(--ink);font-weight:700}
+.save-line{display:flex;align-items:baseline;gap:10px;margin:14px 0 0;max-width:560px;padding:8px 12px;background:var(--card);border-left:3px solid var(--red);color:var(--ink);font-size:var(--fs-small)}
+.save-line .px{flex:none;font-size:var(--px-xs);color:var(--red-ink)}
 .leaves{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
 .leaf{position:absolute;top:-40px;fill:var(--red);opacity:0;animation:fall linear infinite}
 .leaf.l1{left:68%;width:26px;animation-duration:14s}
@@ -498,6 +529,14 @@ cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:0;-webkit-t
 html:not([data-lang=zh]) .lang-tag .lt-en,html[data-lang=zh] .lang-tag .lt-zh{background:var(--red);color:#fff}
 .lang-tag:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 .mt-note{margin:-6px 0 20px;color:var(--mut);font-size:var(--fs-small)}
+
+/* FAQ */
+.faq{margin:0 0 28px}
+.faq h2{margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid var(--ink);font-size:var(--px-m);color:var(--ink)}
+.faq-item{background:var(--card);border:1px solid var(--line);padding:14px clamp(16px,4vw,20px);margin:0 0 10px}
+.faq-item h3{margin:0 0 4px;font-size:var(--fs-body);line-height:1.5;color:var(--ink)}
+.faq-item h3::before{content:"? ";font-family:var(--px);font-size:var(--px-s);color:var(--red)}
+.faq-item p{margin:0;color:var(--mut);font-size:var(--fs-small)}
 
 /* Footer */
 .site-foot{margin:clamp(40px,9vw,56px) 0 0;padding:24px 0 max(56px,env(safe-area-inset-bottom));border-top:1px solid var(--line);color:var(--mut);font-size:var(--fs-small)}
@@ -876,6 +915,84 @@ b.addEventListener('click',function(){open(b.getAttribute('data-poster'),b)})});
 })();"""
 
 
+FAQ_N = 5
+
+
+def parse_dt(s):
+    try:
+        return datetime.datetime.strptime(s, "%a %b %d %H:%M:%S %z %Y").astimezone(datetime.timezone.utc)
+    except (TypeError, ValueError):
+        return None
+
+
+def entry_headline(e):
+    """'Codex Day 1: We have optimized the default speed to be ~50% faster…' (<110 chars)."""
+    return share_blurb(e, limit=80)
+
+
+def json_ld(entries):
+    """schema.org WebSite + ItemList of BlogPosting (one per day) + FAQPage, English."""
+    posts = []
+    for i, e in enumerate(sorted(entries, key=lambda e: (e["day"], e.get("sub") or "")), 1):
+        iso, _ = fmt_date(e.get("posted_at", ""))
+        post = {"@type": "BlogPosting", "headline": entry_headline(e), "url": day_url(day_slug(e)),
+                "inLanguage": "en", "articleBody": e["text"],
+                "author": {"@type": "Person", "name": "Tibo", "url": f"https://x.com/{HANDLE}"},
+                "sameAs": e["url"]}
+        if iso:
+            post["datePublished"] = iso
+        posts.append({"@type": "ListItem", "position": i, "item": post})
+    graph = [
+        {"@type": "WebSite", "@id": f"{SITE_URL}/#website", "url": f"{SITE_URL}/",
+         "name": I18N["en"]["site_title"], "description": I18N["en"]["p_sub"], "inLanguage": ["en", "zh-CN"]},
+        {"@type": "ItemList", "name": "Codex 28-day sprint ship log", "numberOfItems": len(posts),
+         "itemListElement": posts},
+        {"@type": "FAQPage", "mainEntity": [
+            {"@type": "Question", "name": tr("en", f"faq_q{i}"),
+             "acceptedAnswer": {"@type": "Answer", "text": tr("en", f"faq_a{i}")}}
+            for i in range(1, FAQ_N + 1)]},
+    ]
+    doc = {"@context": "https://schema.org", "@graph": graph}
+    # Safe inside <script>: no "</" can close the tag early.
+    return json.dumps(doc, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+
+
+def render_sitemap(log):
+    """Single-URL sitemap: fragments (#day-N) are ignored by crawlers, so only the home page."""
+    dts = [d for d in (parse_dt(e.get("posted_at")) for e in log["entries"]) if d]
+    lastmod = f"\n    <lastmod>{max(dts):%Y-%m-%d}</lastmod>" if dts else ""
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{esc(SITE_URL)}/</loc>{lastmod}
+    <changefreq>daily</changefreq>
+  </url>
+</urlset>
+"""
+
+
+def render_llms(log):
+    """llms.txt: plain-text digest for AI crawlers — every post in full English + Chinese MT."""
+    entries = sorted(log["entries"], key=lambda e: (e["day"], e.get("sub") or ""))
+    out = [f"# {I18N['en']['site_title']}", "",
+           f"> Unofficial day-by-day archive of Tibo (@{HANDLE}, OpenAI Codex lead)'s 28-day Codex "
+           f"shipping sprint (Oct 5 – Nov 1, 2026): every daily ship, full original English text "
+           f"plus a Chinese machine translation. Site: {SITE_URL}/ · Data: {SITE_URL}/data/days.json", "",
+           "## FAQ", ""]
+    for i in range(1, FAQ_N + 1):
+        out += [f"- **{tr('en', f'faq_q{i}')}** {tr('en', f'faq_a{i}')}"]
+    out += ["", "## Ship log", ""]
+    for e in entries:
+        _, pretty = fmt_date(e.get("posted_at", ""))
+        title = "Kickoff announcement" if e["day"] == 0 else f"Day {day_slug(e)}"
+        out += [f"### {title}: {strip_day_prefix(entry_headline(e).split(': ', 1)[-1])}", "",
+                f"- Date: {pretty}", f"- Original post: {e['url']}", f"- Permalink: {day_url(day_slug(e))}", "",
+                "English (original):", "", e["text"].strip(), ""]
+        if e.get("text_zh"):
+            out += ["中文（机器翻译，仅供参考）:", "", e["text_zh"].strip(), ""]
+    return "\n".join(out).rstrip() + "\n"
+
+
 def render(log):
     entries = sorted(log["entries"], key=lambda e: e["day"])
     latest_day = max([e["day"] for e in entries if e["day"] > 0], default=0)
@@ -922,6 +1039,8 @@ def render(log):
     )
     leaves = "".join(leaf_svg.format(cls=c) for c in ("l1", "l2", "l3", "l4"))
     n_entries = len(entries)
+    faq_html = "\n".join(f'<div class="faq-item"><h3>{T(f"faq_q{i}")}</h3><p>{T(f"faq_a{i}")}</p></div>'
+                         for i in range(1, FAQ_N + 1))
 
     return f"""<!DOCTYPE html>
 <html lang="en" data-lang="en">
@@ -945,6 +1064,7 @@ def render(log):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{{"token": "{CF_BEACON_TOKEN}"}}'></script>
+<script type="application/ld+json">{json_ld(entries)}</script>
 <style>{CSS}</style>
 <script>const I18N={i18n_json()};</script>
 <script>{LANG_JS}</script>
@@ -965,6 +1085,8 @@ def render(log):
 <p class="kicker px">{T('kicker')}</p>
 <h1 data-i18n="h1" data-i18n-html>{I18N['en']['h1']}</h1>
 <p class="lede" data-i18n="lede" data-i18n-html>{I18N['en']['lede']}</p>
+<p class="hook">{T('hook')}</p>
+<p class="save-line"><span class="px">{T('save_tag')}</span>{T('save_line')}</p>
 <div class="xp">
 <div class="xp-row"><span class="xp-label px">XP</span><span class="xp-count px">{T('xp_count', {'n': f'{latest_day:02d}', 't': TOTAL_DAYS})}</span></div>
 <div class="xp-bar" style="--n:{TOTAL_DAYS};--half:{(TOTAL_DAYS + 1) // 2}" role="progressbar" aria-label="{I18N['en']['xp_aria']}" data-i18n-attr="aria-label:xp_aria" aria-valuemin="0" aria-valuemax="{TOTAL_DAYS}" aria-valuenow="{latest_day}">{segs}</div>
@@ -981,6 +1103,10 @@ def render(log):
 <h2 id="share-title" class="px">{T('invite_title')}</h2>
 <p>{T('invite_body')}</p>
 <div class="share">{share_tags({l: tr(l, 'site_share') for l in LANGS}, f"{SITE_URL}/", {l: tr(l, 'site_title') for l in LANGS}, "site", "site_poster")}</div>
+</section>
+<section class="faq" id="faq" aria-labelledby="faq-title">
+<h2 id="faq-title" class="px">{T('faq_title')}</h2>
+{faq_html}
 </section>
 <footer class="site-foot">
 <p class="px">{T('foot_saved')}</p>
@@ -1060,6 +1186,9 @@ def main():
     save_log(log)
     with open(INDEX_PATH, "w", encoding="utf-8") as f:
         f.write(render(log))
+    for name, body in (("sitemap.xml", render_sitemap(log)), ("llms.txt", render_llms(log))):
+        with open(os.path.join(ROOT, name), "w", encoding="utf-8") as f:
+            f.write(body)
     print(f"done: {added} new, {len(log['entries'])} total entries", flush=True)
 
 
