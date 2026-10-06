@@ -24,4 +24,17 @@ jobs:
           git config user.name "tibo-tracker-bot"
           git config user.email "tibo-tracker-bot@users.noreply.github.com"
           git add data/days.json index.html sitemap.xml llms.txt
-          git diff --cached --quiet || (git commit -m "chore: update ship log" && git push)
+          git diff --cached --quiet || git commit -m "chore: update ship log"
+          git fetch origin main
+          if git rebase origin/main; then
+            git push origin HEAD:main
+          else
+            # Conflicting remote work landed mid-run: regenerate on the latest remote state instead of merging
+            git rebase --abort
+            git reset --hard origin/main
+            python3 scripts/scrape.py
+            git add data/days.json index.html sitemap.xml llms.txt
+            git diff --cached --quiet || git commit -m "chore: update ship log"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
