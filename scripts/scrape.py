@@ -24,7 +24,7 @@ import urllib.request
 HANDLE = "thsottiaux"
 ANNOUNCEMENT_ID = "2106845241357824205"  # Oct 5: "Over the next 28 days..."
 TOTAL_DAYS = 28
-SITE_URL = "https://codex28days.site"  # custom domain (CNAME); no trailing slash
+SITE_URL = "https://codexy.fyi"  # custom domain (CNAME); no trailing slash
 SITE_SHARE_TEXT = "Tracking Tibo's 28-day Codex shipping sprint"
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
