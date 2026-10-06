@@ -18,11 +18,14 @@ import json
 import os
 import re
 import sys
+import urllib.parse
 import urllib.request
 
 HANDLE = "thsottiaux"
 ANNOUNCEMENT_ID = "2106845241357824205"  # Oct 5: "Over the next 28 days..."
 TOTAL_DAYS = 28
+SITE_URL = "https://genuifx.github.io/codex-28-days/"
+SITE_SHARE_TEXT = "Tracking Tibo's 28-day Codex shipping sprint"
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_PATH = os.path.join(ROOT, "data", "days.json")
@@ -193,6 +196,25 @@ box-shadow:0 -2px 0 0 var(--red),0 2px 0 0 var(--red),-2px 0 0 0 var(--red),2px 
 .orig{margin-left:auto;font-weight:600;text-decoration:none}
 .orig:hover{text-decoration:underline}
 .empty{color:var(--mut)}
+.quest{scroll-margin-top:20px}
+.quest:target,.quest.is-hit{border-color:var(--red);animation:hit 1.2s steps(4,end) 2}
+@keyframes hit{0%,100%{box-shadow:0 0 0 0 var(--red-soft)}50%{box-shadow:0 0 0 6px var(--red-soft)}}
+
+/* Share tags */
+[hidden]{display:none!important}
+.share{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px}
+.share-label{font-size:8px;color:var(--mut);margin-right:2px}
+.tag{display:inline-flex;align-items:center;font:400 8px/1.6 var(--px);letter-spacing:.5px;color:var(--red-ink);background:var(--card);
+border:1px solid var(--red);padding:6px 9px 5px;text-decoration:none;cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:0}
+.tag:hover{background:var(--red);color:#fff}
+.tag:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.tag:disabled{cursor:default;background:var(--red);color:#fff}
+.hud-share{font-size:8px;color:var(--red-ink);text-decoration:none;border:1px solid var(--red);padding:5px 8px 4px}
+.hud-share:hover{background:var(--red);color:#fff}
+.hud-right{display:flex;align-items:center;gap:14px}
+.share-site{background:var(--card);border:1px solid var(--line);padding:20px 24px;margin:0 0 28px;scroll-margin-top:20px}
+.share-site h2{margin:0 0 6px;font-size:10px;color:var(--ink)}
+.share-site p{margin:0;color:var(--mut);font-size:14px}
 
 /* Footer */
 .site-foot{margin:56px 0 0;padding:24px 0 56px;border-top:1px solid var(--line);color:var(--mut);font-size:13px}
@@ -207,12 +229,15 @@ body{font-size:16px}
 .xp-bar{gap:2px;padding:3px}
 .xp-bar i{height:12px}
 .orig{margin-left:0;flex-basis:100%}
+.share-site{padding:18px}
+.tag{padding:8px 10px 7px}
 .leaf.l1,.leaf.l4{display:none}
 }
 @media (prefers-reduced-motion:reduce){
 .leaf{animation:none;opacity:.5}
 .leaf.l1{top:40px}.leaf.l2{top:110px}.leaf.l3{top:18px}.leaf.l4{top:170px}
 .xp-bar i.cur{animation:none}
+.quest:target,.quest.is-hit{animation:none;box-shadow:0 0 0 4px var(--red-soft)}
 }
 """
 
@@ -224,6 +249,51 @@ def fmt_date(s):
         return dt.isoformat(), dt.strftime("%b %d, %Y · %H:%M UTC")
     except (TypeError, ValueError):
         return "", s or ""
+
+
+def day_url(day):
+    return f"{SITE_URL}#day-{day}"
+
+
+def tweet_intent(text, url):
+    q = urllib.parse.urlencode({"text": text, "url": url}, quote_via=urllib.parse.quote)
+    return f"https://twitter.com/intent/tweet?{q}"
+
+
+def share_blurb(e, limit=80):
+    """'Codex Day N: <first ~80 chars of the post>…' for the X intent."""
+    body = re.sub(r"^\s*Day\s*\d{1,2}\s*/\s*", "", e["text"], flags=re.I)
+    body = " ".join(body.split())
+    if len(body) > limit:
+        cut = body[:limit]
+        body = (cut.rsplit(" ", 1)[0] if " " in cut else cut).rstrip(" ,.;:-") + "…"
+    prefix = "Codex sprint kickoff" if e["day"] == 0 else f"Codex Day {e['day']}"
+    return f"{prefix}: {body}"
+
+
+def share_tags(text, url, title):
+    """X intent link (works without JS) + copy / native-share buttons revealed by JS."""
+    return (f'<a class="tag" href="{esc(tweet_intent(text, url))}" target="_blank" rel="noopener">SHARE ON X</a>'
+            f'<button type="button" class="tag" data-copy="{esc(url)}" hidden>COPY LINK</button>'
+            f'<button type="button" class="tag" data-share data-title="{esc(title)}" data-text="{esc(text)}" '
+            f'data-url="{esc(url)}" hidden>SHARE…</button>')
+
+
+JS = """(function(){
+var d=document,n=navigator;
+function each(s,f){Array.prototype.forEach.call(d.querySelectorAll(s),f)}
+function flash(b,t){var o=b.textContent;b.textContent=t;b.disabled=true;setTimeout(function(){b.textContent=o;b.disabled=false},1600)}
+if(n.clipboard&&window.isSecureContext){each('[data-copy]',function(b){b.hidden=false;b.addEventListener('click',function(){
+n.clipboard.writeText(b.getAttribute('data-copy')).then(function(){flash(b,'COPIED!')},function(){flash(b,'COPY FAILED')})})})}
+if(n.share){each('[data-share]',function(b){b.hidden=false;b.addEventListener('click',function(){
+n.share({title:b.getAttribute('data-title'),text:b.getAttribute('data-text'),url:b.getAttribute('data-url')}).catch(function(){})})})}
+var calm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+function go(){var m=/^#day-(\\d+)$/.exec(location.hash);if(!m)return;
+var el=d.getElementById('day-'+parseInt(m[1],10));if(!el)return;
+each('.quest.is-hit',function(x){x.classList.remove('is-hit')});void el.offsetWidth;el.classList.add('is-hit');
+el.scrollIntoView({behavior:calm?'auto':'smooth',block:'start'})}
+addEventListener('hashchange',go);addEventListener('load',go);go();
+})();"""
 
 
 def render(log):
@@ -243,13 +313,14 @@ def render(log):
         iso, pretty = fmt_date(e.get("posted_at", ""))
         time_attr = f' datetime="{esc(iso)}"' if iso else ""
         paras = "".join(f"<p>{esc(p)}</p>" for p in e["text"].split("\n") if p.strip())
-        cards.append(f"""<article class="quest{' is-new' if is_new else ''}" id="day-{e['day']:02d}">
+        cards.append(f"""<article class="quest{' is-new' if is_new else ''}" id="day-{e['day']}">
   {'<span class="new-ship px">NEW SHIP</span>' if is_new else ''}
   <div class="quest-head"><span class="badge px">{esc(label)}</span>
   <time{time_attr}>{esc(pretty)}</time><span class="status px">{status}</span></div>
   <div class="text">{paras}</div>
   <div class="meta"><span title="Likes">♥ {fmt_int(e.get('likes'))}</span><span title="Reposts">↻ {fmt_int(e.get('reposts'))}</span><span title="Replies">💬 {fmt_int(e.get('replies'))}</span><span title="Views">👁 {fmt_int(e.get('views'))}</span>
   <a class="orig" href="{esc(e['url'])}" target="_blank" rel="noopener">View on X →</a></div>
+  <div class="share"><span class="share-label px">SHARE</span>{share_tags(share_blurb(e), day_url(e['day']), share_blurb(e).split(":")[0] + " — 28 Days of Shipping")}</div>
 </article>""")
     cards_html = "\n".join(cards) if cards else '<p class="empty">No entries yet — check back soon.</p>'
     segs = "".join(
@@ -269,6 +340,12 @@ def render(log):
 <meta property="og:title" content="Codex: 28 Days of Shipping">
 <meta property="og:description" content="Every daily Codex ship from Tibo's 28-day sprint, tracked day by day.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="{SITE_URL}">
+<meta property="og:site_name" content="Codex: 28 Days of Shipping">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Codex: 28 Days of Shipping">
+<meta name="twitter:description" content="Every daily Codex ship from Tibo's 28-day sprint, tracked day by day.">
+<link rel="canonical" href="{SITE_URL}">
 <meta name="theme-color" content="#faf8f3">
 <link rel="icon" href="{favicon}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -280,7 +357,8 @@ def render(log):
 <header class="hud">
 <div class="wrap">
 <p class="hud-title px">CODEX <b>//</b> 28-DAY SPRINT</p>
-<span class="hud-lv px">LV.<strong>{latest_day:02d}</strong> / {TOTAL_DAYS}</span>
+<div class="hud-right"><a class="hud-share px" href="#share">SHARE</a>
+<span class="hud-lv px">LV.<strong>{latest_day:02d}</strong> / {TOTAL_DAYS}</span></div>
 </div>
 </header>
 <main class="wrap">
@@ -302,6 +380,11 @@ def render(log):
 <div class="log-head"><h2 id="log-title" class="px">QUEST LOG</h2><span class="px">{n_entries} {'ENTRY' if n_entries == 1 else 'ENTRIES'}</span></div>
 {cards_html}
 </section>
+<section class="share-site" id="share" aria-labelledby="share-title">
+<h2 id="share-title" class="px">INVITE A PLAYER</h2>
+<p>Know someone who lives in Codex? Send them the tracker.</p>
+<div class="share">{share_tags(SITE_SHARE_TEXT, SITE_URL, "Codex: 28 Days of Shipping")}</div>
+</section>
 <footer class="site-foot">
 <p class="px">GAME SAVED</p>
 <p>Unofficial fan tracker. All posts belong to <a href="https://x.com/{HANDLE}" target="_blank" rel="noopener">@{HANDLE}</a> on X.
@@ -309,6 +392,7 @@ Source: public posts, refreshed twice daily. Not affiliated with OpenAI. ·
 <a href="data/days.json">raw JSON</a> · <a href="https://github.com/Genuifx/codex-28-days">GitHub</a></p>
 </footer>
 </main>
+<script>{JS}</script>
 </body>
 </html>
 """
