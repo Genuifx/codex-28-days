@@ -1002,10 +1002,18 @@ def render_llms(log):
     return "\n".join(out).rstrip() + "\n"
 
 
-def render(log):
+def render(log, changed):
     entries = sorted(log["entries"], key=lambda e: e["day"])
     latest_day = max([e["day"] for e in entries if e["day"] > 0], default=0)
-    now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    now = None
+    # Keep the previous timestamp when data is unchanged so idle runs produce no diff.
+    if not changed and os.path.exists(INDEX_PATH):
+        with open(INDEX_PATH, encoding="utf-8") as f:
+            m = re.search(r"(?:updated|更新于) (\d{4}-\d{2}-\d{2} \d{2}:\d{2} UTC)", f.read())
+        if m:
+            now = m.group(1)
+    if now is None:
+        now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     leaf_svg = (f'<svg class="leaf {{cls}}" viewBox="0 0 100 100" aria-hidden="true" focusable="false">'
                 f'<path d="{LEAF_PATH}"/></svg>')
     favicon = ("data:image/svg+xml," + f"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>"
@@ -1132,6 +1140,7 @@ def render(log):
 
 def main():
     log = load_log()
+    before = open(DATA_PATH, "rb").read() if os.path.exists(DATA_PATH) else None
     known_ids = {e["id"] for e in log["entries"]}
     now = datetime.datetime.now(datetime.timezone.utc)
 
@@ -1193,8 +1202,12 @@ def main():
         print(f"translated {translated} entries", flush=True)
 
     save_log(log)
+    after = open(DATA_PATH, "rb").read()
+    changed = (before is None) or (before != after)
+    # Render before opening INDEX_PATH for writing: render() may read the old timestamp from it.
+    page_html = render(log, changed)
     with open(INDEX_PATH, "w", encoding="utf-8") as f:
-        f.write(render(log))
+        f.write(page_html)
     for name, body in (("sitemap.xml", render_sitemap(log)), ("llms.txt", render_llms(log))):
         with open(os.path.join(ROOT, name), "w", encoding="utf-8") as f:
             f.write(body)
