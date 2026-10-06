@@ -24,6 +24,18 @@
       "replies": 2331,
       "views": 1960910,
       "day": 1
+    },
+    {
+      "id": "2107368734981517634",
+      "text": "Day 2.1/\n\nWe have made Auto-review free for all users signed in through a ChatGPT account. You can enable it in settings > permissions > auto-review. Auto-review improves upon the default sandbox setting that requires you to approve everything, which is prone to decision fatigue unless you spend a lot of time configuring specific rules.\n\nIt allows you to run long tasks while having a second agent review all actions taken by the primary agent. Its only goal is to prevent high-risk actions from being taken and to protect against unwanted actions that are not aligned with the original user intent. This  Auto-review feature is now free and does not draw usage from your plan.",
+      "posted_at": "Tue Oct 06 07:13:54 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2107368734981517634",
+      "likes": 4928,
+      "reposts": 299,
+      "replies": 758,
+      "views": 397760,
+      "day": 2,
+      "sub": ".1"
     }
   ]
 }

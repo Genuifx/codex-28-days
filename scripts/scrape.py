@@ -88,9 +88,24 @@ def fx_status(tid):
     }
 
 
+DAY_RE = re.compile(r"\s*Day\s*(\d{1,2})(\.\d+)?\s*/", re.I)
+
+
 def day_number(text):
-    m = re.match(r"\s*Day\s*(\d{1,2})\s*/", text, re.I)
+    """Int day of a 'Day N/' (or 'Day N.M/') post, e.g. 2 for 'Day 2.1/'."""
+    m = DAY_RE.match(text or "")
     return int(m.group(1)) if m else None
+
+
+def day_sub(text):
+    """Sub-day suffix, e.g. '.1' for 'Day 2.1/', '' otherwise."""
+    m = DAY_RE.match(text or "")
+    return m.group(2) or "" if m else ""
+
+
+def day_slug(e):
+    """Human-readable day key for ids, urls and labels: '2' or '2.1'."""
+    return f"{e['day']}{e.get('sub') or ''}"
 
 
 def load_log():
@@ -311,7 +326,7 @@ def tweet_intent(text, url):
 
 
 def strip_day_prefix(text):
-    return re.sub(r"^\s*Day\s*\d{1,2}\s*/\s*", "", text or "", flags=re.I)
+    return re.sub(r"^\s*Day\s*\d{1,2}(?:\.\d+)?\s*/\s*", "", text or "", flags=re.I)
 
 
 def share_blurb(e, limit=80):
@@ -320,7 +335,7 @@ def share_blurb(e, limit=80):
     if len(body) > limit:
         cut = body[:limit]
         body = (cut.rsplit(" ", 1)[0] if " " in cut else cut).rstrip(" ,.;:-") + "…"
-    prefix = "Codex sprint kickoff" if e["day"] == 0 else f"Codex Day {e['day']}"
+    prefix = "Codex sprint kickoff" if e["day"] == 0 else f"Codex Day {day_slug(e)}"
     return f"{prefix}: {body}"
 
 
@@ -339,12 +354,12 @@ def poster_data(entries, latest_day):
     for e in entries:
         items.append({
             "day": e["day"],
-            "label": "KICKOFF" if e["day"] == 0 else f"DAY {e['day']:02d}",
+            "label": "KICKOFF" if e["day"] == 0 else f"DAY {day_slug(e).zfill(2)}",
             "status": "QUEST START" if e["day"] == 0 else "CLEARED",
             "date": fmt_date(e.get("posted_at", ""))[1],
             "body": strip_day_prefix(e["text"]).strip(),
             "stats": [fmt_int(e.get(k)) for k in ("likes", "reposts", "replies", "views")],
-            "url": day_url(e["day"]),
+            "url": day_url(day_slug(e)),
         })
     data = {"total": TOTAL_DAYS, "latest": latest_day, "site": f"{SITE_URL}/", "handle": HANDLE,
             "leaf": LEAF_PATH, "entries": items}
@@ -361,8 +376,8 @@ n.clipboard.writeText(b.getAttribute('data-copy')).then(function(){flash(b,'COPI
 if(n.share){each('[data-share]',function(b){b.hidden=false;b.addEventListener('click',function(){
 n.share({title:b.getAttribute('data-title'),text:b.getAttribute('data-text'),url:b.getAttribute('data-url')}).catch(function(){})})})}
 var calm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-function go(){var m=/^#day-(\\d+)$/.exec(location.hash);if(!m)return;
-var el=d.getElementById('day-'+parseInt(m[1],10));if(!el)return;
+function go(){var m=/^#day-([\\d.]+)$/.exec(location.hash);if(!m)return;
+var el=d.getElementById('day-'+m[1].replace(/^0+(\\d)/,'$1'));if(!el)return;
 each('.quest.is-hit',function(x){x.classList.remove('is-hit')});void el.offsetWidth;el.classList.add('is-hit');
 el.scrollIntoView({behavior:calm?'auto':'smooth',block:'start'})}
 addEventListener('hashchange',go);addEventListener('load',go);go();
@@ -553,19 +568,19 @@ def render(log):
     cards = []
     for e in sorted(entries, key=lambda e: e["day"], reverse=True):
         is_new = e["day"] > 0 and e["day"] == latest_day
-        label = "ANNOUNCEMENT" if e["day"] == 0 else f"DAY {e['day']:02d}"
+        label = "ANNOUNCEMENT" if e["day"] == 0 else f"DAY {day_slug(e).zfill(2)}"
         status = "QUEST START" if e["day"] == 0 else "CLEARED"
         iso, pretty = fmt_date(e.get("posted_at", ""))
         time_attr = f' datetime="{esc(iso)}"' if iso else ""
         paras = "".join(f"<p>{esc(p)}</p>" for p in e["text"].split("\n") if p.strip())
-        cards.append(f"""<article class="quest{' is-new' if is_new else ''}" id="day-{e['day']}">
+        cards.append(f"""<article class="quest{' is-new' if is_new else ''}" id="day-{day_slug(e)}">
   {'<span class="new-ship px">NEW SHIP</span>' if is_new else ''}
   <div class="quest-head"><span class="badge px">{esc(label)}</span>
   <time{time_attr}>{esc(pretty)}</time><span class="status px">{status}</span></div>
   <div class="text">{paras}</div>
   <div class="meta"><span title="Likes">♥ {fmt_int(e.get('likes'))}</span><span title="Reposts">↻ {fmt_int(e.get('reposts'))}</span><span title="Replies">💬 {fmt_int(e.get('replies'))}</span><span title="Views">👁 {fmt_int(e.get('views'))}</span>
   <a class="orig" href="{esc(e['url'])}" target="_blank" rel="noopener">View on X →</a></div>
-  <div class="share"><span class="share-label px">SHARE</span>{share_tags(share_blurb(e), day_url(e['day']), share_blurb(e).split(":")[0] + " — 28 Days of Shipping", str(e['day']))}</div>
+  <div class="share"><span class="share-label px">SHARE</span>{share_tags(share_blurb(e), day_url(day_slug(e)), share_blurb(e).split(":")[0] + " — 28 Days of Shipping", day_slug(e))}</div>
 </article>""")
     cards_html = "\n".join(cards) if cards else '<p class="empty">No entries yet — check back soon.</p>'
     segs = "".join(
@@ -687,10 +702,11 @@ def main():
             if not t["posted_at"]:
                 t["posted_at"] = rel_to_dt(tw["relative"], now).strftime("%a %b %d %H:%M:%S %z %Y")
             t["day"] = day_number(t["text"]) or n
+            t["sub"] = day_sub(t["text"])
             log["entries"].append(t)
             known_ids.add(tw["id"])
             added += 1
-            print(f"added Day {t['day']}: {tw['id']}", flush=True)
+            print(f"added Day {day_slug(t)}: {tw['id']}", flush=True)
 
     save_log(log)
     with open(INDEX_PATH, "w", encoding="utf-8") as f:
