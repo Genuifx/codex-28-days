@@ -2,7 +2,7 @@
 
 Unofficial daily tracker of Tibo ([@thsottiaux](https://x.com/thsottiaux), OpenAI Codex lead)'s 28-day Codex improvement sprint (Oct 5 – Nov 1, 2026). One card per ship, newest first.
 
-**Live site:** https://genuifx.github.io/codex-28-days/
+**Live site:** https://codex28days.site/
 
 ## How it works (total cost: $0)
 
