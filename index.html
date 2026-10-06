@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -22,7 +22,8 @@
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "ce3e870636f3415c8020c3187dfd9319"}'></script>
 <style>
 :root{--paper:#faf8f3;--card:#fff;--ink:#2b1712;--mut:#6f564d;--line:#e7ddd0;--red:#d23b2e;--red-ink:#a92d1f;--red-soft:#fbe9e5;
---px:"Press Start 2P",ui-monospace,monospace;--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+--px:"Press Start 2P",ui-monospace,monospace;--cjk:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC";
+--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,var(--cjk),sans-serif;
 --fs-body:clamp(16px,15.2px + .25vw,17px);--fs-small:clamp(13px,12.6px + .12vw,14px);
 --px-xs:clamp(9px,8.6px + .12vw,10px);--px-s:clamp(9px,8.4px + .25vw,10px);--px-m:clamp(10px,9.4px + .2vw,11px);
 --gut:clamp(18px,5vw,24px)}
@@ -137,6 +138,19 @@ html.pm-open,html.pm-open body{overflow:hidden}
 .pm-act{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 .pm-act .tag{min-height:44px;padding:10px 16px 9px}
 
+/* Language: no-JS = English; html[data-lang] is set before first paint */
+html:not([data-lang=zh]) [data-lang=zh]:not(html),html[data-lang=zh] [data-lang=en]:not(html){display:none!important}
+html[data-lang=zh]{--px:"Press Start 2P",var(--cjk),sans-serif;
+--px-xs:clamp(11px,10.6px + .12vw,12px);--px-s:clamp(12px,11.4px + .25vw,13px);--px-m:clamp(13px,12.4px + .2vw,14px)}
+html[data-lang=zh] .hero h1{letter-spacing:0;line-height:1.2}
+.lang-tag{display:inline-flex;align-items:stretch;padding:0;font-size:var(--px-xs);color:var(--red-ink);background:var(--card);border:1px solid var(--red);
+cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:0;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.lang-tag span{display:inline-flex;align-items:center;padding:5px 8px 4px}
+.lang-tag .lt-zh{font:700 calc(var(--px-xs) + 2px)/1 var(--sans)}
+html:not([data-lang=zh]) .lang-tag .lt-en,html[data-lang=zh] .lang-tag .lt-zh{background:var(--red);color:#fff}
+.lang-tag:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.mt-note{margin:-6px 0 20px;color:var(--mut);font-size:var(--fs-small)}
+
 /* Footer */
 .site-foot{margin:clamp(40px,9vw,56px) 0 0;padding:24px 0 max(56px,env(safe-area-inset-bottom));border-top:1px solid var(--line);color:var(--mut);font-size:var(--fs-small)}
 .site-foot p{margin:0}
@@ -147,6 +161,8 @@ html.pm-open,html.pm-open body{overflow:hidden}
 .hud-right{width:100%;justify-content:space-between}
 .hud-lv{order:-1}
 .hud-share{min-height:44px;padding:0 14px}
+.lang-tag{min-height:44px}
+.lang-tag span{padding:0 12px}
 .xp-bar{grid-template-columns:repeat(var(--half),1fr);gap:3px;padding:3px}
 .xp-bar i{height:16px}
 .quest-head .status{margin-left:0}
@@ -183,79 +199,106 @@ padding:12px max(16px,env(safe-area-inset-right)) 12px max(16px,env(safe-area-in
 .quest:target,.quest.is-hit{animation:none;box-shadow:0 0 0 4px var(--red-soft)}
 }
 </style>
+<script>const I18N={"en":{"doc_title":"Codex: 28 Days of Shipping — tracking @thsottiaux","hud_title":"CODEX <b>//<\/b> 28-DAY SPRINT","hud_share":"SHARE","hud_lv":"LV.<strong>{lv}<\/strong> / {t}","lang_aria":"切换到中文 / Switch to Chinese","kicker":"SEASON 01 · AUTUMN 2026","h1":"Codex: 28 Days<br>of <span>Shipping<\/span>","lede":"Unofficial daily tracker of <a href=\"https://x.com/thsottiaux\" target=\"_blank\" rel=\"noopener\">Tibo (@thsottiaux)<\/a>'s\n28-day Codex improvement sprint (Oct 5 – Nov 1, 2026). One entry per ship, newest first.","xp_count":"{n} / {t} SHIPPED","xp_aria":"Sprint progress","prog":"Day {d} of {t} tracked · updated {now}","log_title":"QUEST LOG","log_count_1":"{n} ENTRY","log_count":"{n} ENTRIES","empty":"No entries yet — check back soon.","new_ship":"NEW SHIP","badge_ann":"ANNOUNCEMENT","badge_day":"DAY {d2}","st_start":"QUEST START","st_cleared":"CLEARED","likes":"Likes","reposts":"Reposts","replies":"Replies","views":"Views","view_x":"View on X →","share_label":"SHARE","share_x":"SHARE ON X","copy":"COPY LINK","copied":"COPIED!","copy_fail":"COPY FAILED","native_share":"SHARE…","poster":"POSTER","site_poster":"SITE POSTER","invite_title":"INVITE A PLAYER","invite_body":"Know someone who lives in Codex? Send them the tracker.","foot_saved":"GAME SAVED","foot":"Unofficial fan tracker. All posts belong to <a href=\"https://x.com/thsottiaux\" target=\"_blank\" rel=\"noopener\">@thsottiaux<\/a> on X.\nSource: public posts, refreshed twice daily. Not affiliated with OpenAI. ·\n<a href=\"data/days.json\">raw JSON<\/a> · <a href=\"https://github.com/Genuifx/codex-28-days\">GitHub<\/a>","share_kickoff":"Codex sprint kickoff","share_day":"Codex Day {d}","share_title_tail":" — 28 Days of Shipping","site_share":"Tracking Tibo's 28-day Codex shipping sprint","site_title":"Codex: 28 Days of Shipping","p_kickoff":"KICKOFF","p_brand":" 28-DAY SPRINT","p_season":"SEASON 01","p_cta_kickoff":"SCAN TO READ THE KICKOFF","p_cta_day":"SCAN TO READ {label}","p_cta_site":"SCAN TO JOIN THE SPRINT","p_tail_day":"Unofficial fan tracker of @{h} on X","p_tail_site":"Unofficial fan tracker · @{h} on X","p_dates":"AUTUMN 2026 // OCT 5 - NOV 1","p_t1":"Codex: 28 Days","p_t2a":"of ","p_t2b":"Shipping","p_sub":"Every daily Codex ship from Tibo’s 28-day sprint, tracked day by day.","p_tracked":"Day {d} of {t} tracked","p_latest":"LATEST SHIP // {label}","p_soon":"The sprint is about to begin.","pm_close":"CLOSE","pm_close_aria":"Close poster preview","pm_rendering":"RENDERING...","pm_fail":"COULD NOT RENDER","pm_hint_b":"Long-press to save","pm_hint":" on mobile, or tap SAVE IMAGE.","pm_save":"SAVE IMAGE","pm_share":"SHARE IMAGE","pm_title_day":"POSTER // {label}","pm_title_site":"SITE POSTER","pm_alt_day":"Share poster for Codex {label}","pm_alt_site":"Codex: 28 Days of Shipping share poster"},"zh":{"doc_title":"Codex：28 天连续发布 — 追踪 @thsottiaux","hud_title":"CODEX <b>//<\/b> 28 天冲刺","hud_share":"分享","hud_lv":"等级 <strong>{lv}<\/strong> / {t}","lang_aria":"Switch to English / 切换到英文","kicker":"第一季 · 2026 秋","h1":"Codex：28 天<br><span>连续发布<\/span>","lede":"非官方每日追踪站，记录 <a href=\"https://x.com/thsottiaux\" target=\"_blank\" rel=\"noopener\">Tibo (@thsottiaux)<\/a> 为期 28 天的 Codex 改进冲刺（2026 年 10 月 5 日 – 11 月 1 日）。每次发布一条，最新的在最前。","xp_count":"已发布 {n} / {t}","xp_aria":"冲刺进度","prog":"已追踪到第 {d} 天（共 {t} 天）· 更新于 {now}","log_title":"任务日志","log_count_1":"共 {n} 条","log_count":"共 {n} 条","empty":"暂无条目，稍后再来看看。","new_ship":"新发布","badge_ann":"官宣","badge_day":"第 {d} 天","st_start":"任务开始","st_cleared":"已通关","likes":"点赞","reposts":"转发","replies":"回复","views":"浏览","view_x":"在 X 上查看原文 →","share_label":"分享","share_x":"分享到 X","copy":"复制链接","copied":"已复制！","copy_fail":"复制失败","native_share":"分享…","poster":"海报","site_poster":"站点海报","invite_title":"邀请玩家","invite_body":"身边有天天泡在 Codex 里的朋友？把这个追踪站发给 TA。","foot_saved":"游戏已保存","foot":"非官方粉丝追踪站。所有推文版权归 X 上的 <a href=\"https://x.com/thsottiaux\" target=\"_blank\" rel=\"noopener\">@thsottiaux<\/a> 所有。\n数据来源：公开推文，每天刷新两次。与 OpenAI 无关。·\n<a href=\"data/days.json\">raw JSON<\/a> · <a href=\"https://github.com/Genuifx/codex-28-days\">GitHub<\/a>","share_kickoff":"Codex 冲刺开幕","share_day":"Codex 第 {d} 天","share_title_tail":" — 28 天连续发布","site_share":"追踪 Tibo 的 Codex 28 天连续发布冲刺","site_title":"Codex：28 天连续发布","p_kickoff":"开幕","p_brand":" 28 天冲刺","p_season":"第一季","p_cta_kickoff":"扫码阅读开幕帖","p_cta_day":"扫码阅读{label}","p_cta_site":"扫码加入冲刺","p_tail_day":"非官方粉丝追踪站 · 推文来自 X 上的 @{h}","p_tail_site":"非官方粉丝追踪站 · X 上的 @{h}","p_dates":"2026 秋 // 10.5 - 11.1","p_t1":"Codex：28 天","p_t2a":"","p_t2b":"连续发布","p_sub":"逐日记录 Tibo 28 天冲刺中的每一次 Codex 发布。","p_tracked":"已追踪到第 {d} 天，共 {t} 天","p_latest":"最新发布 // {label}","p_soon":"冲刺即将开始。","pm_close":"关闭","pm_close_aria":"关闭海报预览","pm_rendering":"生成中...","pm_fail":"生成失败","pm_hint_b":"手机上长按图片保存","pm_hint":"，或点击「保存图片」。","pm_save":"保存图片","pm_share":"分享图片","pm_title_day":"海报 // {label}","pm_title_site":"站点海报","pm_alt_day":"Codex {label} 分享海报","pm_alt_site":"Codex：28 天连续发布 分享海报"}};</script>
+<script>(function(){
+var d=document,h=d.documentElement,K='codex28-lang';
+function stored(){try{var s=localStorage.getItem(K);return s==='en'||s==='zh'?s:null}catch(e){return null}}
+function detect(){var n=navigator,l=(n.languages&&n.languages[0])||n.language||n.userLanguage||'';return /^zh/i.test(l)?'zh':'en'}
+function lang(){return h.getAttribute('data-lang')==='zh'?'zh':'en'}
+function fill(s,v){return v?String(s).replace(/\{(\w+)\}/g,function(m,k){return Object.prototype.hasOwnProperty.call(v,k)?v[k]:m}):s}
+function t(k,v,l){var a=I18N[l||lang()]||I18N.en,s=Object.prototype.hasOwnProperty.call(a,k)?a[k]:I18N.en[k];return fill(s==null?k:s,v)}
+function each(s,f){Array.prototype.forEach.call(d.querySelectorAll(s),f)}
+function set(l){h.setAttribute('data-lang',l);h.lang=l==='zh'?'zh-CN':'en'}
+function apply(l){l=l||lang();set(l);d.title=t('doc_title',null,l);
+each('[data-i18n]',function(el){var v=null,j=el.getAttribute('data-i18n-v');if(j){try{v=JSON.parse(j)}catch(e){}}
+var s=t(el.getAttribute('data-i18n'),v,l);if(el.hasAttribute('data-i18n-html'))el.innerHTML=s;else el.textContent=s});
+each('[data-i18n-attr]',function(el){el.getAttribute('data-i18n-attr').split(',').forEach(function(p){p=p.split(':');el.setAttribute(p[0],t(p[1],null,l))})});
+each('[data-i18n-alt]',function(el){var m;try{m=JSON.parse(el.getAttribute('data-i18n-alt'))}catch(e){return}
+for(var a in m)if(m[a]&&m[a][l]!=null)el.setAttribute(a,m[a][l])});
+return l}
+set(stored()||detect());
+window.i18n={t:t,lang:lang,apply:apply,toggle:function(){var l=lang()==='zh'?'en':'zh';try{localStorage.setItem(K,l)}catch(e){}apply(l)}};
+})();</script>
 </head>
 <body>
 <header class="hud">
 <div class="wrap">
-<p class="hud-title px">CODEX <b>//</b> 28-DAY SPRINT</p>
-<div class="hud-right"><a class="hud-share px" href="#share">SHARE</a>
-<span class="hud-lv px">LV.<strong>02</strong> / 28</span></div>
+<p class="hud-title px"><span data-i18n="hud_title" data-i18n-html>CODEX <b>//</b> 28-DAY SPRINT</span></p>
+<div class="hud-right"><a class="hud-share px" href="#share"><span data-i18n="hud_share">SHARE</span></a>
+<button type="button" class="lang-tag px" data-lang-toggle aria-label="切换到中文 / Switch to Chinese" data-i18n-attr="aria-label:lang_aria,title:lang_aria" hidden><span class="lt-zh" lang="zh-CN">中</span><span class="lt-en" lang="en">EN</span></button>
+<span class="hud-lv px"><span data-i18n="hud_lv" data-i18n-v="{&quot;lv&quot;: &quot;02&quot;, &quot;t&quot;: 28}" data-i18n-html>LV.<strong>02</strong> / 28</span></span></div>
 </div>
 </header>
 <main class="wrap">
 <section class="hero">
 <div class="leaves" aria-hidden="true"><svg class="leaf l1" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M50 2 58 20 66 15 63 38 78 26 82 34 96 30 88 48 95 52 72 68 75 76 54 73 53 98 47 98 46 73 25 76 28 68 5 52 12 48 4 30 18 34 22 26 37 38 34 15 42 20Z"/></svg><svg class="leaf l2" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M50 2 58 20 66 15 63 38 78 26 82 34 96 30 88 48 95 52 72 68 75 76 54 73 53 98 47 98 46 73 25 76 28 68 5 52 12 48 4 30 18 34 22 26 37 38 34 15 42 20Z"/></svg><svg class="leaf l3" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M50 2 58 20 66 15 63 38 78 26 82 34 96 30 88 48 95 52 72 68 75 76 54 73 53 98 47 98 46 73 25 76 28 68 5 52 12 48 4 30 18 34 22 26 37 38 34 15 42 20Z"/></svg><svg class="leaf l4" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><path d="M50 2 58 20 66 15 63 38 78 26 82 34 96 30 88 48 95 52 72 68 75 76 54 73 53 98 47 98 46 73 25 76 28 68 5 52 12 48 4 30 18 34 22 26 37 38 34 15 42 20Z"/></svg></div>
 <div class="hero-inner">
-<p class="kicker px">SEASON 01 · AUTUMN 2026</p>
-<h1>Codex: 28 Days<br>of <span>Shipping</span></h1>
-<p class="lede">Unofficial daily tracker of <a href="https://x.com/thsottiaux" target="_blank" rel="noopener">Tibo (@thsottiaux)</a>'s
+<p class="kicker px"><span data-i18n="kicker">SEASON 01 · AUTUMN 2026</span></p>
+<h1 data-i18n="h1" data-i18n-html>Codex: 28 Days<br>of <span>Shipping</span></h1>
+<p class="lede" data-i18n="lede" data-i18n-html>Unofficial daily tracker of <a href="https://x.com/thsottiaux" target="_blank" rel="noopener">Tibo (@thsottiaux)</a>'s
 28-day Codex improvement sprint (Oct 5 – Nov 1, 2026). One entry per ship, newest first.</p>
 <div class="xp">
-<div class="xp-row"><span class="xp-label px">XP</span><span class="xp-count px">02 / 28 SHIPPED</span></div>
-<div class="xp-bar" style="--n:28;--half:14" role="progressbar" aria-label="Sprint progress" aria-valuemin="0" aria-valuemax="28" aria-valuenow="2"><i class="on"></i><i class="cur"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-<p class="prog">Day 2 of 28 tracked · updated 2026-10-06 09:08 UTC</p>
+<div class="xp-row"><span class="xp-label px">XP</span><span class="xp-count px"><span data-i18n="xp_count" data-i18n-v="{&quot;n&quot;: &quot;02&quot;, &quot;t&quot;: 28}">02 / 28 SHIPPED</span></span></div>
+<div class="xp-bar" style="--n:28;--half:14" role="progressbar" aria-label="Sprint progress" data-i18n-attr="aria-label:xp_aria" aria-valuemin="0" aria-valuemax="28" aria-valuenow="2"><i class="on"></i><i class="cur"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<p class="prog"><span data-i18n="prog" data-i18n-v="{&quot;d&quot;: 2, &quot;t&quot;: 28, &quot;now&quot;: &quot;2026-10-06 09:40 UTC&quot;}">Day 2 of 28 tracked · updated 2026-10-06 09:40 UTC</span></p>
 </div>
 </div>
 </section>
 <section aria-labelledby="log-title">
-<div class="log-head"><h2 id="log-title" class="px">QUEST LOG</h2><span class="px">3 ENTRIES</span></div>
+<div class="log-head"><h2 id="log-title" class="px"><span data-i18n="log_title">QUEST LOG</span></h2><span class="px"><span data-i18n="log_count" data-i18n-v="{&quot;n&quot;: 3}">3 ENTRIES</span></span></div>
+<p class="mt-note" data-lang="zh" lang="zh-CN">中文由机器翻译，仅供参考</p>
 <article class="quest is-new" id="day-2.1">
-  <span class="new-ship px">NEW SHIP</span>
-  <div class="quest-head"><span class="badge px">DAY 2.1</span>
-  <time datetime="2026-10-06T07:13:54+00:00">Oct 06, 2026 · 07:13 UTC</time><span class="status px">CLEARED</span></div>
-  <div class="text"><p>Day 2.1/</p><p>We have made Auto-review free for all users signed in through a ChatGPT account. You can enable it in settings &gt; permissions &gt; auto-review. Auto-review improves upon the default sandbox setting that requires you to approve everything, which is prone to decision fatigue unless you spend a lot of time configuring specific rules.</p><p>It allows you to run long tasks while having a second agent review all actions taken by the primary agent. Its only goal is to prevent high-risk actions from being taken and to protect against unwanted actions that are not aligned with the original user intent. This  Auto-review feature is now free and does not draw usage from your plan.</p></div>
-  <div class="meta"><span title="Likes">♥ 4.9K</span><span title="Reposts">↻ 299</span><span title="Replies">💬 758</span><span title="Views">👁 397.8K</span>
-  <a class="orig" href="https://x.com/thsottiaux/status/2107368734981517634" target="_blank" rel="noopener">View on X →</a></div>
-  <div class="share"><span class="share-label px">SHARE</span><a class="tag" href="https://twitter.com/intent/tweet?text=Codex%20Day%202.1%3A%20We%20have%20made%20Auto-review%20free%20for%20all%20users%20signed%20in%20through%20a%20ChatGPT%E2%80%A6&amp;url=https%3A%2F%2Fcodexy.fyi%2F%23day-2.1" target="_blank" rel="noopener">SHARE ON X</a><button type="button" class="tag" data-copy="https://codexy.fyi/#day-2.1" hidden>COPY LINK</button><button type="button" class="tag" data-share data-title="Codex Day 2.1 — 28 Days of Shipping" data-text="Codex Day 2.1: We have made Auto-review free for all users signed in through a ChatGPT…" data-url="https://codexy.fyi/#day-2.1" hidden>SHARE…</button><button type="button" class="tag" data-poster="2.1" hidden>POSTER</button></div>
+  <span class="new-ship px"><span data-i18n="new_ship">NEW SHIP</span></span>
+  <div class="quest-head"><span class="badge px"><span data-i18n="badge_day" data-i18n-v="{&quot;d2&quot;: &quot;2.1&quot;, &quot;d&quot;: &quot;2.1&quot;}">DAY 2.1</span></span>
+  <time datetime="2026-10-06T07:13:54+00:00"><span data-lang="en">Oct 06, 2026 · 07:13 UTC</span><span data-lang="zh">2026 年 10 月 6 日 · 07:13 UTC</span></time><span class="status px"><span data-i18n="st_cleared">CLEARED</span></span></div>
+  <div class="text" data-lang="en"><p>Day 2.1/</p><p>We have made Auto-review free for all users signed in through a ChatGPT account. You can enable it in settings &gt; permissions &gt; auto-review. Auto-review improves upon the default sandbox setting that requires you to approve everything, which is prone to decision fatigue unless you spend a lot of time configuring specific rules.</p><p>It allows you to run long tasks while having a second agent review all actions taken by the primary agent. Its only goal is to prevent high-risk actions from being taken and to protect against unwanted actions that are not aligned with the original user intent. This  Auto-review feature is now free and does not draw usage from your plan.</p></div>
+  <div class="text" data-lang="zh" lang="zh-CN"><p>Day 2.1/</p><p>我们为所有通过 ChatGPT 帐户登录的用户免费提供自动审核。您可以在“设置”&gt;“权限”&gt;“自动审核”中启用它。自动审核改进了默认沙箱设置，默认沙箱设置要求您批准所有内容，这很容易导致决策疲劳，除非您花费大量时间配置特定规则。</p><p>它允许您运行长时间任务，同时让第二个代理审查主要代理采取的所有操作。其唯一目标是防止采取高风险操作，并防止与原始用户意图不一致的不需要的操作。此自动审核功能现在是免费的，不会占用您的计划的使用量。</p></div>
+  <div class="meta"><span title="Likes" data-i18n-attr="title:likes">♥ 4.9K</span><span title="Reposts" data-i18n-attr="title:reposts">↻ 299</span><span title="Replies" data-i18n-attr="title:replies">💬 758</span><span title="Views" data-i18n-attr="title:views">👁 397.8K</span>
+  <a class="orig" href="https://x.com/thsottiaux/status/2107368734981517634" target="_blank" rel="noopener"><span data-i18n="view_x">View on X →</span></a></div>
+  <div class="share"><span class="share-label px"><span data-i18n="share_label">SHARE</span></span><a class="tag" href="https://twitter.com/intent/tweet?text=Codex%20Day%202.1%3A%20We%20have%20made%20Auto-review%20free%20for%20all%20users%20signed%20in%20through%20a%20ChatGPT%E2%80%A6&amp;url=https%3A%2F%2Fcodexy.fyi%2F%23day-2.1" target="_blank" rel="noopener" data-i18n="share_x" data-i18n-alt="{&quot;href&quot;: {&quot;en&quot;: &quot;https://twitter.com/intent/tweet?text=Codex%20Day%202.1%3A%20We%20have%20made%20Auto-review%20free%20for%20all%20users%20signed%20in%20through%20a%20ChatGPT%E2%80%A6&amp;url=https%3A%2F%2Fcodexy.fyi%2F%23day-2.1&quot;, &quot;zh&quot;: &quot;https://twitter.com/intent/tweet?text=Codex%20%E7%AC%AC%202.1%20%E5%A4%A9%EF%BC%9A%E6%88%91%E4%BB%AC%E4%B8%BA%E6%89%80%E6%9C%89%E9%80%9A%E8%BF%87%20ChatGPT%20%E5%B8%90%E6%88%B7%E7%99%BB%E5%BD%95%E7%9A%84%E7%94%A8%E6%88%B7%E5%85%8D%E8%B4%B9%E6%8F%90%E4%BE%9B%E8%87%AA%E5%8A%A8%E5%AE%A1%E6%A0%B8%E3%80%82%E6%82%A8%E5%8F%AF%E4%BB%A5%E5%9C%A8%E2%80%9C%E8%AE%BE%E7%BD%AE%E2%80%9D%3E%E2%80%9C%E6%9D%83%E9%99%90%E2%80%9D%3E%E2%80%9C%E8%87%AA%E5%8A%A8%E5%AE%A1%E6%A0%B8%E2%80%9D%E4%B8%AD%E5%90%AF%E7%94%A8%E5%AE%83%E3%80%82%E8%87%AA%E5%8A%A8%E5%AE%A1%E2%80%A6&amp;url=https%3A%2F%2Fcodexy.fyi%2F%23day-2.1&quot;}}">SHARE ON X</a><button type="button" class="tag" data-copy="https://codexy.fyi/#day-2.1" data-i18n="copy" hidden>COPY LINK</button><button type="button" class="tag" data-share data-title="Codex Day 2.1 — 28 Days of Shipping" data-text="Codex Day 2.1: We have made Auto-review free for all users signed in through a ChatGPT…" data-url="https://codexy.fyi/#day-2.1" data-i18n="native_share" data-i18n-alt="{&quot;data-title&quot;: {&quot;en&quot;: &quot;Codex Day 2.1 — 28 Days of Shipping&quot;, &quot;zh&quot;: &quot;Codex 第 2.1 天 — 28 天连续发布&quot;}, &quot;data-text&quot;: {&quot;en&quot;: &quot;Codex Day 2.1: We have made Auto-review free for all users signed in through a ChatGPT…&quot;, &quot;zh&quot;: &quot;Codex 第 2.1 天：我们为所有通过 ChatGPT 帐户登录的用户免费提供自动审核。您可以在“设置”&gt;“权限”&gt;“自动审核”中启用它。自动审…&quot;}}" hidden>SHARE…</button><button type="button" class="tag" data-poster="2.1" data-i18n="poster" hidden>POSTER</button></div>
 </article>
 <article class="quest" id="day-1">
   
-  <div class="quest-head"><span class="badge px">DAY 01</span>
-  <time datetime="2026-10-05T17:20:29+00:00">Oct 05, 2026 · 17:20 UTC</time><span class="status px">CLEARED</span></div>
-  <div class="text"><p>Day 1/</p><p>We have optimized the default speed to be ~50% faster across GPT-6 Astra and GPT-6.1 Sol through the subscription across all our products and partners using Sign in With ChatGPT (including OpenCode, Pi, Amp, Devin, ...).</p><p>No changes needed on your end and this should be felt within the next two hours.</p></div>
-  <div class="meta"><span title="Likes">♥ 18.4K</span><span title="Reposts">↻ 897</span><span title="Replies">💬 2.3K</span><span title="Views">👁 2.0M</span>
-  <a class="orig" href="https://x.com/thsottiaux/status/2107158998495748264" target="_blank" rel="noopener">View on X →</a></div>
-  <div class="share"><span class="share-label px">SHARE</span><a class="tag" href="https://twitter.com/intent/tweet?text=Codex%20Day%201%3A%20We%20have%20optimized%20the%20default%20speed%20to%20be%20~50%25%20faster%20across%20GPT-6%20Astra%20and%E2%80%A6&amp;url=https%3A%2F%2Fcodexy.fyi%2F%23day-1" target="_blank" rel="noopener">SHARE ON X</a><button type="button" class="tag" data-copy="https://codexy.fyi/#day-1" hidden>COPY LINK</button><button type="button" class="tag" data-share data-title="Codex Day 1 — 28 Days of Shipping" data-text="Codex Day 1: We have optimized the default speed to be ~50% faster across GPT-6 Astra and…" data-url="https://codexy.fyi/#day-1" hidden>SHARE…</button><button type="button" class="tag" data-poster="1" hidden>POSTER</button></div>
+  <div class="quest-head"><span class="badge px"><span data-i18n="badge_day" data-i18n-v="{&quot;d2&quot;: &quot;01&quot;, &quot;d&quot;: &quot;1&quot;}">DAY 01</span></span>
+  <time datetime="2026-10-05T17:20:29+00:00"><span data-lang="en">Oct 05, 2026 · 17:20 UTC</span><span data-lang="zh">2026 年 10 月 5 日 · 17:20 UTC</span></time><span class="status px"><span data-i18n="st_cleared">CLEARED</span></span></div>
+  <div class="text" data-lang="en"><p>Day 1/</p><p>We have optimized the default speed to be ~50% faster across GPT-6 Astra and GPT-6.1 Sol through the subscription across all our products and partners using Sign in With ChatGPT (including OpenCode, Pi, Amp, Devin, ...).</p><p>No changes needed on your end and this should be felt within the next two hours.</p></div>
+  <div class="text" data-lang="zh" lang="zh-CN"><p>Day 1/</p><p>通过使用“使用 ChatGPT 登录”（包括 OpenCode、Pi、Amp、Devin 等）订阅我们的所有产品和合作伙伴，我们已将 GPT-6 Astra 和 GPT-6.1 Sol 的默认速度优化了约 50%。</p><p>您无需进行任何更改，并且应该会在接下来的两个小时内感受到这一点。</p></div>
+  <div class="meta"><span title="Likes" data-i18n-attr="title:likes">♥ 18.4K</span><span title="Reposts" data-i18n-attr="title:reposts">↻ 897</span><span title="Replies" data-i18n-attr="title:replies">💬 2.3K</span><span title="Views" data-i18n-attr="title:views">👁 2.0M</span>
+  <a class="orig" href="https://x.com/thsottiaux/status/2107158998495748264" target="_blank" rel="noopener"><span data-i18n="view_x">View on X →</span></a></div>
+  <div class="share"><span class="share-label px"><span data-i18n="share_label">SHARE</span></span><a class="tag" href="https://twitter.com/intent/tweet?text=Codex%20Day%201%3A%20We%20have%20optimized%20the%20default%20speed%20to%20be%20~50%25%20faster%20across%20GPT-6%20Astra%20and%E2%80%A6&amp;url=https%3A%2F%2Fcodexy.fyi%2F%23day-1" target="_blank" rel="noopener" data-i18n="share_x" data-i18n-alt="{&quot;href&quot;: {&quot;en&quot;: &quot;https://twitter.com/intent/tweet?text=Codex%20Day%201%3A%20We%20have%20optimized%20the%20default%20speed%20to%20be%20~50%25%20faster%20across%20GPT-6%20Astra%20and%E2%80%A6&amp;url=https%3A%2F%2Fcodexy.fyi%2F%23day-1&quot;, &quot;zh&quot;: &quot;https://twitter.com/intent/tweet?text=Codex%20%E7%AC%AC%201%20%E5%A4%A9%EF%BC%9A%E9%80%9A%E8%BF%87%E4%BD%BF%E7%94%A8%E2%80%9C%E4%BD%BF%E7%94%A8%20ChatGPT%20%E7%99%BB%E5%BD%95%E2%80%9D%EF%BC%88%E5%8C%85%E6%8B%AC%20OpenCode%E3%80%81Pi%E3%80%81Amp%E3%80%81Devin%20%E7%AD%89%EF%BC%89%E8%AE%A2%E9%98%85%E6%88%91%E4%BB%AC%E7%9A%84%E6%89%80%E6%9C%89%E4%BA%A7%E5%93%81%E5%92%8C%E5%90%88%E4%BD%9C%E4%BC%99%E2%80%A6&amp;url=https%3A%2F%2Fcodexy.fyi%2F%23day-1&quot;}}">SHARE ON X</a><button type="button" class="tag" data-copy="https://codexy.fyi/#day-1" data-i18n="copy" hidden>COPY LINK</button><button type="button" class="tag" data-share data-title="Codex Day 1 — 28 Days of Shipping" data-text="Codex Day 1: We have optimized the default speed to be ~50% faster across GPT-6 Astra and…" data-url="https://codexy.fyi/#day-1" data-i18n="native_share" data-i18n-alt="{&quot;data-title&quot;: {&quot;en&quot;: &quot;Codex Day 1 — 28 Days of Shipping&quot;, &quot;zh&quot;: &quot;Codex 第 1 天 — 28 天连续发布&quot;}, &quot;data-text&quot;: {&quot;en&quot;: &quot;Codex Day 1: We have optimized the default speed to be ~50% faster across GPT-6 Astra and…&quot;, &quot;zh&quot;: &quot;Codex 第 1 天：通过使用“使用 ChatGPT 登录”（包括 OpenCode、Pi、Amp、Devin 等）订阅我们的所有产品和合作伙…&quot;}}" hidden>SHARE…</button><button type="button" class="tag" data-poster="1" data-i18n="poster" hidden>POSTER</button></div>
 </article>
 <article class="quest" id="day-0">
   
-  <div class="quest-head"><span class="badge px">ANNOUNCEMENT</span>
-  <time datetime="2026-10-04T20:33:43+00:00">Oct 04, 2026 · 20:33 UTC</time><span class="status px">QUEST START</span></div>
-  <div class="text"><p>Over the next 28 days, each day we’ll either ship one thing that is a clear improvement and relevant for most codex/work users or ship a full reset. Let the improvements begin.</p></div>
-  <div class="meta"><span title="Likes">♥ 25.7K</span><span title="Reposts">↻ 1.5K</span><span title="Replies">💬 4.4K</span><span title="Views">👁 6.8M</span>
-  <a class="orig" href="https://x.com/thsottiaux/status/2106845241357824205" target="_blank" rel="noopener">View on X →</a></div>
-  <div class="share"><span class="share-label px">SHARE</span><a class="tag" href="https://twitter.com/intent/tweet?text=Codex%20sprint%20kickoff%3A%20Over%20the%20next%2028%20days%2C%20each%20day%20we%E2%80%99ll%20either%20ship%20one%20thing%20that%20is%20a%20clear%E2%80%A6&amp;url=https%3A%2F%2Fcodexy.fyi%2F%23day-0" target="_blank" rel="noopener">SHARE ON X</a><button type="button" class="tag" data-copy="https://codexy.fyi/#day-0" hidden>COPY LINK</button><button type="button" class="tag" data-share data-title="Codex sprint kickoff — 28 Days of Shipping" data-text="Codex sprint kickoff: Over the next 28 days, each day we’ll either ship one thing that is a clear…" data-url="https://codexy.fyi/#day-0" hidden>SHARE…</button><button type="button" class="tag" data-poster="0" hidden>POSTER</button></div>
+  <div class="quest-head"><span class="badge px"><span data-i18n="badge_ann">ANNOUNCEMENT</span></span>
+  <time datetime="2026-10-04T20:33:43+00:00"><span data-lang="en">Oct 04, 2026 · 20:33 UTC</span><span data-lang="zh">2026 年 10 月 4 日 · 20:33 UTC</span></time><span class="status px"><span data-i18n="st_start">QUEST START</span></span></div>
+  <div class="text" data-lang="en"><p>Over the next 28 days, each day we’ll either ship one thing that is a clear improvement and relevant for most codex/work users or ship a full reset. Let the improvements begin.</p></div>
+  <div class="text" data-lang="zh" lang="zh-CN"><p>在接下来的 28 天里，每天我们要么发布一项明显改进且与大多数 Codex/工作用户相关的内容，要么发布完全重置的内容。让改进开始吧。</p></div>
+  <div class="meta"><span title="Likes" data-i18n-attr="title:likes">♥ 25.7K</span><span title="Reposts" data-i18n-attr="title:reposts">↻ 1.5K</span><span title="Replies" data-i18n-attr="title:replies">💬 4.4K</span><span title="Views" data-i18n-attr="title:views">👁 6.8M</span>
+  <a class="orig" href="https://x.com/thsottiaux/status/2106845241357824205" target="_blank" rel="noopener"><span data-i18n="view_x">View on X →</span></a></div>
+  <div class="share"><span class="share-label px"><span data-i18n="share_label">SHARE</span></span><a class="tag" href="https://twitter.com/intent/tweet?text=Codex%20sprint%20kickoff%3A%20Over%20the%20next%2028%20days%2C%20each%20day%20we%E2%80%99ll%20either%20ship%20one%20thing%20that%20is%20a%20clear%E2%80%A6&amp;url=https%3A%2F%2Fcodexy.fyi%2F%23day-0" target="_blank" rel="noopener" data-i18n="share_x" data-i18n-alt="{&quot;href&quot;: {&quot;en&quot;: &quot;https://twitter.com/intent/tweet?text=Codex%20sprint%20kickoff%3A%20Over%20the%20next%2028%20days%2C%20each%20day%20we%E2%80%99ll%20either%20ship%20one%20thing%20that%20is%20a%20clear%E2%80%A6&amp;url=https%3A%2F%2Fcodexy.fyi%2F%23day-0&quot;, &quot;zh&quot;: &quot;https://twitter.com/intent/tweet?text=Codex%20%E5%86%B2%E5%88%BA%E5%BC%80%E5%B9%95%EF%BC%9A%E5%9C%A8%E6%8E%A5%E4%B8%8B%E6%9D%A5%E7%9A%84%2028%20%E5%A4%A9%E9%87%8C%EF%BC%8C%E6%AF%8F%E5%A4%A9%E6%88%91%E4%BB%AC%E8%A6%81%E4%B9%88%E5%8F%91%E5%B8%83%E4%B8%80%E9%A1%B9%E6%98%8E%E6%98%BE%E6%94%B9%E8%BF%9B%E4%B8%94%E4%B8%8E%E5%A4%A7%E5%A4%9A%E6%95%B0%20Codex%2F%E5%B7%A5%E4%BD%9C%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3%E7%9A%84%E5%86%85%E5%AE%B9%EF%BC%8C%E8%A6%81%E4%B9%88%E5%8F%91%E5%B8%83%E5%AE%8C%E5%85%A8%E9%87%8D%E7%BD%AE%E7%9A%84%E5%86%85%E5%AE%B9%E2%80%A6&amp;url=https%3A%2F%2Fcodexy.fyi%2F%23day-0&quot;}}">SHARE ON X</a><button type="button" class="tag" data-copy="https://codexy.fyi/#day-0" data-i18n="copy" hidden>COPY LINK</button><button type="button" class="tag" data-share data-title="Codex sprint kickoff — 28 Days of Shipping" data-text="Codex sprint kickoff: Over the next 28 days, each day we’ll either ship one thing that is a clear…" data-url="https://codexy.fyi/#day-0" data-i18n="native_share" data-i18n-alt="{&quot;data-title&quot;: {&quot;en&quot;: &quot;Codex sprint kickoff — 28 Days of Shipping&quot;, &quot;zh&quot;: &quot;Codex 冲刺开幕 — 28 天连续发布&quot;}, &quot;data-text&quot;: {&quot;en&quot;: &quot;Codex sprint kickoff: Over the next 28 days, each day we’ll either ship one thing that is a clear…&quot;, &quot;zh&quot;: &quot;Codex 冲刺开幕：在接下来的 28 天里，每天我们要么发布一项明显改进且与大多数 Codex/工作用户相关的内容，要么发布完全重置的内容…&quot;}}" hidden>SHARE…</button><button type="button" class="tag" data-poster="0" data-i18n="poster" hidden>POSTER</button></div>
 </article>
 </section>
 <section class="share-site" id="share" aria-labelledby="share-title">
-<h2 id="share-title" class="px">INVITE A PLAYER</h2>
-<p>Know someone who lives in Codex? Send them the tracker.</p>
-<div class="share"><a class="tag" href="https://twitter.com/intent/tweet?text=Tracking%20Tibo%27s%2028-day%20Codex%20shipping%20sprint&amp;url=https%3A%2F%2Fcodexy.fyi%2F" target="_blank" rel="noopener">SHARE ON X</a><button type="button" class="tag" data-copy="https://codexy.fyi/" hidden>COPY LINK</button><button type="button" class="tag" data-share data-title="Codex: 28 Days of Shipping" data-text="Tracking Tibo&#x27;s 28-day Codex shipping sprint" data-url="https://codexy.fyi/" hidden>SHARE…</button><button type="button" class="tag" data-poster="site" hidden>SITE POSTER</button></div>
+<h2 id="share-title" class="px"><span data-i18n="invite_title">INVITE A PLAYER</span></h2>
+<p><span data-i18n="invite_body">Know someone who lives in Codex? Send them the tracker.</span></p>
+<div class="share"><a class="tag" href="https://twitter.com/intent/tweet?text=Tracking%20Tibo%27s%2028-day%20Codex%20shipping%20sprint&amp;url=https%3A%2F%2Fcodexy.fyi%2F" target="_blank" rel="noopener" data-i18n="share_x" data-i18n-alt="{&quot;href&quot;: {&quot;en&quot;: &quot;https://twitter.com/intent/tweet?text=Tracking%20Tibo%27s%2028-day%20Codex%20shipping%20sprint&amp;url=https%3A%2F%2Fcodexy.fyi%2F&quot;, &quot;zh&quot;: &quot;https://twitter.com/intent/tweet?text=%E8%BF%BD%E8%B8%AA%20Tibo%20%E7%9A%84%20Codex%2028%20%E5%A4%A9%E8%BF%9E%E7%BB%AD%E5%8F%91%E5%B8%83%E5%86%B2%E5%88%BA&amp;url=https%3A%2F%2Fcodexy.fyi%2F&quot;}}">SHARE ON X</a><button type="button" class="tag" data-copy="https://codexy.fyi/" data-i18n="copy" hidden>COPY LINK</button><button type="button" class="tag" data-share data-title="Codex: 28 Days of Shipping" data-text="Tracking Tibo&#x27;s 28-day Codex shipping sprint" data-url="https://codexy.fyi/" data-i18n="native_share" data-i18n-alt="{&quot;data-title&quot;: {&quot;en&quot;: &quot;Codex: 28 Days of Shipping&quot;, &quot;zh&quot;: &quot;Codex：28 天连续发布&quot;}, &quot;data-text&quot;: {&quot;en&quot;: &quot;Tracking Tibo&#x27;s 28-day Codex shipping sprint&quot;, &quot;zh&quot;: &quot;追踪 Tibo 的 Codex 28 天连续发布冲刺&quot;}}" hidden>SHARE…</button><button type="button" class="tag" data-poster="site" data-i18n="site_poster" hidden>SITE POSTER</button></div>
 </section>
 <footer class="site-foot">
-<p class="px">GAME SAVED</p>
-<p>Unofficial fan tracker. All posts belong to <a href="https://x.com/thsottiaux" target="_blank" rel="noopener">@thsottiaux</a> on X.
+<p class="px"><span data-i18n="foot_saved">GAME SAVED</span></p>
+<p data-i18n="foot" data-i18n-html>Unofficial fan tracker. All posts belong to <a href="https://x.com/thsottiaux" target="_blank" rel="noopener">@thsottiaux</a> on X.
 Source: public posts, refreshed twice daily. Not affiliated with OpenAI. ·
 <a href="data/days.json">raw JSON</a> · <a href="https://github.com/Genuifx/codex-28-days">GitHub</a></p>
 </footer>
 </main>
-<script type="application/json" id="poster-data">{"total":28,"latest":2,"site":"https://codexy.fyi/","handle":"thsottiaux","leaf":"M50 2 58 20 66 15 63 38 78 26 82 34 96 30 88 48 95 52 72 68 75 76 54 73 53 98 47 98 46 73 25 76 28 68 5 52 12 48 4 30 18 34 22 26 37 38 34 15 42 20Z","entries":[{"day":0,"label":"KICKOFF","status":"QUEST START","date":"Oct 04, 2026 · 20:33 UTC","body":"Over the next 28 days, each day we’ll either ship one thing that is a clear improvement and relevant for most codex/work users or ship a full reset. Let the improvements begin.","stats":["25.7K","1.5K","4.4K","6.8M"],"url":"https://codexy.fyi/#day-0"},{"day":1,"label":"DAY 01","status":"CLEARED","date":"Oct 05, 2026 · 17:20 UTC","body":"We have optimized the default speed to be ~50% faster across GPT-6 Astra and GPT-6.1 Sol through the subscription across all our products and partners using Sign in With ChatGPT (including OpenCode, Pi, Amp, Devin, ...).\n\nNo changes needed on your end and this should be felt within the next two hours.","stats":["18.4K","897","2.3K","2.0M"],"url":"https://codexy.fyi/#day-1"},{"day":2,"label":"DAY 2.1","status":"CLEARED","date":"Oct 06, 2026 · 07:13 UTC","body":"We have made Auto-review free for all users signed in through a ChatGPT account. You can enable it in settings > permissions > auto-review. Auto-review improves upon the default sandbox setting that requires you to approve everything, which is prone to decision fatigue unless you spend a lot of time configuring specific rules.\n\nIt allows you to run long tasks while having a second agent review all actions taken by the primary agent. Its only goal is to prevent high-risk actions from being taken and to protect against unwanted actions that are not aligned with the original user intent. This  Auto-review feature is now free and does not draw usage from your plan.","stats":["4.9K","299","758","397.8K"],"url":"https://codexy.fyi/#day-2.1"}]}</script>
+<script type="application/json" id="poster-data">{"total":28,"latest":2,"site":"https://codexy.fyi/","handle":"thsottiaux","leaf":"M50 2 58 20 66 15 63 38 78 26 82 34 96 30 88 48 95 52 72 68 75 76 54 73 53 98 47 98 46 73 25 76 28 68 5 52 12 48 4 30 18 34 22 26 37 38 34 15 42 20Z","entries":[{"day":0,"key":"0","label":"KICKOFF","label_zh":"开幕","status":"QUEST START","status_zh":"任务开始","date":"Oct 04, 2026 · 20:33 UTC","date_zh":"2026 年 10 月 4 日 · 20:33 UTC","body":"Over the next 28 days, each day we’ll either ship one thing that is a clear improvement and relevant for most codex/work users or ship a full reset. Let the improvements begin.","body_zh":"在接下来的 28 天里，每天我们要么发布一项明显改进且与大多数 Codex/工作用户相关的内容，要么发布完全重置的内容。让改进开始吧。","stats":["25.7K","1.5K","4.4K","6.8M"],"url":"https://codexy.fyi/#day-0"},{"day":1,"key":"1","label":"DAY 01","label_zh":"第 1 天","status":"CLEARED","status_zh":"已通关","date":"Oct 05, 2026 · 17:20 UTC","date_zh":"2026 年 10 月 5 日 · 17:20 UTC","body":"We have optimized the default speed to be ~50% faster across GPT-6 Astra and GPT-6.1 Sol through the subscription across all our products and partners using Sign in With ChatGPT (including OpenCode, Pi, Amp, Devin, ...).\n\nNo changes needed on your end and this should be felt within the next two hours.","body_zh":"通过使用“使用 ChatGPT 登录”（包括 OpenCode、Pi、Amp、Devin 等）订阅我们的所有产品和合作伙伴，我们已将 GPT-6 Astra 和 GPT-6.1 Sol 的默认速度优化了约 50%。\n\n您无需进行任何更改，并且应该会在接下来的两个小时内感受到这一点。","stats":["18.4K","897","2.3K","2.0M"],"url":"https://codexy.fyi/#day-1"},{"day":2,"key":"2.1","label":"DAY 2.1","label_zh":"第 2.1 天","status":"CLEARED","status_zh":"已通关","date":"Oct 06, 2026 · 07:13 UTC","date_zh":"2026 年 10 月 6 日 · 07:13 UTC","body":"We have made Auto-review free for all users signed in through a ChatGPT account. You can enable it in settings > permissions > auto-review. Auto-review improves upon the default sandbox setting that requires you to approve everything, which is prone to decision fatigue unless you spend a lot of time configuring specific rules.\n\nIt allows you to run long tasks while having a second agent review all actions taken by the primary agent. Its only goal is to prevent high-risk actions from being taken and to protect against unwanted actions that are not aligned with the original user intent. This  Auto-review feature is now free and does not draw usage from your plan.","body_zh":"我们为所有通过 ChatGPT 帐户登录的用户免费提供自动审核。您可以在“设置”>“权限”>“自动审核”中启用它。自动审核改进了默认沙箱设置，默认沙箱设置要求您批准所有内容，这很容易导致决策疲劳，除非您花费大量时间配置特定规则。\n\n它允许您运行长时间任务，同时让第二个代理审查主要代理采取的所有操作。其唯一目标是防止采取高风险操作，并防止与原始用户意图不一致的不需要的操作。此自动审核功能现在是免费的，不会占用您的计划的使用量。","stats":["4.9K","299","758","397.8K"],"url":"https://codexy.fyi/#day-2.1"}]}</script>
 <script>(function(){
-var d=document,n=navigator;
+var d=document,n=navigator,I=window.i18n;
 function each(s,f){Array.prototype.forEach.call(d.querySelectorAll(s),f)}
-function flash(b,t){var o=b.textContent;b.textContent=t;b.disabled=true;setTimeout(function(){b.textContent=o;b.disabled=false},1600)}
+if(I){I.apply();var lt=d.querySelector('[data-lang-toggle]');if(lt){lt.hidden=false;lt.addEventListener('click',function(){I.toggle()})}}
+function flash(b,k){var o=b.getAttribute('data-i18n');b.textContent=I?I.t(k):k;b.disabled=true;
+setTimeout(function(){b.textContent=I&&o?I.t(o):b.textContent;b.disabled=false},1600)}
 if(n.clipboard&&window.isSecureContext){each('[data-copy]',function(b){b.hidden=false;b.addEventListener('click',function(){
-n.clipboard.writeText(b.getAttribute('data-copy')).then(function(){flash(b,'COPIED!')},function(){flash(b,'COPY FAILED')})})})}
+n.clipboard.writeText(b.getAttribute('data-copy')).then(function(){flash(b,'copied')},function(){flash(b,'copy_fail')})})})}
 if(n.share){each('[data-share]',function(b){b.hidden=false;b.addEventListener('click',function(){
 n.share({title:b.getAttribute('data-title'),text:b.getAttribute('data-text'),url:b.getAttribute('data-url')}).catch(function(){})})})}
 var calm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -272,7 +315,10 @@ if(!src||!w.Promise||!probe.getContext||!probe.getContext('2d')||!probe.toDataUR
 var D;try{D=JSON.parse(src.textContent)}catch(e){return}
 var W=1080,H=1350,X0=108,X1=972,CW=X1-X0;
 var C={paper:'#faf8f3',card:'#fff',ink:'#2b1712',mut:'#6f564d',line:'#e7ddd0',red:'#d23b2e',redInk:'#a92d1f',soft:'#fbe9e5',pink:'#e98b7d'};
-var SANS='system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif',PX='monospace';
+var CJKF='"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC"';
+var SANS='system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,'+CJKF+',sans-serif',PX='monospace',PXOK=false,ZH=false;
+function T(k,v){return w.i18n?w.i18n.t(k,v):k}
+function V(e,k){return ZH&&e[k+'_zh']||e[k]}
 var QR_SRC='https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js';
 var LEAF=null;try{if(w.Path2D)LEAF=new Path2D(D.leaf)}catch(e){}
 function pad(x){return(x<10?'0':'')+x}
@@ -283,14 +329,14 @@ p.then(function(v){clearTimeout(t);res(v)},function(){clearTimeout(t);res(false)
 var fontP,qrP;
 function fontReady(){if(!fontP){
 fontP=(d.fonts&&d.fonts.load)?settle(d.fonts.load('32px "Press Start 2P"').then(function(l){return l.length>0}),3000):Promise.resolve(false);
-fontP=fontP.then(function(ok){PX=ok?'"Press Start 2P",monospace':'monospace';if(!ok)fontP=null;return ok})}return fontP}
+fontP=fontP.then(function(ok){PXOK=ok;PX=ok?'"Press Start 2P",monospace':'monospace';if(!ok)fontP=null;return ok})}return fontP}
 function qrReady(){if(typeof w.qrcode==='function')return Promise.resolve(true);if(!qrP){
 qrP=settle(new Promise(function(res,rej){var s=d.createElement('script');s.src=QR_SRC;s.async=true;
 s.onload=function(){typeof w.qrcode==='function'?res(true):rej()};s.onerror=rej;d.head.appendChild(s)}),5000)
 .then(function(ok){if(!ok)qrP=null;return ok})}return qrP}
 
 /* --- drawing primitives --- */
-function F(size,weight,px){return(weight||'400')+' '+size+'px '+(px?PX:SANS)}
+function F(size,weight,px){return(weight||'400')+' '+size+'px '+(px?(ZH?(PXOK?'"Press Start 2P",':'')+SANS:PX):SANS)}
 function leaf(x,cx,cy,size,rot,col,alpha){x.save();x.globalAlpha=alpha==null?1:alpha;x.fillStyle=col;x.translate(cx,cy);x.rotate(rot*Math.PI/180);
 var s=size/100;x.scale(s,s);x.translate(-50,-50);
 if(LEAF)x.fill(LEAF);else{x.beginPath();x.moveTo(50,0);x.lineTo(100,50);x.lineTo(50,100);x.lineTo(0,50);x.closePath();x.fill()}x.restore()}
@@ -305,14 +351,16 @@ view:['..XXXXX..','.X.....X.','X...X...X','X..XXX..X','.X.....X.','..XXXXX..']};
 function icon(x,name,ix,iy,s,col){var rows=ICONS[name];x.fillStyle=col;
 for(var r=0;r<rows.length;r++)for(var c=0;c<rows[r].length;c++)if(rows[r][c]==='X')x.fillRect(ix+c*s,iy+r*s,s,s);return rows[0].length*s}
 
-/* word wrap: spaces for Latin, per-glyph for CJK, hard-break overlong tokens (URLs) */
+/* word wrap: spaces for Latin, per-glyph for CJK, hard-break overlong tokens (URLs);
+   closing CJK punctuation hangs instead of starting a line */
+var HANG=/^[，。、；：！？）》」』”’,.;:!?)]$/;
 var CJK='⺀-鿿가-힯豈-﫿＀-￯';
 var TOK=new RegExp('['+CJK+']|[^\\s'+CJK+']+|\\s+','g');
 function wrap(x,text,maxW){var out=[];
 String(text||'').split('\n').forEach(function(p){p=p.replace(/\s+/g,' ').trim();if(!p)return;if(out.length)out.push('');
 var line='';(p.match(TOK)||[]).forEach(function(t){
 if(/^\s+$/.test(t)){if(line)line+=' ';return}
-if(x.measureText(line+t).width<=maxW){line+=t;return}
+if(x.measureText(line+t).width<=maxW||(HANG.test(t)&&line.trim())){line+=t;return}
 if(line.trim())out.push(line.trim());line='';
 while(x.measureText(t).width>maxW){var k=t.length;while(k>1&&x.measureText(t.slice(0,k)).width>maxW)k--;out.push(t.slice(0,k));t=t.slice(k)}
 line=t});
@@ -337,8 +385,8 @@ x.fillStyle=C.line;for(var gy=18;gy<H;gy+=36)for(var gx=18;gx<W;gx+=36)x.fillRec
 x.fillStyle=C.card;x.fillRect(48,48,W-96,H-96);x.strokeStyle=C.ink;x.lineWidth=3;x.strokeRect(49.5,49.5,W-99,H-99);
 x.fillStyle=C.red;[[30,30,1,1],[W-30,30,-1,1],[30,H-30,1,-1],[W-30,H-30,-1,-1]].forEach(function(k){
 x.fillRect(k[2]>0?k[0]:k[0]-56,k[3]>0?k[1]:k[1]-10,56,10);x.fillRect(k[2]>0?k[0]:k[0]-10,k[3]>0?k[1]:k[1]-56,10,56)});
-var s=fitPx(x,'CODEX // 28-DAY SPRINT',22,CW-260);x.font=F(s,'400',true);x.textBaseline='top';var tx=X0;
-[['CODEX ',C.ink],['//',C.red],[' 28-DAY SPRINT',C.ink]].forEach(function(p){x.fillStyle=p[1];x.fillText(p[0],tx,100);tx+=x.measureText(p[0]).width});
+var s=fitPx(x,'CODEX //'+T('p_brand'),22,CW-260);x.font=F(s,'400',true);x.textBaseline='top';var tx=X0;
+[['CODEX ',C.ink],['//',C.red],[T('p_brand'),C.ink]].forEach(function(p){x.fillStyle=p[1];x.fillText(p[0],tx,100);tx+=x.measureText(p[0]).width});
 pxText(x,right,X1,100,s,C.redInk,'right');
 x.fillStyle=C.ink;x.fillRect(X0,146,CW,3);
 return {c:c,x:x}}
@@ -358,48 +406,48 @@ x.textBaseline='top';x.fillStyle=C.ink;x.fillText(host,X0,y+62);if(path!=='/'){x
 x.font=F(22);x.fillStyle=C.mut;x.fillText(tail,X0,H-48-26-24)}
 
 /* --- posters --- */
-function dayPoster(e){var f=frame('LV.'+pad(D.latest)+' / '+D.total),x=f.x;
-var bs=fitPx(x,e.label,52,560);x.font=F(bs,'400',true);var bw=Math.round(x.measureText(e.label).width)+60,bh=bs+44;
-pxBox(x,X0,196,bw,bh,8,C.red);pxText(x,e.label,X0+30,196+22+4,bs,'#fff');
+function dayPoster(e){var f=frame('LV.'+pad(D.latest)+' / '+D.total),x=f.x,label=V(e,'label');
+var bs=fitPx(x,label,52,560);x.font=F(bs,'400',true);var bw=Math.round(x.measureText(label).width)+60,bh=bs+44;
+pxBox(x,X0,196,bw,bh,8,C.red);pxText(x,label,X0+30,196+22+4,bs,'#fff');
 leaf(x,900,222,96,-18,C.red);leaf(x,968,270,48,28,C.pink);leaf(x,838,286,38,64,C.red,.85);
-x.font=F(28);x.fillStyle=C.mut;x.textBaseline='top';x.fillText(e.date,X0,326);
-pxText(x,e.status,X1,332,16,C.redInk,'right');
+x.font=F(28);x.fillStyle=C.mut;x.textBaseline='top';x.fillText(V(e,'date'),X0,326);
+pxText(x,V(e,'status'),X1,332,ZH?20:16,C.redInk,'right');
 leaf(x,800,690,480,14,C.red,.05);
-var r=fit(x,e.body,CW,530,[46,42,38,35,32,30,28],'400');drawLines(x,r,X0,388,C.ink,'400');
+var r=fit(x,V(e,'body'),CW,530,[46,42,38,35,32,30,28],'400');drawLines(x,r,X0,388,C.ink,'400');
 stats(x,e.stats,962);
-footer(x,e.url,e.day===0?'SCAN TO READ THE KICKOFF':'SCAN TO READ '+e.label,'Unofficial fan tracker of @'+D.handle+' on X');
+footer(x,e.url,e.day===0?T('p_cta_kickoff'):T('p_cta_day',{label:label}),T('p_tail_day',{h:D.handle}));
 return f.c}
-function sitePoster(){var f=frame('SEASON 01'),x=f.x,total=D.total,lv=D.latest;
-pxText(x,'AUTUMN 2026 // OCT 5 - NOV 1',X0,196,fitPx(x,'AUTUMN 2026 // OCT 5 - NOV 1',20,CW),C.redInk);
-var ts=118;x.font=F(ts,'800');while(x.measureText('Codex: 28 Days').width>CW&&ts>60){ts-=4;x.font=F(ts,'800')}
-x.textBaseline='top';x.fillStyle=C.ink;x.fillText('Codex: 28 Days',X0-4,244);
-var l2=244+Math.round(ts*1.08);x.fillText('of ',X0-4,l2);var ow=x.measureText('of ').width;x.fillStyle=C.red;x.fillText('Shipping',X0-4+ow,l2);
-var endX=X0+ow+x.measureText('Shipping').width;if(endX<760){leaf(x,904,l2+78,100,-16,C.red);leaf(x,966,l2+136,48,32,C.pink);leaf(x,826,l2+132,36,70,C.red,.85)}
-var r=fit(x,'Every daily Codex ship from Tibo’s 28-day sprint, tracked day by day.',CW,90,[32,30,28]);drawLines(x,r,X0,l2+ts+44,C.mut);
+function sitePoster(){var f=frame(T('p_season')),x=f.x,total=D.total,lv=D.latest,t1=T('p_t1'),t2a=T('p_t2a'),t2b=T('p_t2b');
+pxText(x,T('p_dates'),X0,196,fitPx(x,T('p_dates'),20,CW),C.redInk);
+var ts=118;x.font=F(ts,'800');while(x.measureText(t1).width>CW&&ts>60){ts-=4;x.font=F(ts,'800')}
+x.textBaseline='top';x.fillStyle=C.ink;x.fillText(t1,X0-4,244);
+var l2=244+Math.round(ts*(ZH?1.2:1.08));x.fillText(t2a,X0-4,l2);var ow=x.measureText(t2a).width;x.fillStyle=C.red;x.fillText(t2b,X0-4+ow,l2);
+var endX=X0+ow+x.measureText(t2b).width;if(endX<760){leaf(x,904,l2+78,100,-16,C.red);leaf(x,966,l2+136,48,32,C.pink);leaf(x,826,l2+132,36,70,C.red,.85)}
+var r=fit(x,T('p_sub'),CW,90,[32,30,28]);drawLines(x,r,X0,l2+ts+44,C.mut);
 var by=650;pxText(x,'XP',X0,by,22,C.ink);pxText(x,'LV.'+pad(lv)+' / '+total,X1,by,22,C.redInk,'right');
 var bx=X0,bt=by+40,bw=CW,bh=60,gap=4,inner=8,sw=(bw-2*inner-gap*(total-1))/total;
 x.fillStyle=C.card;x.fillRect(bx,bt,bw,bh);x.strokeStyle=C.line;x.lineWidth=2;x.strokeRect(bx+1,bt+1,bw-2,bh-2);
 for(var i=1;i<=total;i++){var sx=bx+inner+(i-1)*(sw+gap),sy=bt+inner,sh=bh-2*inner;
 x.fillStyle=i<=lv?C.red:C.paper;x.fillRect(sx,sy,sw,sh);x.lineWidth=2;x.strokeStyle=i===lv?C.ink:(i<lv?C.red:C.line);x.strokeRect(sx+1,sy+1,sw-2,sh-2)}
-x.font=F(26);x.fillStyle=C.mut;x.textBaseline='top';x.fillText('Day '+lv+' of '+total+' tracked',X0,bt+bh+16);
+x.font=F(26);x.fillStyle=C.mut;x.textBaseline='top';x.fillText(T('p_tracked',{d:lv,t:total}),X0,bt+bh+16);
 var latest=null;D.entries.forEach(function(e){if(!latest||e.day>latest.day)latest=e});
 var ly=850;
-if(latest){pxText(x,'LATEST SHIP // '+latest.label,X0,ly,fitPx(x,'LATEST SHIP // '+latest.label,20,CW),C.redInk);
-drawLines(x,fit(x,latest.body.replace(/\s+/g,' '),CW,132,[32,30,28]),X0,ly+42,C.ink)}
-else{x.font=F(34);x.fillStyle=C.ink;x.fillText('The sprint is about to begin.',X0,ly+42)}
-footer(x,D.site,'SCAN TO JOIN THE SPRINT','Unofficial fan tracker · @'+D.handle+' on X');
+if(latest){var lt=T('p_latest',{label:V(latest,'label')});pxText(x,lt,X0,ly,fitPx(x,lt,20,CW),C.redInk);
+drawLines(x,fit(x,V(latest,'body').replace(/\s+/g,' '),CW,132,[32,30,28]),X0,ly+42,C.ink)}
+else{x.font=F(34);x.fillStyle=C.ink;x.fillText(T('p_soon'),X0,ly+42)}
+footer(x,D.site,T('p_cta_site'),T('p_tail_site',{h:D.handle}));
 return f.c}
 
 /* --- preview modal --- */
-var M,img,wait,title,saveB,shareB,lastFocus,cur=null,job=0;
+var M,img,wait,title,hint,saveB,shareB,lastFocus,cur=null,job=0;
 function el(tag,cls,txt){var e=d.createElement(tag);if(cls)e.className=cls;if(txt)e.textContent=txt;return e}
 function btn(cls,txt){var b=el('button',cls,txt);b.type='button';return b}
 function build(){M=el('div','pm');M.hidden=true;M.setAttribute('role','dialog');M.setAttribute('aria-modal','true');M.setAttribute('aria-labelledby','pm-t');
-var box=el('div','pm-box'),head=el('div','pm-head'),x=btn('tag pm-x','CLOSE');title=el('p','pm-title px');title.id='pm-t';
-x.setAttribute('aria-label','Close poster preview');head.appendChild(title);head.appendChild(x);
-var stage=el('div','pm-stage');img=el('img');img.hidden=true;img.alt='';wait=el('p','pm-wait px','RENDERING...');stage.appendChild(img);stage.appendChild(wait);
-var hint=el('p','pm-hint');hint.appendChild(el('strong','','Long-press to save'));hint.appendChild(d.createTextNode(' on mobile, or tap SAVE IMAGE.'));
-var act=el('div','pm-act');saveB=btn('tag is-main','SAVE IMAGE');shareB=btn('tag','SHARE IMAGE');shareB.hidden=true;act.appendChild(saveB);act.appendChild(shareB);
+var box=el('div','pm-box'),head=el('div','pm-head'),x=btn('tag pm-x');title=el('p','pm-title px');title.id='pm-t';
+head.appendChild(title);head.appendChild(x);
+var stage=el('div','pm-stage');img=el('img');img.hidden=true;img.alt='';wait=el('p','pm-wait px');stage.appendChild(img);stage.appendChild(wait);
+hint=el('p','pm-hint');
+var act=el('div','pm-act');saveB=btn('tag is-main');shareB=btn('tag');shareB.hidden=true;act.appendChild(saveB);act.appendChild(shareB);
 [head,stage,hint,act].forEach(function(c){box.appendChild(c)});M.appendChild(box);
 M.addEventListener('click',function(e){if(e.target===M)close()});x.addEventListener('click',close);
 saveB.addEventListener('click',save);shareB.addEventListener('click',shareImg);
@@ -408,18 +456,23 @@ if(e.key==='Escape'||e.key==='Esc'){e.preventDefault();close();return}
 if(e.key!=='Tab')return;var f=Array.prototype.filter.call(M.querySelectorAll('button'),function(b){return !b.hidden&&!b.disabled});if(!f.length)return;
 var i=f.indexOf(d.activeElement);if(e.shiftKey&&i<=0){e.preventDefault();f[f.length-1].focus()}else if(!e.shiftKey&&i===f.length-1){e.preventDefault();f[0].focus()}});
 d.body.appendChild(M)}
+/* modal copy is (re)applied on every open so it follows the current language */
+function texts(){var x=M.querySelector('.pm-x');x.textContent=T('pm_close');x.setAttribute('aria-label',T('pm_close_aria'));
+hint.textContent='';hint.appendChild(el('strong','',T('pm_hint_b')));hint.appendChild(d.createTextNode(T('pm_hint')));
+saveB.textContent=T('pm_save');shareB.textContent=T('pm_share')}
 function open(key,from){var e=null;
-if(key!=='site'){D.entries.forEach(function(x){if(String(x.day)===key&&!e)e=x});if(!e)return}
-if(!M)build();lastFocus=from;var my=++job;cur=null;
+if(key!=='site'){D.entries.forEach(function(x){if(String(x.key)===key&&!e)e=x});if(!e)return}
+ZH=!!(w.i18n&&w.i18n.lang()==='zh');
+if(!M)build();texts();lastFocus=from;var my=++job;cur=null;
 var name=e?'codex-'+(e.day===0?'kickoff':'day-'+pad(e.day))+'-poster.png':'codex-28-days-poster.png';
-title.textContent=e?'POSTER // '+e.label:'SITE POSTER';
-img.hidden=true;img.removeAttribute('src');wait.hidden=false;wait.textContent='RENDERING...';saveB.disabled=true;shareB.hidden=true;
+title.textContent=e?T('pm_title_day',{label:V(e,'label')}):T('pm_title_site');
+img.hidden=true;img.removeAttribute('src');wait.hidden=false;wait.textContent=T('pm_rendering');saveB.disabled=true;shareB.hidden=true;
 M.hidden=false;d.documentElement.classList.add('pm-open');M.querySelector('.pm-x').focus();
 Promise.all([fontReady(),qrReady()]).then(function(){if(my!==job)return;
 var c=e?dayPoster(e):sitePoster();cur={c:c,name:name,url:e?e.url:D.site,file:null};
-img.src=c.toDataURL('image/png');img.alt=e?'Share poster for Codex '+e.label:'Codex: 28 Days of Shipping share poster';
+img.src=c.toDataURL('image/png');img.alt=e?T('pm_alt_day',{label:V(e,'label')}):T('pm_alt_site');
 img.hidden=false;wait.hidden=true;saveB.disabled=false;prepShare(cur,my)})
-.catch(function(){if(my===job)wait.textContent='COULD NOT RENDER'})}
+.catch(function(){if(my===job)wait.textContent=T('pm_fail')})}
 function prepShare(p,my){if(!n.canShare||!p.c.toBlob||typeof File!=='function')return;
 p.c.toBlob(function(b){if(!b||my!==job)return;try{var f=new File([b],p.name,{type:'image/png'});
 if(n.canShare({files:[f]})){p.file=f;shareB.hidden=false}}catch(e){}},'image/png')}
@@ -428,7 +481,7 @@ function go(href,blob){var a=d.createElement('a');a.href=href;a.download=p.name;
 if(blob)setTimeout(function(){URL.revokeObjectURL(href)},4000)}
 if(p.c.toBlob&&w.URL&&URL.createObjectURL)p.c.toBlob(function(b){b?go(URL.createObjectURL(b),true):go(p.c.toDataURL('image/png'))},'image/png');
 else go(p.c.toDataURL('image/png'))}
-function shareImg(){if(!cur||!cur.file)return;n.share({files:[cur.file],title:'Codex: 28 Days of Shipping',text:cur.url}).catch(function(){})}
+function shareImg(){if(!cur||!cur.file)return;n.share({files:[cur.file],title:T('site_title'),text:cur.url}).catch(function(){})}
 function close(){if(!M||M.hidden)return;job++;cur=null;M.hidden=true;d.documentElement.classList.remove('pm-open');
 if(lastFocus&&lastFocus.focus)lastFocus.focus()}
 Array.prototype.forEach.call(d.querySelectorAll('[data-poster]'),function(b){b.hidden=false;
