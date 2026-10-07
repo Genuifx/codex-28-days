@@ -133,5 +133,15 @@
       },
       "quote_text_zh": "我们正在让您更容易获得更高 OpenAI API 速率限制的资格。\n\n五个付费使用级别变成了三个：构建、启动和增长。\n\n您只需支付 500 美元的 API 付款总额即可获得 Grow（我们新的最高级别）的资格，而之前最高级别的支付金额为 1,000 美元。"
     }
+  ],
+  "resets": [
+    {
+      "day": 2,
+      "id": "2107676072871600470",
+      "text": "We shipped four things that were deemed good to great and some math proofs, but the vote is clear and the community demands a reset. I did calibrate it and it *seems* that the game is rigged in reset's favor, but such are the rules at the moment.  Therefore ... the reset has been processed. Enjoy!",
+      "text_zh": "我们发布了四件被认为从优秀到优秀的东西以及一些数学证明，但投票结果很明确，社区要求重新设置。我确实校准了它，并且“似乎”游戏被操纵以利于重置，但这就是目前的规则。  因此...重置已处理。享受！",
+      "url": "https://x.com/thsottiaux/status/2107676072871600470",
+      "posted_at": "Wed Oct 07 03:35:09 +0000 2026"
+    }
   ]
 }

@@ -139,7 +139,7 @@ def load_log():
         with open(DATA_PATH, encoding="utf-8") as f:
             return json.load(f)
     return {"handle": HANDLE, "total_days": TOTAL_DAYS,
-            "announcement_id": ANNOUNCEMENT_ID, "entries": []}
+            "announcement_id": ANNOUNCEMENT_ID, "entries": [], "resets": []}
 
 
 def save_log(log):
@@ -299,6 +299,7 @@ I18N = {
         "xp_count": "{n} / {t} SHIPPED",
         "xp_aria": "Sprint progress",
         "prog": "Day {d} of {t} tracked · updated {now}",
+        "prog_reset": "· reset on day {days}",
         "log_title": "QUEST LOG",
         "log_count_1": "{n} ENTRY",
         "log_count": "{n} ENTRIES",
@@ -388,6 +389,7 @@ I18N = {
         "xp_count": "已发布 {n} / {t}",
         "xp_aria": "冲刺进度",
         "prog": "已追踪到第 {d} 天（共 {t} 天）· 更新于 {now}",
+        "prog_reset": "· 第 {days} 天 reset",
         "log_title": "任务日志",
         "log_count_1": "共 {n} 条",
         "log_count": "共 {n} 条",
@@ -535,6 +537,7 @@ a:focus-visible{outline:2px solid var(--red);outline-offset:3px}
 .xp-bar i{display:block;height:14px;background:var(--paper);border:1px solid var(--line)}
 .xp-bar i.on{background:var(--red);border-color:var(--red)}
 .xp-bar i.cur{background:var(--red);border-color:var(--ink);animation:blink 1.6s steps(2,start) infinite}
+.xp-bar i.reset{background:var(--ink);border-color:var(--ink);animation:none}
 @keyframes blink{50%{background:#f2a497}}
 .prog{margin:10px 0 0;color:var(--mut);font-size:var(--fs-small)}
 
@@ -1152,10 +1155,17 @@ def render(log, changed):
   <div class="share"><span class="share-label px">{T('share_label')}</span>{share_tags(texts, day_url(slug), titles, slug)}</div>
 </article>""")
     cards_html = "\n".join(cards) if cards else f'<p class="empty">{T("empty")}</p>'
-    segs = "".join(
-        '<i class="cur"></i>' if d == latest_day else ('<i class="on"></i>' if d < latest_day else "<i></i>")
-        for d in range(1, TOTAL_DAYS + 1)
-    )
+    reset_days = sorted({r["day"] for r in log.get("resets", []) if isinstance(r.get("day"), int)})
+    def _seg(d):
+        cls = "cur" if d == latest_day else ("on" if d < latest_day else "")
+        if d in reset_days:
+            cls = f"{cls} reset".strip()
+        return f'<i class="{cls}"></i>' if cls else "<i></i>"
+    segs = "".join(_seg(d) for d in range(1, TOTAL_DAYS + 1))
+    if reset_days:
+        prog_reset = " " + T("prog_reset", {"days": ", ".join(str(d) for d in reset_days)})
+    else:
+        prog_reset = ""
     leaves = "".join(leaf_svg.format(cls=c) for c in ("l1", "l2", "l3", "l4"))
     n_entries = len(entries)
     faq_html = "\n".join(f'<div class="faq-item"><h3>{T(f"faq_q{i}")}</h3><p>{T(f"faq_a{i}")}</p></div>'
@@ -1209,7 +1219,7 @@ def render(log, changed):
 <div class="xp">
 <div class="xp-row"><span class="xp-label px">XP</span><span class="xp-count px">{T('xp_count', {'n': f'{latest_day:02d}', 't': TOTAL_DAYS})}</span></div>
 <div class="xp-bar" style="--n:{TOTAL_DAYS};--half:{(TOTAL_DAYS + 1) // 2}" role="progressbar" aria-label="{I18N['en']['xp_aria']}" data-i18n-attr="aria-label:xp_aria" aria-valuemin="0" aria-valuemax="{TOTAL_DAYS}" aria-valuenow="{latest_day}">{segs}</div>
-<p class="prog">{T('prog', {'d': latest_day, 't': TOTAL_DAYS, 'now': now})}</p>
+<p class="prog">{T('prog', {'d': latest_day, 't': TOTAL_DAYS, 'now': now})}{prog_reset}</p>
 </div>
 </div>
 </section>
