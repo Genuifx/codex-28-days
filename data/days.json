@@ -39,6 +39,45 @@
       "day": 2,
       "sub": ".1",
       "text_zh": "Day 2.1/\n\n我们为所有通过 ChatGPT 帐户登录的用户免费提供自动审核。您可以在“设置”>“权限”>“自动审核”中启用它。自动审核改进了默认沙箱设置，默认沙箱设置要求您批准所有内容，这很容易导致决策疲劳，除非您花费大量时间配置特定规则。\n\n它允许您运行长时间任务，同时让第二个代理审查主要代理采取的所有操作。其唯一目标是防止采取高风险操作，并防止与原始用户意图不一致的不需要的操作。此自动审核功能现在是免费的，不会占用您的计划的使用量。"
+    },
+    {
+      "id": "2107574912349303197",
+      "text": "Day 2.4/\n\nDecisions API is live. We will use this ourselves to improve the experience for everyone in many fun ways. Realtime general classifier does open some great possibilities.",
+      "posted_at": "Tue Oct 06 20:53:10 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2107574912349303197",
+      "likes": 1998,
+      "reposts": 96,
+      "replies": 220,
+      "views": 197158,
+      "day": 2,
+      "sub": ".4",
+      "text_zh": "Day 2.4/\n\n决策 API 已上线。我们将利用这一点以多种有趣的方式改善每个人的体验。实时通用分类器确实开启了一些巨大的可能性。"
+    },
+    {
+      "id": "2107573405553938664",
+      "text": "Day 2.3/\n\nNever worry about remembering what you were saying with that colleague. Just talk your heart out and build up the context to load up into codex to get it all done.",
+      "posted_at": "Tue Oct 06 20:47:11 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2107573405553938664",
+      "likes": 2286,
+      "reposts": 65,
+      "replies": 372,
+      "views": 256225,
+      "day": 2,
+      "sub": ".3",
+      "text_zh": "Day 2.3/\n\n不必担心记住您与该同事所说的话。只需说出你的心声并构建上下文以加载到法典中即可完成所有工作。"
+    },
+    {
+      "id": "2107548725359104441",
+      "text": "Day 2.2/\n\nOK this one is smaller, but we removed some friction for when building on the API. Happy building.",
+      "posted_at": "Tue Oct 06 19:09:07 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2107548725359104441",
+      "likes": 2266,
+      "reposts": 59,
+      "replies": 947,
+      "views": 440420,
+      "day": 2,
+      "sub": ".2",
+      "text_zh": "Day 2.2/\n\n好吧，这个较小，但我们消除了在 API 上构建时的一些障碍。快乐的建筑。"
     }
   ]
 }

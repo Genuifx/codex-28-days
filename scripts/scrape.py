@@ -52,7 +52,10 @@ def parse_twiscan(page_html):
             continue
         seen.add(tid)
         tail = page_html[m.end() : m.end() + 8000]
-        tm = re.search(r'id="clamp-%s-0">\s*(.*?)\s*</div>' % tid, tail, re.S)
+        tm = re.search(r'<!-- text -->\s*<div[^>]*whitespace-pre-wrap[^>]*>\s*(.*?)\s*</div>', tail, re.S)
+        if not tm:
+            # Older twiscan markup fallback.
+            tm = re.search(r'id="clamp-%s-0">\s*(.*?)\s*</div>' % tid, tail, re.S)
         text = ""
         if tm:
             text = htmlmod.unescape(re.sub(r"<[^>]+>", "", tm.group(1))).strip()
@@ -1167,9 +1170,8 @@ def main():
         for tw in parse_twiscan(page):
             if tw["id"] in known_ids:
                 continue
-            n = day_number(tw["preview"]) or day_number(tw["preview"].lstrip())
-            if n is None or not (1 <= n <= TOTAL_DAYS):
-                continue
+            # Fetch the canonical full text first: twiscan's preview markup has
+            # changed before, so the Day N decision must not depend on it.
             try:
                 t = fx_status(tw["id"])
             except Exception as e:  # noqa: BLE001
@@ -1177,6 +1179,9 @@ def main():
                 continue
             if not t["text"]:
                 t["text"] = tw["preview"]
+            n = day_number(t["text"]) or day_number(tw["preview"]) or day_number(tw["preview"].lstrip())
+            if n is None or not (1 <= n <= TOTAL_DAYS):
+                continue
             if not t["posted_at"]:
                 t["posted_at"] = rel_to_dt(tw["relative"], now).strftime("%a %b %d %H:%M:%S %z %Y")
             t["day"] = day_number(t["text"]) or n
