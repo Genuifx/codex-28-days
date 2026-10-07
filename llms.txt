@@ -122,7 +122,7 @@ OK this one is smaller, but we removed some friction for when building on the AP
 
 Day 2.2/
 
-好吧，这个较小，但我们消除了在 API 上构建时的一些障碍。快乐的建筑。
+好吧，这个较小，但我们消除了在 API 上构建时的一些障碍。祝构建愉快。
 
 Quoted post by OpenAI Developers (@OpenAIDevs): https://x.com/OpenAIDevs/status/2107539647392096384
 
@@ -156,7 +156,7 @@ Never worry about remembering what you were saying with that colleague. Just tal
 
 Day 2.3/
 
-不必担心记住您与该同事所说的话。只需说出你的心声并构建上下文以加载到法典中即可完成所有工作。
+不必担心记住您与该同事所说的话。只需说出你的心声并构建上下文以加载到 Codex 中即可完成所有工作。
 
 Quoted post by ChatGPT (@ChatGPT): https://x.com/ChatGPT/status/2107567930557026653
 

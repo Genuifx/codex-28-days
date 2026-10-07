@@ -157,6 +157,52 @@ def esc(s):
 
 TRANSLATE_URL = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q="
 
+# Proper nouns the machine translator mangles (e.g. "codex" -> "法典").
+# Swapped for opaque tokens before translation, restored verbatim after.
+# Longer phrases first so e.g. "Decisions API" wins over a shorter overlap.
+PROTECTED_TERMS = (
+    "Thibault Sottiaux",
+    "Decisions API",
+    "Responses API",
+    "Auto-review",
+    "ChatGPT",
+    "OpenAI",
+    "OpenCode",
+    "GPT-6.1",
+    "GPT-6",
+    "Codex",
+    "codex",
+    "Devin",
+    "Astra",
+    "Meetings",
+    "Tibo",
+    "Luna",
+    "Sol",
+    "Amp",
+    "API",
+    "Pi",
+)
+
+
+def _protect_terms(text):
+    """Replace PROTECTED_TERMS with opaque tokens; returns (text, mapping)."""
+    mapping = {}
+    for i, term in enumerate(PROTECTED_TERMS):
+        token = f"MTK{i}KEEP"
+        # Word boundaries: short terms like "Pi"/"Amp"/"Sol" must not match
+        # inside "API", "example", "solution".
+        pat = r"\b" + re.escape(term) + r"\b"
+        if re.search(pat, text, re.IGNORECASE):
+            text = re.sub(pat, token, text, flags=re.IGNORECASE)
+            mapping[token] = term if term != "codex" else "Codex"
+    return text, mapping
+
+
+def _restore_terms(text, mapping):
+    for token, term in mapping.items():
+        text = text.replace(token, term)
+    return text
+
 
 def _gtx(chunk):
     req = urllib.request.Request(TRANSLATE_URL + urllib.parse.quote(chunk, safe=""), headers=UA)
@@ -172,6 +218,8 @@ def translate_en_to_zh(text):
     """Machine-translate to Simplified Chinese via the free Google endpoint; '' on failure."""
     if not (text or "").strip():
         return ""
+    # Keep proper nouns out of the translator's reach.
+    text, mapping = _protect_terms(text)
     # Keep GET urls short: translate in line-aligned chunks of ~1500 chars.
     chunks, cur = [], ""
     for line in text.split("\n"):
@@ -194,7 +242,7 @@ def translate_en_to_zh(text):
                 if attempt == 2:
                     print(f"translate failed: {e}", file=sys.stderr, flush=True)
                     return ""
-    return "\n".join(out)
+    return _restore_terms("\n".join(out), mapping)
 
 
 def translate_entry(text):
