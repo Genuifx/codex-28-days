@@ -79,7 +79,7 @@ def fx_status(tid):
     """Canonical tweet data from the fxtwitter API."""
     d = json.loads(fetch(f"https://api.fxtwitter.com/{HANDLE}/status/{tid}"))
     t = d.get("tweet") or {}
-    return {
+    out = {
         "id": str(t.get("id") or tid),
         "text": (t.get("text") or "").strip(),
         "posted_at": t.get("created_at") or "",
@@ -89,6 +89,18 @@ def fx_status(tid):
         "replies": t.get("replies") or 0,
         "views": t.get("views") or 0,
     }
+    q = t.get("quote")
+    if isinstance(q, dict):  # quote-tweet: keep the quoted post for context
+        a = q.get("author") or {}
+        out["quote"] = {
+            "id": str(q.get("id") or ""),
+            "handle": a.get("screen_name") or "",
+            "name": a.get("name") or "",
+            "text": (q.get("text") or "").strip(),
+            "created_at": q.get("created_at") or "",
+            "url": q.get("url") or "",
+        }
+    return out
 
 
 DAY_RE = re.compile(r"\s*Day\s*(\d{1,2})(\.\d+)?\s*/", re.I)
@@ -240,6 +252,8 @@ I18N = {
         "st_cleared": "CLEARED",
         "likes": "Likes", "reposts": "Reposts", "replies": "Replies", "views": "Views",
         "view_x": "View on X →",
+        "quote_tag": "QUOTING",
+        "quote_aria": "Quoted post",
         "share_label": "SHARE",
         "share_x": "SHARE ON X",
         "copy": "COPY LINK",
@@ -327,6 +341,8 @@ I18N = {
         "st_cleared": "已通关",
         "likes": "点赞", "reposts": "转发", "replies": "回复", "views": "浏览",
         "view_x": "在 X 上查看原文 →",
+        "quote_tag": "引用",
+        "quote_aria": "引用的帖子",
         "share_label": "分享",
         "share_x": "分享到 X",
         "copy": "复制链接",
@@ -477,6 +493,12 @@ box-shadow:0 -2px 0 0 var(--red),0 2px 0 0 var(--red),-2px 0 0 0 var(--red),2px 
 .status{margin-left:auto;font-size:var(--px-xs);color:var(--mut)}
 .new-ship{position:absolute;top:-10px;right:clamp(14px,4vw,20px);font-size:var(--px-xs);color:var(--red-ink);background:var(--card);border:1px solid var(--red);padding:3px 7px 2px}
 .text p{margin:0 0 14px;white-space:pre-wrap;overflow-wrap:anywhere}
+.quote{margin:0 0 18px;padding:12px 14px;background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--ink);color:var(--mut);font-size:var(--fs-small);line-height:1.65}
+.quote-head{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px;margin:0 0 6px;color:var(--ink)}
+.quote-head a{color:var(--mut)}
+.quote-tag{font-size:var(--px-xs);color:var(--red-ink)}
+.quote-text p{margin:0 0 8px;white-space:pre-wrap;overflow-wrap:anywhere}
+.quote-text p:last-child{margin-bottom:0}
 .meta{display:flex;gap:8px 18px;align-items:center;flex-wrap:wrap;color:var(--mut);font-size:var(--fs-small);border-top:1px dashed var(--line);padding-top:14px;margin-top:6px}
 .meta span{white-space:nowrap}
 .orig{margin-left:auto;font-weight:600;text-decoration:none}
@@ -1002,6 +1024,12 @@ def render_llms(log):
                 "English (original):", "", e["text"].strip(), ""]
         if e.get("text_zh"):
             out += ["中文（机器翻译，仅供参考）:", "", e["text_zh"].strip(), ""]
+        q = e.get("quote") or {}
+        if q.get("text"):
+            out += [f"Quoted post by {q.get('name') or q.get('handle')} (@{q.get('handle')}): {q.get('url')}", "",
+                    q["text"].strip(), ""]
+            if e.get("quote_text_zh"):
+                out += ["引用帖中文（机器翻译，仅供参考）:", "", e["quote_text_zh"].strip(), ""]
     return "\n".join(out).rstrip() + "\n"
 
 
@@ -1040,6 +1068,19 @@ def render(log, changed):
                          f'  <div class="text" data-lang="zh" lang="zh-CN">{paras_zh}</div>')
         else:
             text_html = f'<div class="text">{paras}</div>'
+        q = e.get("quote") or {}
+        if q.get("text"):
+            q_en = "".join(f"<p>{esc(p)}</p>" for p in q["text"].split("\n") if p.strip())
+            q_zh = ("".join(f"<p>{esc(p)}</p>" for p in e["quote_text_zh"].split("\n") if p.strip())
+                    if e.get("quote_text_zh") else q_en)
+            handle = f"@{esc(q.get('handle'))}"
+            if q.get("url"):
+                handle = f'<a href="{esc(q["url"])}" target="_blank" rel="noopener">{handle}</a>'
+            text_html += (f'\n  <blockquote class="quote" aria-label="{I18N["en"]["quote_aria"]}" data-i18n-attr="aria-label:quote_aria">'
+                          f'<div class="quote-head"><span class="quote-tag px">{T("quote_tag")}</span>'
+                          f'<b>{esc(q.get("name") or q.get("handle"))}</b> {handle}</div>'
+                          f'<div class="quote-text" data-lang="en">{q_en}</div>'
+                          f'<div class="quote-text" data-lang="zh" lang="zh-CN">{q_zh}</div></blockquote>')
         stats = "".join(f'<span title="{I18N["en"][k]}" data-i18n-attr="title:{k}">{icon} {fmt_int(e.get(k))}</span>'
                         for k, icon in (("likes", "♥"), ("reposts", "↻"), ("replies", "💬"), ("views", "👁")))
         texts, titles = entry_share(e)
@@ -1196,13 +1237,18 @@ def main():
     # we stop for this run so a blocked endpoint can't stall the job.
     translated = 0
     for e in sorted(log["entries"], key=lambda e: e["day"]):
-        if e.get("text_zh"):
-            continue
-        e["text_zh"] = translate_entry(e["text"])
-        if not e["text_zh"]:
-            print(f"translation unavailable for Day {day_slug(e)}; showing English", file=sys.stderr, flush=True)
-            break
-        translated += 1
+        if not e.get("text_zh"):
+            e["text_zh"] = translate_entry(e["text"])
+            if not e["text_zh"]:
+                print(f"translation unavailable for Day {day_slug(e)}; showing English", file=sys.stderr, flush=True)
+                break
+            translated += 1
+        if (e.get("quote") or {}).get("text") and not e.get("quote_text_zh"):
+            e["quote_text_zh"] = translate_entry(e["quote"]["text"])
+            if not e["quote_text_zh"]:
+                print(f"quote translation unavailable for Day {day_slug(e)}; showing English", file=sys.stderr, flush=True)
+                break
+            translated += 1
     if translated:
         print(f"translated {translated} entries", flush=True)
 

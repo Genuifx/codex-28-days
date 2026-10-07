@@ -26,6 +26,18 @@ Over the next 28 days, each day we’ll either ship one thing that is a clear im
 
 在接下来的 28 天里，每天我们要么发布一项明显改进且与大多数 Codex/工作用户相关的内容，要么发布完全重置的内容。让改进开始吧。
 
+Quoted post by Tibo (@thsottiaux): https://x.com/thsottiaux/status/2106610099720720811
+
+All right, we’re locking in. Only things being worked on are simplifications, more efficiency for more usage, groundbreaking features or new models. 
+
+Sometimes you have to invest ahead of the curve, but feedback is clear that you all want things to get simpler. On it.
+
+引用帖中文（机器翻译，仅供参考）:
+
+好吧，我们正在锁定目标。唯一要做的就是简化、提高使用效率、突破性功能或新模型。 
+
+有时你必须提前投资，但反馈很明显，大家都希望事情变得更简单。在它上面。
+
 ### Day 1: We have optimized the default speed to be ~50% faster across GPT-6 Astra and…
 
 - Date: Oct 05, 2026 · 17:20 UTC
@@ -47,6 +59,14 @@ Day 1/
 通过使用“使用 ChatGPT 登录”（包括 OpenCode、Pi、Amp、Devin 等）订阅我们的所有产品和合作伙伴，我们已将 GPT-6 Astra 和 GPT-6.1 Sol 的默认速度优化了约 50%。
 
 您无需进行任何更改，并且应该会在接下来的两个小时内感受到这一点。
+
+Quoted post by Tibo (@thsottiaux): https://x.com/thsottiaux/status/2106845241357824205
+
+Over the next 28 days, each day we’ll either ship one thing that is a clear improvement and relevant for most codex/work users or ship a full reset. Let the improvements begin.
+
+引用帖中文（机器翻译，仅供参考）:
+
+在接下来的 28 天里，每天我们要么发布一项明显改进且与大多数 Codex/工作用户相关的内容，要么发布完全重置的内容。让改进开始吧。
 
 ### Day 2.1: We have made Auto-review free for all users signed in through a ChatGPT…
 
@@ -70,6 +90,22 @@ Day 2.1/
 
 它允许您运行长时间任务，同时让第二个代理审查主要代理采取的所有操作。其唯一目标是防止采取高风险操作，并防止与原始用户意图不一致的不需要的操作。此自动审核功能现在是免费的，不会占用您的计划的使用量。
 
+Quoted post by Tibo (@thsottiaux): https://x.com/thsottiaux/status/2107158998495748264
+
+Day 1/
+
+We have optimized the default speed to be ~50% faster across GPT-6 Astra and GPT-6.1 Sol through the subscription across all our products and partners using Sign in With ChatGPT (including OpenCode, Pi, Amp, Devin, ...).
+
+No changes needed on your end and this should be felt within the next two hours.
+
+引用帖中文（机器翻译，仅供参考）:
+
+Day 1/
+
+通过使用“使用 ChatGPT 登录”（包括 OpenCode、Pi、Amp、Devin 等）订阅我们的所有产品和合作伙伴，我们已将 GPT-6 Astra 和 GPT-6.1 Sol 的默认速度优化了约 50%。
+
+您无需进行任何更改，并且应该会在接下来的两个小时内感受到这一点。
+
 ### Day 2.2: OK this one is smaller, but we removed some friction for when building on the…
 
 - Date: Oct 06, 2026 · 19:09 UTC
@@ -87,6 +123,22 @@ OK this one is smaller, but we removed some friction for when building on the AP
 Day 2.2/
 
 好吧，这个较小，但我们消除了在 API 上构建时的一些障碍。快乐的建筑。
+
+Quoted post by OpenAI Developers (@OpenAIDevs): https://x.com/OpenAIDevs/status/2107539647392096384
+
+We’re making it easier to qualify for higher OpenAI API rate limits.
+
+Five paid usage tiers become three: Build, Launch, and Grow.
+
+You can qualify for Grow, our new highest tier, with $500 in total API payments—down from $1,000 for the previous highest tier.
+
+引用帖中文（机器翻译，仅供参考）:
+
+我们正在让您更容易获得更高 OpenAI API 速率限制的资格。
+
+五个付费使用级别变成了三个：构建、启动和增长。
+
+您只需支付 500 美元的 API 付款总额即可获得 Grow（我们新的最高级别）的资格，而之前最高级别的支付金额为 1,000 美元。
 
 ### Day 2.3: Never worry about remembering what you were saying with that colleague. Just…
 
@@ -106,6 +158,32 @@ Day 2.3/
 
 不必担心记住您与该同事所说的话。只需说出你的心声并构建上下文以加载到法典中即可完成所有工作。
 
+Quoted post by ChatGPT (@ChatGPT): https://x.com/ChatGPT/status/2107567930557026653
+
+Your next meeting comes with a note-taker who can help with the follow-up.
+
+The Meetings plugin takes notes for you and saves a personalized summary and next steps in ChatGPT Space, based on what ChatGPT knows about you and the work you’ve done together.
+
+Keep notes private or share them with your team, then ask ChatGPT to update a project plan or draft a follow-up.
+
+Available in beta for Pro and Business users in the ChatGPT desktop app on macOS. Enterprise is coming soon.
+
+Download the desktop app, then search for “Meetings” in the plugin directory.
+https://chatgpt.com/download/
+
+引用帖中文（机器翻译，仅供参考）:
+
+您的下一次会议将配备一名记录员，他可以帮助您进行后续工作。
+
+会议插件根据 ChatGPT 对您的了解以及你们一起完成的工作，为您做笔记，并在 ChatGPT Space 中保存个性化摘要和后续步骤。
+
+将笔记保密或与您的团队共享，然后要求 ChatGPT 更新项目计划或起草后续计划。
+
+专业版和商业版用户可以在 macOS 上的 ChatGPT 桌面应用程序中使用测试版。企业即将到来。
+
+下载桌面应用程序，然后在插件目录中搜索“Meetings”。
+https://chatgpt.com/download/
+
 ### Day 2.4: Decisions API is live. We will use this ourselves to improve the experience for…
 
 - Date: Oct 06, 2026 · 20:53 UTC
@@ -123,3 +201,15 @@ Decisions API is live. We will use this ourselves to improve the experience for 
 Day 2.4/
 
 决策 API 已上线。我们将利用这一点以多种有趣的方式改善每个人的体验。实时通用分类器确实开启了一些巨大的可能性。
+
+Quoted post by OpenAI Developers (@OpenAIDevs): https://x.com/OpenAIDevs/status/2107573382229188645
+
+Let your app choose the right model, tool, or action in near real-time with Decisions API, now available to all developers in public beta.
+
+The Decisions API makes decisions up to 10x faster than GPT-6 Luna through the Responses API.
+
+引用帖中文（机器翻译，仅供参考）:
+
+让您的应用程序使用 Decisions API 近乎实时地选择正确的模型、工具或操作，现在所有开发人员都可以在公共测试版中使用。
+
+Decisions API 通过 Responses API 做出决策的速度比 GPT-6 Luna 快 10 倍。

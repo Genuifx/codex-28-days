@@ -13,7 +13,16 @@
       "replies": 4442,
       "views": 6815637,
       "day": 0,
-      "text_zh": "在接下来的 28 天里，每天我们要么发布一项明显改进且与大多数 Codex/工作用户相关的内容，要么发布完全重置的内容。让改进开始吧。"
+      "text_zh": "在接下来的 28 天里，每天我们要么发布一项明显改进且与大多数 Codex/工作用户相关的内容，要么发布完全重置的内容。让改进开始吧。",
+      "quote": {
+        "id": "2106610099720720811",
+        "handle": "thsottiaux",
+        "name": "Tibo",
+        "text": "All right, we’re locking in. Only things being worked on are simplifications, more efficiency for more usage, groundbreaking features or new models. \n\nSometimes you have to invest ahead of the curve, but feedback is clear that you all want things to get simpler. On it.",
+        "created_at": "Sun Oct 04 04:59:21 +0000 2026",
+        "url": "https://x.com/thsottiaux/status/2106610099720720811"
+      },
+      "quote_text_zh": "好吧，我们正在锁定目标。唯一要做的就是简化、提高使用效率、突破性功能或新模型。 \n\n有时你必须提前投资，但反馈很明显，大家都希望事情变得更简单。在它上面。"
     },
     {
       "id": "2107158998495748264",
@@ -25,7 +34,16 @@
       "replies": 2331,
       "views": 1960910,
       "day": 1,
-      "text_zh": "Day 1/\n\n通过使用“使用 ChatGPT 登录”（包括 OpenCode、Pi、Amp、Devin 等）订阅我们的所有产品和合作伙伴，我们已将 GPT-6 Astra 和 GPT-6.1 Sol 的默认速度优化了约 50%。\n\n您无需进行任何更改，并且应该会在接下来的两个小时内感受到这一点。"
+      "text_zh": "Day 1/\n\n通过使用“使用 ChatGPT 登录”（包括 OpenCode、Pi、Amp、Devin 等）订阅我们的所有产品和合作伙伴，我们已将 GPT-6 Astra 和 GPT-6.1 Sol 的默认速度优化了约 50%。\n\n您无需进行任何更改，并且应该会在接下来的两个小时内感受到这一点。",
+      "quote": {
+        "id": "2106845241357824205",
+        "handle": "thsottiaux",
+        "name": "Tibo",
+        "text": "Over the next 28 days, each day we’ll either ship one thing that is a clear improvement and relevant for most codex/work users or ship a full reset. Let the improvements begin.",
+        "created_at": "Sun Oct 04 20:33:43 +0000 2026",
+        "url": "https://x.com/thsottiaux/status/2106845241357824205"
+      },
+      "quote_text_zh": "在接下来的 28 天里，每天我们要么发布一项明显改进且与大多数 Codex/工作用户相关的内容，要么发布完全重置的内容。让改进开始吧。"
     },
     {
       "id": "2107368734981517634",
@@ -38,7 +56,16 @@
       "views": 397760,
       "day": 2,
       "sub": ".1",
-      "text_zh": "Day 2.1/\n\n我们为所有通过 ChatGPT 帐户登录的用户免费提供自动审核。您可以在“设置”>“权限”>“自动审核”中启用它。自动审核改进了默认沙箱设置，默认沙箱设置要求您批准所有内容，这很容易导致决策疲劳，除非您花费大量时间配置特定规则。\n\n它允许您运行长时间任务，同时让第二个代理审查主要代理采取的所有操作。其唯一目标是防止采取高风险操作，并防止与原始用户意图不一致的不需要的操作。此自动审核功能现在是免费的，不会占用您的计划的使用量。"
+      "text_zh": "Day 2.1/\n\n我们为所有通过 ChatGPT 帐户登录的用户免费提供自动审核。您可以在“设置”>“权限”>“自动审核”中启用它。自动审核改进了默认沙箱设置，默认沙箱设置要求您批准所有内容，这很容易导致决策疲劳，除非您花费大量时间配置特定规则。\n\n它允许您运行长时间任务，同时让第二个代理审查主要代理采取的所有操作。其唯一目标是防止采取高风险操作，并防止与原始用户意图不一致的不需要的操作。此自动审核功能现在是免费的，不会占用您的计划的使用量。",
+      "quote": {
+        "id": "2107158998495748264",
+        "handle": "thsottiaux",
+        "name": "Tibo",
+        "text": "Day 1/\n\nWe have optimized the default speed to be ~50% faster across GPT-6 Astra and GPT-6.1 Sol through the subscription across all our products and partners using Sign in With ChatGPT (including OpenCode, Pi, Amp, Devin, ...).\n\nNo changes needed on your end and this should be felt within the next two hours.",
+        "created_at": "Mon Oct 05 17:20:29 +0000 2026",
+        "url": "https://x.com/thsottiaux/status/2107158998495748264"
+      },
+      "quote_text_zh": "Day 1/\n\n通过使用“使用 ChatGPT 登录”（包括 OpenCode、Pi、Amp、Devin 等）订阅我们的所有产品和合作伙伴，我们已将 GPT-6 Astra 和 GPT-6.1 Sol 的默认速度优化了约 50%。\n\n您无需进行任何更改，并且应该会在接下来的两个小时内感受到这一点。"
     },
     {
       "id": "2107574912349303197",
@@ -51,7 +78,16 @@
       "views": 197158,
       "day": 2,
       "sub": ".4",
-      "text_zh": "Day 2.4/\n\n决策 API 已上线。我们将利用这一点以多种有趣的方式改善每个人的体验。实时通用分类器确实开启了一些巨大的可能性。"
+      "text_zh": "Day 2.4/\n\n决策 API 已上线。我们将利用这一点以多种有趣的方式改善每个人的体验。实时通用分类器确实开启了一些巨大的可能性。",
+      "quote": {
+        "id": "2107573382229188645",
+        "handle": "OpenAIDevs",
+        "name": "OpenAI Developers",
+        "text": "Let your app choose the right model, tool, or action in near real-time with Decisions API, now available to all developers in public beta.\n\nThe Decisions API makes decisions up to 10x faster than GPT-6 Luna through the Responses API.",
+        "created_at": "Tue Oct 06 20:47:05 +0000 2026",
+        "url": "https://x.com/OpenAIDevs/status/2107573382229188645"
+      },
+      "quote_text_zh": "让您的应用程序使用 Decisions API 近乎实时地选择正确的模型、工具或操作，现在所有开发人员都可以在公共测试版中使用。\n\nDecisions API 通过 Responses API 做出决策的速度比 GPT-6 Luna 快 10 倍。"
     },
     {
       "id": "2107573405553938664",
@@ -64,7 +100,16 @@
       "views": 256225,
       "day": 2,
       "sub": ".3",
-      "text_zh": "Day 2.3/\n\n不必担心记住您与该同事所说的话。只需说出你的心声并构建上下文以加载到法典中即可完成所有工作。"
+      "text_zh": "Day 2.3/\n\n不必担心记住您与该同事所说的话。只需说出你的心声并构建上下文以加载到法典中即可完成所有工作。",
+      "quote": {
+        "id": "2107567930557026653",
+        "handle": "ChatGPT",
+        "name": "ChatGPT",
+        "text": "Your next meeting comes with a note-taker who can help with the follow-up.\n\nThe Meetings plugin takes notes for you and saves a personalized summary and next steps in ChatGPT Space, based on what ChatGPT knows about you and the work you’ve done together.\n\nKeep notes private or share them with your team, then ask ChatGPT to update a project plan or draft a follow-up.\n\nAvailable in beta for Pro and Business users in the ChatGPT desktop app on macOS. Enterprise is coming soon.\n\nDownload the desktop app, then search for “Meetings” in the plugin directory.\nhttps://chatgpt.com/download/",
+        "created_at": "Tue Oct 06 20:25:26 +0000 2026",
+        "url": "https://x.com/ChatGPT/status/2107567930557026653"
+      },
+      "quote_text_zh": "您的下一次会议将配备一名记录员，他可以帮助您进行后续工作。\n\n会议插件根据 ChatGPT 对您的了解以及你们一起完成的工作，为您做笔记，并在 ChatGPT Space 中保存个性化摘要和后续步骤。\n\n将笔记保密或与您的团队共享，然后要求 ChatGPT 更新项目计划或起草后续计划。\n\n专业版和商业版用户可以在 macOS 上的 ChatGPT 桌面应用程序中使用测试版。企业即将到来。\n\n下载桌面应用程序，然后在插件目录中搜索“Meetings”。\nhttps://chatgpt.com/download/"
     },
     {
       "id": "2107548725359104441",
@@ -77,7 +122,16 @@
       "views": 440420,
       "day": 2,
       "sub": ".2",
-      "text_zh": "Day 2.2/\n\n好吧，这个较小，但我们消除了在 API 上构建时的一些障碍。快乐的建筑。"
+      "text_zh": "Day 2.2/\n\n好吧，这个较小，但我们消除了在 API 上构建时的一些障碍。快乐的建筑。",
+      "quote": {
+        "id": "2107539647392096384",
+        "handle": "OpenAIDevs",
+        "name": "OpenAI Developers",
+        "text": "We’re making it easier to qualify for higher OpenAI API rate limits.\n\nFive paid usage tiers become three: Build, Launch, and Grow.\n\nYou can qualify for Grow, our new highest tier, with $500 in total API payments—down from $1,000 for the previous highest tier.",
+        "created_at": "Tue Oct 06 18:33:02 +0000 2026",
+        "url": "https://x.com/OpenAIDevs/status/2107539647392096384"
+      },
+      "quote_text_zh": "我们正在让您更容易获得更高 OpenAI API 速率限制的资格。\n\n五个付费使用级别变成了三个：构建、启动和增长。\n\n您只需支付 500 美元的 API 付款总额即可获得 Grow（我们新的最高级别）的资格，而之前最高级别的支付金额为 1,000 美元。"
     }
   ]
 }
