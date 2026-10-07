@@ -107,6 +107,16 @@ DAY_RE = re.compile(r"\s*Day\s*(\d{1,2})(\.\d+)?\s*/", re.I)
 DAY_PREFIX_RE = re.compile(r"^\s*Day\s*\d{1,2}(?:\.\d+)?\s*/\s*", re.I)
 
 
+def day_sort_key(e):
+    """Chronological sort key: (day, numeric sub-day). String sort would put
+    '.10' before '.2'; float('.10')=0.1 > 0.2 is correct."""
+    try:
+        sub = float(e.get("sub") or 0)
+    except (TypeError, ValueError):
+        sub = 0
+    return (e["day"], sub)
+
+
 def day_number(text):
     """Int day of a 'Day N/' (or 'Day N.M/') post, e.g. 2 for 'Day 2.1/'."""
     m = DAY_RE.match(text or "")
@@ -1015,7 +1025,7 @@ def entry_headline(e):
 def json_ld(entries):
     """schema.org WebSite + ItemList of BlogPosting (one per day) + FAQPage, English."""
     posts = []
-    for i, e in enumerate(sorted(entries, key=lambda e: (e["day"], e.get("sub") or "")), 1):
+    for i, e in enumerate(sorted(entries, key=day_sort_key), 1):
         iso, _ = fmt_date(e.get("posted_at", ""))
         post = {"@type": "BlogPosting", "headline": entry_headline(e), "url": day_url(day_slug(e)),
                 "inLanguage": "en", "articleBody": e["text"],
@@ -1055,7 +1065,7 @@ def render_sitemap(log):
 
 def render_llms(log):
     """llms.txt: plain-text digest for AI crawlers — every post in full English + Chinese MT."""
-    entries = sorted(log["entries"], key=lambda e: (e["day"], e.get("sub") or ""))
+    entries = sorted(log["entries"], key=day_sort_key)
     out = [f"# {I18N['en']['site_title']}", "",
            f"> Unofficial day-by-day archive of Tibo (@{HANDLE}, OpenAI Codex lead)'s 28-day Codex "
            f"shipping sprint (Oct 5 – Nov 1, 2026): every daily ship, full original English text "
@@ -1082,7 +1092,7 @@ def render_llms(log):
 
 
 def render(log, changed):
-    entries = sorted(log["entries"], key=lambda e: e["day"])
+    entries = sorted(log["entries"], key=day_sort_key)
     latest_day = max([e["day"] for e in entries if e["day"] > 0], default=0)
     now = None
     # Keep the previous timestamp when data is unchanged so idle runs produce no diff.
@@ -1099,7 +1109,7 @@ def render(log, changed):
                f"<path fill='%23d23b2e' d='{LEAF_PATH}'/></svg>").replace(" ", "%20")
 
     cards = []
-    for e in sorted(entries, key=lambda e: e["day"], reverse=True):
+    for e in sorted(entries, key=day_sort_key, reverse=True):
         is_new = e["day"] > 0 and e["day"] == latest_day
         slug = day_slug(e)
         badge = T("badge_ann") if e["day"] == 0 else T("badge_day", {"d2": slug.zfill(2), "d": slug})
