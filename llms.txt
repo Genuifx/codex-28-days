@@ -213,3 +213,43 @@ The Decisions API makes decisions up to 10x faster than GPT-6 Luna through the R
 让您的应用程序使用 Decisions API 近乎实时地选择正确的模型、工具或操作，现在所有开发人员都可以在公共测试版中使用。
 
 Decisions API 通过 Responses API 做出决策的速度比 GPT-6 Luna 快 10 倍。
+
+### Day 3: The big one is GPT-6 in Chat, but today is also a little celebration day with a…
+
+- Date: Oct 07, 2026 · 19:19 UTC
+- Original post: https://x.com/thsottiaux/status/2107913674593644711
+- Permalink: https://codexy.fyi/#day-3
+
+English (original):
+
+Day 3/
+
+The big one is GPT-6 in Chat, but today is also a little celebration day with a new high of 40M active users across Codex and ChatGPT Work.
+
+Loading a banked reset in everyone's paid accounts. See you again tomorrow!
+
+中文（机器翻译，仅供参考）:
+
+Day 3/
+
+最重要的是聊天中的 GPT-6，但今天也是一个小小的庆祝日，Codex 和 ChatGPT Work 的活跃用户创下了 4000 万新高。
+
+正在把攒下的 reset 额度充进所有付费账户。明天再见！
+
+Quoted post by Tibo (@thsottiaux): https://x.com/thsottiaux/status/2107575657014468879
+
+Roundup of Day 2/
+
+2.1/ Approve for me (auto-review) is now included and does not use usage. Can be between 2-10% of plan when used. Also better for you.
+2.2/ Simplified API for builders.
+2.3/ Meeting notes integrated.
+2.4/ Decisions API live for builders. Will use in the app to improve the experience.
+
+引用帖中文（机器翻译，仅供参考）:
+
+第二天综述/
+
+2.1/ Approve for me (Auto-review) 现在已包含并且不使用用法。使用时可以为计划的 2-10%。对你也更好。
+2.2/ 为构建者简化的 API。
+2.3/ 整合会议记录。
+2.4/ Decisions API 为构建者而生。将在应用程序中使用以改善体验。
