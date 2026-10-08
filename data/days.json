@@ -132,6 +132,28 @@
         "url": "https://x.com/OpenAIDevs/status/2107539647392096384"
       },
       "quote_text_zh": "我们正在让您更容易获得更高 OpenAI API 速率限制的资格。\n\n五个付费使用级别变成了三个：构建、启动和增长。\n\n您只需支付 500 美元的 API 付款总额即可获得 Grow（我们新的最高级别）的资格，而之前最高级别的支付金额为 1,000 美元。"
+    },
+    {
+      "id": "2107913674593644711",
+      "text": "Day 3/\n\nThe big one is GPT-6 in Chat, but today is also a little celebration day with a new high of 40M active users across Codex and ChatGPT Work.\n\nLoading a banked reset in everyone's paid accounts. See you again tomorrow!",
+      "posted_at": "Wed Oct 07 19:19:17 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2107913674593644711",
+      "likes": 14980,
+      "reposts": 544,
+      "replies": 1126,
+      "views": 703307,
+      "quote": {
+        "id": "2107575657014468879",
+        "handle": "thsottiaux",
+        "name": "Tibo",
+        "text": "Roundup of Day 2/\n\n2.1/ Approve for me (auto-review) is now included and does not use usage. Can be between 2-10% of plan when used. Also better for you.\n2.2/ Simplified API for builders.\n2.3/ Meeting notes integrated.\n2.4/ Decisions API live for builders. Will use in the app to improve the experience.",
+        "created_at": "Tue Oct 06 20:56:08 +0000 2026",
+        "url": "https://x.com/thsottiaux/status/2107575657014468879"
+      },
+      "day": 3,
+      "sub": "",
+      "text_zh": "Day 3/\n\n最重要的是聊天中的 GPT-6，但今天也是一个小小的庆祝日，Codex 和 ChatGPT Work 的活跃用户创下了 4000 万新高。\n\n正在把攒下的 reset 额度充进所有付费账户。明天再见！",
+      "quote_text_zh": "第二天综述/\n\n2.1/ Approve for me (Auto-review) 现在已包含并且不使用用法。使用时可以为计划的 2-10%。对你也更好。\n2.2/ 为构建者简化的 API。\n2.3/ 整合会议记录。\n2.4/ Decisions API 为构建者而生。将在应用程序中使用以改善体验。"
     }
   ],
   "resets": [
