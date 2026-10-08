@@ -165,27 +165,5 @@
       "url": "https://x.com/thsottiaux/status/2107676072871600470",
       "posted_at": "Wed Oct 07 03:35:09 +0000 2026"
     }
-  ],
-  "highlights": [
-    {
-      "id": "2107912709715132482",
-      "text": "We're going beyond text and are releasing a new version of GPT-6 to all users in ChatGPT. Lots of model and infra improvements coming together here to scale it to 1.2B users!",
-      "text_zh": "我们将超越文本，向 ChatGPT 中的所有用户发布新版本的 GPT-6。许多模型和基础设施改进汇集于此，将其扩展到 1.2B 用户！",
-      "url": "https://x.com/thsottiaux/status/2107912709715132482",
-      "posted_at": "Wed Oct 07 19:15:27 +0000 2026",
-      "likes": 6457,
-      "reposts": 221,
-      "replies": 446,
-      "views": 601946,
-      "quote": {
-        "id": "2107894997538525580",
-        "handle": "OpenAI",
-        "name": "OpenAI",
-        "text": "GPT-6 and Intelligent UI, now rolling out in ChatGPT for everyone.\n\nIntelligent UI in ChatGPT delivers fast, interactive answers that make everyday questions more visual, complex topics easier to grasp, and interactive tools for your task available on the spot.",
-        "created_at": "Wed Oct 07 18:05:04 +0000 2026",
-        "url": "https://x.com/OpenAI/status/2107894997538525580"
-      },
-      "quote_text_zh": "GPT-6 和智能 UI 现已在 ChatGPT 中向所有人推出。\n\nChatGPT 中的智能 UI 提供快速、交互式的答案，使日常问题更加直观，使复杂的主题更容易掌握，并可现场使用用于完成任务的交互式工具。"
-    }
   ]
 }

@@ -253,32 +253,3 @@ Roundup of Day 2/
 2.2/ 为构建者简化的 API。
 2.3/ 整合会议记录。
 2.4/ Decisions API 为构建者而生。将在应用程序中使用以改善体验。
-
-
-## Highlights (major announcements without a Day N label)
-
-### Highlight
-
-- Date: Oct 07, 2026 · 19:15 UTC
-- Original post: https://x.com/thsottiaux/status/2107912709715132482
-- Permalink: https://codexy.fyi/#highlight-2107912709715132482
-
-English (original):
-
-We're going beyond text and are releasing a new version of GPT-6 to all users in ChatGPT. Lots of model and infra improvements coming together here to scale it to 1.2B users!
-
-中文（机器翻译，仅供参考）:
-
-我们将超越文本，向 ChatGPT 中的所有用户发布新版本的 GPT-6。许多模型和基础设施改进汇集于此，将其扩展到 1.2B 用户！
-
-Quoted post by OpenAI (@OpenAI): https://x.com/OpenAI/status/2107894997538525580
-
-GPT-6 and Intelligent UI, now rolling out in ChatGPT for everyone.
-
-Intelligent UI in ChatGPT delivers fast, interactive answers that make everyday questions more visual, complex topics easier to grasp, and interactive tools for your task available on the spot.
-
-引用帖中文（机器翻译，仅供参考）:
-
-GPT-6 和智能 UI 现已在 ChatGPT 中向所有人推出。
-
-ChatGPT 中的智能 UI 提供快速、交互式的答案，使日常问题更加直观，使复杂的主题更容易掌握，并可现场使用用于完成任务的交互式工具。
