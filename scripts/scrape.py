@@ -139,7 +139,7 @@ def load_log():
         with open(DATA_PATH, encoding="utf-8") as f:
             return json.load(f)
     return {"handle": HANDLE, "total_days": TOTAL_DAYS,
-            "announcement_id": ANNOUNCEMENT_ID, "entries": [], "resets": []}
+            "announcement_id": ANNOUNCEMENT_ID, "entries": [], "resets": [], "highlights": []}
 
 
 def save_log(log):
@@ -307,6 +307,7 @@ I18N = {
         "new_ship": "NEW SHIP",
         "badge_ann": "ANNOUNCEMENT",
         "badge_day": "DAY {d2}",
+        "badge_hl": "HIGHLIGHT",
         "st_start": "QUEST START",
         "st_cleared": "CLEARED",
         "likes": "Likes", "reposts": "Reposts", "replies": "Replies", "views": "Views",
@@ -329,6 +330,7 @@ I18N = {
         # share copy
         "share_kickoff": "Codex sprint kickoff",
         "share_day": "Codex Day {d}",
+        "share_highlight": "Codex highlight",
         "share_title_tail": " — 28 Days of Shipping",
         "site_share": SITE_SHARE_TEXT,
         "site_title": "Codex: 28 Days of Shipping",
@@ -397,6 +399,7 @@ I18N = {
         "new_ship": "新发布",
         "badge_ann": "官宣",
         "badge_day": "第 {d} 天",
+        "badge_hl": "特别关注",
         "st_start": "任务开始",
         "st_cleared": "已通关",
         "likes": "点赞", "reposts": "转发", "replies": "回复", "views": "浏览",
@@ -418,6 +421,7 @@ I18N = {
                 f"数据来源：公开推文，每天刷新两次。与 OpenAI 无关。·\n{_FOOT_LINKS}",
         "share_kickoff": "Codex 冲刺开幕",
         "share_day": "Codex 第 {d} 天",
+        "share_highlight": "Codex 特别关注",
         "share_title_tail": " — 28 天连续发布",
         "site_share": "追踪 Tibo 的 Codex 28 天连续发布冲刺",
         "site_title": "Codex：28 天连续发布",
@@ -734,6 +738,38 @@ def entry_share(e):
         head = tr(lang, "share_kickoff") if e["day"] == 0 else tr(lang, "share_day", {"d": day_slug(e)})
         titles[lang] = head + tr(lang, "share_title_tail")
     return texts, titles
+
+
+def hl_url(hl):
+    return f"{SITE_URL}/#highlight-{hl['id']}"
+
+
+def hl_share(hl):
+    """(texts, titles) per language for one highlight (no Day N reference)."""
+    def cut(text, limit):
+        body = " ".join((text or "").split())
+        if len(body) > limit:
+            c = body[:limit]
+            body = (c.rsplit(" ", 1)[0] if " " in c else c).rstrip(" ,.;:-") + "…"
+        return body
+    texts = {"en": f"{tr('en', 'share_highlight')}: {cut(hl.get('text'), 80)}",
+             "zh": f"{tr('zh', 'share_highlight')}：{cut(hl.get('text_zh') or hl.get('text'), 60)}"}
+    titles = {lang: tr(lang, "share_highlight") + tr(lang, "share_title_tail") for lang in LANGS}
+    return texts, titles
+
+
+def hl_share_tags(hl):
+    """Share row for a highlight card: X intent + copy + native share (no poster)."""
+    texts, titles = hl_share(hl)
+    url = hl_url(hl)
+    alt_x = {"href": {lang: tweet_intent(texts[lang], url) for lang in LANGS}}
+    alt_s = {"data-title": titles, "data-text": texts}
+    j = lambda o: esc(json.dumps(o, ensure_ascii=False))  # noqa: E731
+    return (f'<a class="tag" href="{esc(tweet_intent(texts["en"], url))}" target="_blank" rel="noopener" '
+            f'data-i18n="share_x" data-i18n-alt="{j(alt_x)}">{tr("en", "share_x")}</a>'
+            f'<button type="button" class="tag" data-copy="{esc(url)}" data-i18n="copy" hidden>{tr("en", "copy")}</button>'
+            f'<button type="button" class="tag" data-share data-title="{esc(titles["en"])}" data-text="{esc(texts["en"])}" '
+            f'data-url="{esc(url)}" data-i18n="native_share" data-i18n-alt="{j(alt_s)}" hidden>{tr("en", "native_share")}</button>')
 
 
 def share_tags(texts, url, titles, poster, poster_key="poster"):
@@ -1091,6 +1127,23 @@ def render_llms(log):
                     q["text"].strip(), ""]
             if e.get("quote_text_zh"):
                 out += ["引用帖中文（机器翻译，仅供参考）:", "", e["quote_text_zh"].strip(), ""]
+    highlights = sorted(log.get("highlights", []), key=lambda h: h.get("posted_at", ""), reverse=True)
+    if highlights:
+        out += ["", "## Highlights (major announcements without a Day N label)", ""]
+        for hl in highlights:
+            _, pretty = fmt_date(hl.get("posted_at", ""))
+            out += [f"### Highlight", "",
+                    f"- Date: {pretty}", f"- Original post: {hl['url']}",
+                    f"- Permalink: {hl_url(hl)}", "",
+                    "English (original):", "", hl["text"].strip(), ""]
+            if hl.get("text_zh"):
+                out += ["中文（机器翻译，仅供参考）:", "", hl["text_zh"].strip(), ""]
+            q = hl.get("quote") or {}
+            if q.get("text"):
+                out += [f"Quoted post by {q.get('name') or q.get('handle')} (@{q.get('handle')}): {q.get('url')}", "",
+                        q["text"].strip(), ""]
+                if hl.get("quote_text_zh"):
+                    out += ["引用帖中文（机器翻译，仅供参考）:", "", hl["quote_text_zh"].strip(), ""]
     return "\n".join(out).rstrip() + "\n"
 
 
@@ -1112,6 +1165,42 @@ def render(log, changed):
                f"<path fill='%23d23b2e' d='{LEAF_PATH}'/></svg>").replace(" ", "%20")
 
     cards = []
+    for hl in sorted(log.get("highlights", []), key=lambda h: h.get("posted_at", ""), reverse=True):
+        iso, pretty = fmt_date(hl.get("posted_at", ""))
+        pretty_zh = fmt_date_zh(hl.get("posted_at", ""))
+        time_attr = f' datetime="{esc(iso)}"' if iso else ""
+        when = (f'<span data-lang="en">{esc(pretty)}</span><span data-lang="zh">{esc(pretty_zh)}</span>'
+                if pretty_zh else esc(pretty))
+        paras = "".join(f"<p>{esc(p)}</p>" for p in hl["text"].split("\n") if p.strip())
+        if hl.get("text_zh"):
+            paras_zh = "".join(f"<p>{esc(p)}</p>" for p in hl["text_zh"].split("\n") if p.strip())
+            text_html = (f'<div class="text" data-lang="en">{paras}</div>\n'
+                         f'  <div class="text" data-lang="zh" lang="zh-CN">{paras_zh}</div>')
+        else:
+            text_html = f'<div class="text">{paras}</div>'
+        q = hl.get("quote") or {}
+        if q.get("text"):
+            q_en = "".join(f"<p>{esc(p)}</p>" for p in q["text"].split("\n") if p.strip())
+            q_zh = ("".join(f"<p>{esc(p)}</p>" for p in hl["quote_text_zh"].split("\n") if p.strip())
+                    if hl.get("quote_text_zh") else q_en)
+            handle = f"@{esc(q.get('handle'))}"
+            if q.get("url"):
+                handle = f'<a href="{esc(q["url"])}" target="_blank" rel="noopener">{handle}</a>'
+            text_html += (f'\n  <blockquote class="quote" aria-label="{I18N["en"]["quote_aria"]}" data-i18n-attr="aria-label:quote_aria">'
+                          f'<div class="quote-head"><span class="quote-tag px">{T("quote_tag")}</span>'
+                          f'<b>{esc(q.get("name") or q.get("handle"))}</b> {handle}</div>'
+                          f'<div class="quote-text" data-lang="en">{q_en}</div>'
+                          f'<div class="quote-text" data-lang="zh" lang="zh-CN">{q_zh}</div></blockquote>')
+        stats = "".join(f'<span title="{I18N["en"][k]}" data-i18n-attr="title:{k}">{icon} {fmt_int(hl.get(k))}</span>'
+                        for k, icon in (("likes", "♥"), ("reposts", "↻"), ("replies", "💬"), ("views", "👁")))
+        cards.append(f"""<article class="quest quest-hl" id="highlight-{esc(hl['id'])}">
+  <div class="quest-head"><span class="badge px">{T("badge_hl")}</span>
+  <time{time_attr}>{when}</time></div>
+  {text_html}
+  <div class="meta">{stats}
+  <a class="orig" href="{esc(hl['url'])}" target="_blank" rel="noopener">{T('view_x')}</a></div>
+  <div class="share"><span class="share-label px">{T('share_label')}</span>{hl_share_tags(hl)}</div>
+</article>""")
     for e in sorted(entries, key=day_sort_key, reverse=True):
         is_new = e["day"] > 0 and e["day"] == latest_day
         slug = day_slug(e)
