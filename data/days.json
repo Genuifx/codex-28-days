@@ -154,6 +154,28 @@
       "sub": "",
       "text_zh": "Day 3/\n\n最重要的是聊天中的 GPT-6，但今天也是一个小小的庆祝日，Codex 和 ChatGPT Work 的活跃用户创下了 4000 万新高。\n\n正在把攒下的 reset 额度充进所有付费账户。明天再见！",
       "quote_text_zh": "第二天综述/\n\n2.1/ Approve for me (Auto-review) 现在已包含并且不使用用法。使用时可以为计划的 2-10%。对你也更好。\n2.2/ 为构建者简化的 API。\n2.3/ 整合会议记录。\n2.4/ Decisions API 为构建者而生。将在应用程序中使用以改善体验。"
+    },
+    {
+      "id": "2108275041276420573",
+      "text": "Day 4/\n\nWe have improved steering to be instant, leading to the model now reacting much faster to adjustments you make, allowing you to course-correct direction in realtime and not have the model waste effort.\n\nAlso releasing GPT-6.1 Sol ultrafast. The two work very well together.",
+      "posted_at": "Thu Oct 08 19:15:14 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2108275041276420573",
+      "likes": 7439,
+      "reposts": 228,
+      "replies": 1362,
+      "views": 655958,
+      "quote": {
+        "id": "2108262812489531498",
+        "handle": "OpenAIDevs",
+        "name": "OpenAI Developers",
+        "text": "Ultrafast is rolling out today for GPT-6.1 Sol in the API, Codex, and ChatGPT Work.\n\nNear-Astra intelligence at up to 8x faster speeds than Sol Standard, so you can build as fast as the ideas come.",
+        "created_at": "Thu Oct 08 18:26:38 +0000 2026",
+        "url": "https://x.com/OpenAIDevs/status/2108262812489531498"
+      },
+      "day": 4,
+      "sub": "",
+      "text_zh": "Day 4/\n\n我们改进了即时转向，使模型现在对您所做的调整反应更快，让您可以实时修正方向，而不会让模型浪费精力。\n\n同时发布 GPT-6.1 Sol 超快。两者合作得很好。",
+      "quote_text_zh": ""
     }
   ],
   "resets": [
