@@ -175,7 +175,7 @@
       "day": 4,
       "sub": "",
       "text_zh": "Day 4/\n\n我们改进了即时转向，使模型现在对您所做的调整反应更快，让您可以实时修正方向，而不会让模型浪费精力。\n\n同时发布 GPT-6.1 Sol 超快。两者合作得很好。",
-      "quote_text_zh": ""
+      "quote_text_zh": "Ultrafast 现已在 API、Codex 和 ChatGPT Work 中推出，适用于 GPT-6.1、Sol。\n\n接近 Astra 的智能速度比 Sol 标准版快 8 倍，因此您可以根据想法快速构建。"
     }
   ],
   "resets": [
