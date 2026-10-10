@@ -68,6 +68,30 @@ Over the next 28 days, each day we’ll either ship one thing that is a clear im
 
 在接下来的 28 天里，每天我们要么发布一项明显改进且与大多数 Codex/工作用户相关的内容，要么发布完全重置的内容。让改进开始吧。
 
+### Day 2: Roundup of Day 2/ 2.1/ Approve for me (auto-review) is now included and does…
+
+- Date: Oct 06, 2026 · 20:56 UTC
+- Original post: https://x.com/thsottiaux/status/2107575657014468879
+- Permalink: https://codexy.fyi/#day-2
+
+English (original):
+
+Roundup of Day 2/
+
+2.1/ Approve for me (auto-review) is now included and does not use usage. Can be between 2-10% of plan when used. Also better for you.
+2.2/ Simplified API for builders.
+2.3/ Meeting notes integrated.
+2.4/ Decisions API live for builders. Will use in the app to improve the experience.
+
+中文（机器翻译，仅供参考）:
+
+第二天综述/
+
+2.1/ Approve for me (Auto-review) 现在已包含并且不使用用法。使用时可以为计划的 2-10%。也对你更好。
+2.2/ 为构建者简化的 API。
+2.3/ 整合会议记录。
+2.4/ Decisions API 为构建者而生。将在应用程序中使用以改善体验。
+
 ### Day 2.1: We have made Auto-review free for all users signed in through a ChatGPT…
 
 - Date: Oct 06, 2026 · 07:13 UTC
@@ -287,3 +311,37 @@ Near-Astra intelligence at up to 8x faster speeds than Sol Standard, so you can 
 Ultrafast 现已在 API、Codex 和 ChatGPT Work 中推出，适用于 GPT-6.1、Sol。
 
 接近 Astra 的智能速度比 Sol 标准版快 8 倍，因此您可以根据想法快速构建。
+
+### Day 5: Composer predictions in the desktop app. Often leads to a double take with how…
+
+- Date: Oct 09, 2026 · 19:47 UTC
+- Original post: https://x.com/thsottiaux/status/2108645667451318747
+- Permalink: https://codexy.fyi/#day-5
+
+English (original):
+
+Day 5/
+
+Composer predictions in the desktop app. Often leads to a double take with how on point they are. Included in the Pro plans without consuming usage.
+
+中文（机器翻译，仅供参考）:
+
+Day 5/
+
+桌面应用程序中的作曲家预测。通常会让人怀疑他们的观点是否正确。包含在 Pro 计划中，无需消耗使用量。
+
+Quoted post by OpenAI Developers (@OpenAIDevs): https://x.com/OpenAIDevs/status/2108624138369929725
+
+Now in beta: composer predictions in Codex for Pro users.
+
+Codex can now suggest your next message based on your conversation and how you talk to it.
+
+One of the most loved new features we've ever tested internally.
+
+引用帖中文（机器翻译，仅供参考）:
+
+现在处于测试阶段：Codex 中为 Pro 用户提供作曲家预测。
+
+Codex 现在可以根据您的对话以及您与之交谈的方式建议您的下一条消息。
+
+这是我们内部测试过的最受欢迎的新功能之一。
