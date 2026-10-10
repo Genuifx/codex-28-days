@@ -108,13 +108,21 @@ DAY_PREFIX_RE = re.compile(r"^\s*Day\s*\d{1,2}(?:\.\d+)?\s*(?:\([^)]*\)\s*)?/\s*
 
 
 def day_sort_key(e):
-    """Chronological sort key: (day, numeric sub-day). String sort would put
-    '.10' before '.2'; float('.10')=0.1 > 0.2 is correct."""
+    """Chronological sort key: (day, numeric sub-day, posted_at). String sort
+    would put '.10' before '.2'; float('.10')=0.1 > 0.2 is correct. The
+    timestamp breaks ties between same-day ships without a sub number
+    (e.g. two plain 'Day 5/' posts)."""
     try:
         sub = float(e.get("sub") or 0)
     except (TypeError, ValueError):
         sub = 0
-    return (e["day"], sub)
+    try:
+        ts = datetime.datetime.strptime(
+            e.get("posted_at") or "", "%a %b %d %H:%M:%S %z %Y"
+        ).timestamp()
+    except (ValueError, TypeError):
+        ts = 0
+    return (e["day"], sub, ts)
 
 
 def day_number(text):
@@ -132,6 +140,24 @@ def day_sub(text):
 def day_slug(e):
     """Human-readable day key for ids, urls and labels: '2' or '2.1'."""
     return f"{e['day']}{e.get('sub') or ''}"
+
+
+QUAL_RE = re.compile(r"\s*Day\s*\d{1,2}(?:\.\d+)?\s*\(([^)]*)\)\s*/", re.I)
+
+
+def day_qual(text):
+    """Parenthetical qualifier, e.g. 'dots edition' for 'Day 5 (dots edition)/'."""
+    m = QUAL_RE.match(text or "")
+    return (m.group(1).strip() if m else "") or ""
+
+
+def day_uid(e):
+    """Unique per-entry key for anchors/urls/posters: '5', '2.1', or
+    '5-dots-edition' when the tweet carries a parenthetical qualifier.
+    Labels keep using day_slug so badges still read 'DAY 05'."""
+    slug = day_slug(e)
+    q = re.sub(r"[^a-z0-9]+", "-", (e.get("qual") or "").strip().lower()).strip("-")
+    return f"{slug}-{q}" if q else slug
 
 
 def load_log():
@@ -180,6 +206,7 @@ PROTECTED_TERMS = (
     "OpenCode",
     "GPT-6.1",
     "GPT-6",
+    "Codex Cloud",
     "Codex",
     "codex",
     "Devin",
@@ -191,6 +218,9 @@ PROTECTED_TERMS = (
     "Amp",
     "API",
     "Pi",
+    "Composer",
+    "dots",
+    "dot",
 )
 
 
@@ -760,7 +790,7 @@ def poster_data(entries, latest_day):
         body = strip_day_prefix(e["text"]).strip()
         items.append({
             "day": e["day"],
-            "key": slug,
+            "key": day_uid(e),
             "label": tr("en", "p_kickoff") if e["day"] == 0 else f"DAY {slug.zfill(2)}",
             "label_zh": tr("zh", "p_kickoff") if e["day"] == 0 else tr("zh", "badge_day", {"d": slug}),
             "status": tr("en", "st_start" if e["day"] == 0 else "st_cleared"),
@@ -811,7 +841,7 @@ n.clipboard.writeText(b.getAttribute('data-copy')).then(function(){flash(b,'copi
 if(n.share){each('[data-share]',function(b){b.hidden=false;b.addEventListener('click',function(){
 n.share({title:b.getAttribute('data-title'),text:b.getAttribute('data-text'),url:b.getAttribute('data-url')}).catch(function(){})})})}
 var calm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-function go(){var m=/^#day-([\\d.]+)$/.exec(location.hash);if(!m)return;
+function go(){var m=/^#day-([\\w.()-]+)$/.exec(location.hash);if(!m)return;
 var el=d.getElementById('day-'+m[1].replace(/^0+(\\d)/,'$1'));if(!el)return;
 each('.quest.is-hit',function(x){x.classList.remove('is-hit')});void el.offsetWidth;el.classList.add('is-hit');
 el.scrollIntoView({behavior:calm?'auto':'smooth',block:'start'})}
@@ -1030,7 +1060,7 @@ def json_ld(entries):
     posts = []
     for i, e in enumerate(sorted(entries, key=day_sort_key), 1):
         iso, _ = fmt_date(e.get("posted_at", ""))
-        post = {"@type": "BlogPosting", "headline": entry_headline(e), "url": day_url(day_slug(e)),
+        post = {"@type": "BlogPosting", "headline": entry_headline(e), "url": day_url(day_uid(e)),
                 "inLanguage": "en", "articleBody": e["text"],
                 "author": {"@type": "Person", "name": "Tibo", "url": f"https://x.com/{HANDLE}"},
                 "sameAs": e["url"]}
@@ -1081,7 +1111,7 @@ def render_llms(log):
         _, pretty = fmt_date(e.get("posted_at", ""))
         title = "Kickoff announcement" if e["day"] == 0 else f"Day {day_slug(e)}"
         out += [f"### {title}: {strip_day_prefix(entry_headline(e).split(': ', 1)[-1])}", "",
-                f"- Date: {pretty}", f"- Original post: {e['url']}", f"- Permalink: {day_url(day_slug(e))}", "",
+                f"- Date: {pretty}", f"- Original post: {e['url']}", f"- Permalink: {day_url(day_uid(e))}", "",
                 "English (original):", "", e["text"].strip(), ""]
         if e.get("text_zh"):
             out += ["中文（机器翻译，仅供参考）:", "", e["text_zh"].strip(), ""]
@@ -1115,6 +1145,7 @@ def render(log, changed):
     for e in sorted(entries, key=day_sort_key, reverse=True):
         is_new = e["day"] > 0 and e["day"] == latest_day
         slug = day_slug(e)
+        uid = day_uid(e)
         badge = T("badge_ann") if e["day"] == 0 else T("badge_day", {"d2": slug.zfill(2), "d": slug})
         status = T("st_start" if e["day"] == 0 else "st_cleared")
         iso, pretty = fmt_date(e.get("posted_at", ""))
@@ -1145,14 +1176,14 @@ def render(log, changed):
         stats = "".join(f'<span title="{I18N["en"][k]}" data-i18n-attr="title:{k}">{icon} {fmt_int(e.get(k))}</span>'
                         for k, icon in (("likes", "♥"), ("reposts", "↻"), ("replies", "💬"), ("views", "👁")))
         texts, titles = entry_share(e)
-        cards.append(f"""<article class="quest{' is-new' if is_new else ''}" id="day-{slug}">
+        cards.append(f"""<article class="quest{' is-new' if is_new else ''}" id="day-{uid}">
   {'<span class="new-ship px">' + T('new_ship') + '</span>' if is_new else ''}
   <div class="quest-head"><span class="badge px">{badge}</span>
   <time{time_attr}>{when}</time><span class="status px">{status}</span></div>
   {text_html}
   <div class="meta">{stats}
   <a class="orig" href="{esc(e['url'])}" target="_blank" rel="noopener">{T('view_x')}</a></div>
-  <div class="share"><span class="share-label px">{T('share_label')}</span>{share_tags(texts, day_url(slug), titles, slug)}</div>
+  <div class="share"><span class="share-label px">{T('share_label')}</span>{share_tags(texts, day_url(uid), titles, uid)}</div>
 </article>""")
     cards_html = "\n".join(cards) if cards else f'<p class="empty">{T("empty")}</p>'
     reset_days = sorted({r["day"] for r in log.get("resets", []) if isinstance(r.get("day"), int)})
@@ -1286,19 +1317,27 @@ def main():
             except Exception as e:  # noqa: BLE001
                 print(f"status fetch failed for {tw['id']}: {e}", file=sys.stderr, flush=True)
                 continue
-            if not t["text"]:
-                t["text"] = tw["preview"]
-            n = day_number(t["text"]) or day_number(tw["preview"]) or day_number(tw["preview"].lstrip())
+            full_text = t["text"] or ""
+            if not full_text:
+                # fxtwitter came back empty: last-resort preview fallback.
+                # Never let the preview override real full text — twiscan
+                # previews can be misattributed to a neighboring tweet
+                # (seen 2026-10-08: a 'Roundup of Day 2' card nearly shipped
+                # as its own Day 2 entry off a neighbor's preview).
+                full_text = tw["preview"]
+            t["text"] = full_text
+            n = day_number(full_text)
             if n is None or not (1 <= n <= TOTAL_DAYS):
                 continue
             if not t["posted_at"]:
                 t["posted_at"] = rel_to_dt(tw["relative"], now).strftime("%a %b %d %H:%M:%S %z %Y")
-            t["day"] = day_number(t["text"]) or n
-            t["sub"] = day_sub(t["text"])
+            t["day"] = n
+            t["sub"] = day_sub(full_text)
+            t["qual"] = day_qual(full_text)
             log["entries"].append(t)
             known_ids.add(tw["id"])
             added += 1
-            print(f"added Day {day_slug(t)}: {tw['id']}", flush=True)
+            print(f"added Day {day_uid(t)}: {tw['id']}", flush=True)
 
     # Chinese machine translation, once per entry (incl. the announcement). Fail-soft: a failure
     # stores "" (page falls back to English) and is retried next run; after the first failure
