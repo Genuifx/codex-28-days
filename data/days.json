@@ -245,6 +245,20 @@
       "qual": "encore",
       "text_zh": "Day 3 (encore)/\n\n我们默默重新发货了Codex Cloud。现在已经很好了",
       "quote_text_zh": "Codex 🤝 尾鳞\n\nCodex Cloud 现在可以使用 Tailscale 安全地连接到尾网上的资源。\n\n有用的工具应该易于构建、组合并变成更有用的东西。\n\n看看它是如何工作的 → \nhttps://buff.ly/yFcldrC"
+    },
+    {
+      "id": "2109045220411351517",
+      "text": "Day 6/ Reset",
+      "posted_at": "Sat Oct 10 22:15:39 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2109045220411351517",
+      "likes": 5142,
+      "reposts": 228,
+      "replies": 698,
+      "views": 198992,
+      "day": 6,
+      "sub": "",
+      "qual": "",
+      "text_zh": "Day 6/ 重置"
     }
   ],
   "resets": [
@@ -255,6 +269,14 @@
       "text_zh": "我们发布了四件被认为从优秀到优秀的东西以及一些数学证明，但投票结果很明确，社区要求重新设置。我确实校准了它，并且“似乎”游戏被操纵以利于重置，但这就是目前的规则。  因此...重置已处理。享受！",
       "url": "https://x.com/thsottiaux/status/2107676072871600470",
       "posted_at": "Wed Oct 07 03:35:09 +0000 2026"
+    },
+    {
+      "day": 5,
+      "id": "2109045392684032299",
+      "text": "Global reset by EOD. May the tokens do good things for you.",
+      "text_zh": "通过 EOD 进行全局重置。愿代币为您带来好处。",
+      "url": "https://x.com/thsottiaux/status/2109045392684032299",
+      "posted_at": "Sat Oct 10 22:16:20 +0000 2026"
     }
   ]
 }
