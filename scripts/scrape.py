@@ -103,8 +103,8 @@ def fx_status(tid):
     return out
 
 
-DAY_RE = re.compile(r"\s*Day\s*(\d{1,2})(\.\d+)?\s*/", re.I)
-DAY_PREFIX_RE = re.compile(r"^\s*Day\s*\d{1,2}(?:\.\d+)?\s*/\s*", re.I)
+DAY_RE = re.compile(r"\s*Day\s*(\d{1,2})(\.\d+)?\s*(?:\([^)]*\)\s*)?/", re.I)
+DAY_PREFIX_RE = re.compile(r"^\s*Day\s*\d{1,2}(?:\.\d+)?\s*(?:\([^)]*\)\s*)?/\s*", re.I)
 
 
 def day_sort_key(e):
