@@ -175,17 +175,40 @@
       "day": 4,
       "sub": "",
       "text_zh": "Day 4/\n\n我们改进了即时转向，使模型现在对您所做的调整反应更快，让您可以实时修正方向，而不会让模型浪费精力。\n\n同时发布 GPT-6.1 Sol 超快。两者合作得很好。",
-      "quote_text_zh": "Ultrafast 现已在 API、Codex 和 ChatGPT Work 中推出，适用于 GPT-6.1、Sol。\n\n接近 Astra 的智能速度比 Sol 标准版快 8 倍，因此您可以根据想法快速构建。"
+      "quote_text_zh": "Ultrafast 现已在 API、Codex 和 ChatGPT Work 中针对 GPT-6.1、Sol 推出。\n\n接近 Astra 的智能速度比 Sol 标准快 8 倍，因此您可以根据想法快速构建。"
+    },
+    {
+      "id": "2108646052178092403",
+      "text": "Day 5 (dots edition)/\n\nYou can now create and text your dot entirely from the ChatGPT mobile app. Impressed so many created them via the desktop/web app previously. Time to scale!",
+      "posted_at": "Fri Oct 09 19:49:30 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2108646052178092403",
+      "likes": 2260,
+      "reposts": 74,
+      "replies": 1417,
+      "views": 360426,
+      "quote": {
+        "id": "2108636745915052037",
+        "handle": "ChatGPT",
+        "name": "ChatGPT",
+        "text": "Fresh updates for dots.\n\nFirst up: you can now create your dot straight from your phone in the ChatGPT app on iOS and Android.",
+        "created_at": "Fri Oct 09 19:12:31 +0000 2026",
+        "url": "https://x.com/ChatGPT/status/2108636745915052037"
+      },
+      "day": 5,
+      "sub": "",
+      "qual": "dots edition",
+      "text_zh": "Day 5 (dots edition)/\n\n您现在可以完全通过 ChatGPT 移动应用程序创建 dot 并发送短信。令很多人印象深刻的是之前通过桌面/网络应用程序创建了它们。是时候扩大规模了！",
+      "quote_text_zh": "dots 的最新更新。\n\n首先：您现在可以直接从手机在 iOS 和 Android 上的 ChatGPT 应用程序中创建 dot。"
     },
     {
       "id": "2108645667451318747",
       "text": "Day 5/\n\nComposer predictions in the desktop app. Often leads to a double take with how on point they are. Included in the Pro plans without consuming usage.",
       "posted_at": "Fri Oct 09 19:47:58 +0000 2026",
       "url": "https://x.com/thsottiaux/status/2108645667451318747",
-      "likes": 4281,
-      "reposts": 131,
-      "replies": 1134,
-      "views": 562834,
+      "likes": 4022,
+      "reposts": 122,
+      "replies": 1040,
+      "views": 483213,
       "quote": {
         "id": "2108624138369929725",
         "handle": "OpenAIDevs",
@@ -196,21 +219,32 @@
       },
       "day": 5,
       "sub": "",
-      "text_zh": "Day 5/\n\n桌面应用程序中的作曲家预测。通常会让人怀疑他们的观点是否正确。包含在 Pro 计划中，无需消耗使用量。",
-      "quote_text_zh": "现在处于测试阶段：Codex 中为 Pro 用户提供作曲家预测。\n\nCodex 现在可以根据您的对话以及您与之交谈的方式建议您的下一条消息。\n\n这是我们内部测试过的最受欢迎的新功能之一。"
+      "qual": "",
+      "text_zh": "Day 5/\n\nComposer 在桌面应用程序中进行预测。通常会让人怀疑他们的观点是否正确。包含在 Pro 计划中，无需消耗使用量。",
+      "quote_text_zh": "现在处于测试阶段：专业用户在 Codex 中进行 Composer 预测。\n\nCodex 现在可以根据您的对话以及您与之交谈的方式建议您的下一条消息。\n\n这是我们内部测试过的最受欢迎的新功能之一。"
     },
     {
-      "id": "2107575657014468879",
-      "text": "Roundup of Day 2/\n\n2.1/ Approve for me (auto-review) is now included and does not use usage. Can be between 2-10% of plan when used. Also better for you.\n2.2/ Simplified API for builders.\n2.3/ Meeting notes integrated.\n2.4/ Decisions API live for builders. Will use in the app to improve the experience.",
-      "posted_at": "Tue Oct 06 20:56:08 +0000 2026",
-      "url": "https://x.com/thsottiaux/status/2107575657014468879",
-      "likes": 5135,
-      "reposts": 156,
-      "replies": 601,
-      "views": 2956772,
-      "day": 2,
+      "id": "2108084615349170480",
+      "text": "Day 3 (encore)/\n\nWe silently re-shipped codex cloud. It’s pretty good now",
+      "posted_at": "Thu Oct 08 06:38:33 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2108084615349170480",
+      "likes": 7178,
+      "reposts": 184,
+      "replies": 1131,
+      "views": 972572,
+      "quote": {
+        "id": "2107836671605551217",
+        "handle": "Tailscale",
+        "name": "Tailscale",
+        "text": "Codex 🤝 Tailscale\n\nCodex Cloud can now securely connect to resources on your tailnet with Tailscale.\n\nUseful tools should be easy to build with, combine, and turn into something even more useful.\n\nSee how it works → \nhttps://buff.ly/yFcldrC",
+        "created_at": "Wed Oct 07 14:13:18 +0000 2026",
+        "url": "https://x.com/Tailscale/status/2107836671605551217"
+      },
+      "day": 3,
       "sub": "",
-      "text_zh": "第二天综述/\n\n2.1/ Approve for me (Auto-review) 现在已包含并且不使用用法。使用时可以为计划的 2-10%。也对你更好。\n2.2/ 为构建者简化的 API。\n2.3/ 整合会议记录。\n2.4/ Decisions API 为构建者而生。将在应用程序中使用以改善体验。"
+      "qual": "encore",
+      "text_zh": "Day 3 (encore)/\n\n我们默默重新发货了Codex Cloud。现在已经很好了",
+      "quote_text_zh": "Codex 🤝 尾鳞\n\nCodex Cloud 现在可以使用 Tailscale 安全地连接到尾网上的资源。\n\n有用的工具应该易于构建、组合并变成更有用的东西。\n\n看看它是如何工作的 → \nhttps://buff.ly/yFcldrC"
     }
   ],
   "resets": [

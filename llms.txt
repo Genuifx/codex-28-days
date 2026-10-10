@@ -68,30 +68,6 @@ Over the next 28 days, each day we’ll either ship one thing that is a clear im
 
 在接下来的 28 天里，每天我们要么发布一项明显改进且与大多数 Codex/工作用户相关的内容，要么发布完全重置的内容。让改进开始吧。
 
-### Day 2: Roundup of Day 2/ 2.1/ Approve for me (auto-review) is now included and does…
-
-- Date: Oct 06, 2026 · 20:56 UTC
-- Original post: https://x.com/thsottiaux/status/2107575657014468879
-- Permalink: https://codexy.fyi/#day-2
-
-English (original):
-
-Roundup of Day 2/
-
-2.1/ Approve for me (auto-review) is now included and does not use usage. Can be between 2-10% of plan when used. Also better for you.
-2.2/ Simplified API for builders.
-2.3/ Meeting notes integrated.
-2.4/ Decisions API live for builders. Will use in the app to improve the experience.
-
-中文（机器翻译，仅供参考）:
-
-第二天综述/
-
-2.1/ Approve for me (Auto-review) 现在已包含并且不使用用法。使用时可以为计划的 2-10%。也对你更好。
-2.2/ 为构建者简化的 API。
-2.3/ 整合会议记录。
-2.4/ Decisions API 为构建者而生。将在应用程序中使用以改善体验。
-
 ### Day 2.1: We have made Auto-review free for all users signed in through a ChatGPT…
 
 - Date: Oct 06, 2026 · 07:13 UTC
@@ -278,6 +254,46 @@ Roundup of Day 2/
 2.3/ 整合会议记录。
 2.4/ Decisions API 为构建者而生。将在应用程序中使用以改善体验。
 
+### Day 3: We silently re-shipped codex cloud. It’s pretty good now
+
+- Date: Oct 08, 2026 · 06:38 UTC
+- Original post: https://x.com/thsottiaux/status/2108084615349170480
+- Permalink: https://codexy.fyi/#day-3-encore
+
+English (original):
+
+Day 3 (encore)/
+
+We silently re-shipped codex cloud. It’s pretty good now
+
+中文（机器翻译，仅供参考）:
+
+Day 3 (encore)/
+
+我们默默重新发货了Codex Cloud。现在已经很好了
+
+Quoted post by Tailscale (@Tailscale): https://x.com/Tailscale/status/2107836671605551217
+
+Codex 🤝 Tailscale
+
+Codex Cloud can now securely connect to resources on your tailnet with Tailscale.
+
+Useful tools should be easy to build with, combine, and turn into something even more useful.
+
+See how it works → 
+https://buff.ly/yFcldrC
+
+引用帖中文（机器翻译，仅供参考）:
+
+Codex 🤝 尾鳞
+
+Codex Cloud 现在可以使用 Tailscale 安全地连接到尾网上的资源。
+
+有用的工具应该易于构建、组合并变成更有用的东西。
+
+看看它是如何工作的 → 
+https://buff.ly/yFcldrC
+
 ### Day 4: We have improved steering to be instant, leading to the model now reacting much…
 
 - Date: Oct 08, 2026 · 19:15 UTC
@@ -308,9 +324,9 @@ Near-Astra intelligence at up to 8x faster speeds than Sol Standard, so you can 
 
 引用帖中文（机器翻译，仅供参考）:
 
-Ultrafast 现已在 API、Codex 和 ChatGPT Work 中推出，适用于 GPT-6.1、Sol。
+Ultrafast 现已在 API、Codex 和 ChatGPT Work 中针对 GPT-6.1、Sol 推出。
 
-接近 Astra 的智能速度比 Sol 标准版快 8 倍，因此您可以根据想法快速构建。
+接近 Astra 的智能速度比 Sol 标准快 8 倍，因此您可以根据想法快速构建。
 
 ### Day 5: Composer predictions in the desktop app. Often leads to a double take with how…
 
@@ -328,7 +344,7 @@ Composer predictions in the desktop app. Often leads to a double take with how o
 
 Day 5/
 
-桌面应用程序中的作曲家预测。通常会让人怀疑他们的观点是否正确。包含在 Pro 计划中，无需消耗使用量。
+Composer 在桌面应用程序中进行预测。通常会让人怀疑他们的观点是否正确。包含在 Pro 计划中，无需消耗使用量。
 
 Quoted post by OpenAI Developers (@OpenAIDevs): https://x.com/OpenAIDevs/status/2108624138369929725
 
@@ -340,8 +356,38 @@ One of the most loved new features we've ever tested internally.
 
 引用帖中文（机器翻译，仅供参考）:
 
-现在处于测试阶段：Codex 中为 Pro 用户提供作曲家预测。
+现在处于测试阶段：专业用户在 Codex 中进行 Composer 预测。
 
 Codex 现在可以根据您的对话以及您与之交谈的方式建议您的下一条消息。
 
 这是我们内部测试过的最受欢迎的新功能之一。
+
+### Day 5: You can now create and text your dot entirely from the ChatGPT mobile app…
+
+- Date: Oct 09, 2026 · 19:49 UTC
+- Original post: https://x.com/thsottiaux/status/2108646052178092403
+- Permalink: https://codexy.fyi/#day-5-dots-edition
+
+English (original):
+
+Day 5 (dots edition)/
+
+You can now create and text your dot entirely from the ChatGPT mobile app. Impressed so many created them via the desktop/web app previously. Time to scale!
+
+中文（机器翻译，仅供参考）:
+
+Day 5 (dots edition)/
+
+您现在可以完全通过 ChatGPT 移动应用程序创建 dot 并发送短信。令很多人印象深刻的是之前通过桌面/网络应用程序创建了它们。是时候扩大规模了！
+
+Quoted post by ChatGPT (@ChatGPT): https://x.com/ChatGPT/status/2108636745915052037
+
+Fresh updates for dots.
+
+First up: you can now create your dot straight from your phone in the ChatGPT app on iOS and Android.
+
+引用帖中文（机器翻译，仅供参考）:
+
+dots 的最新更新。
+
+首先：您现在可以直接从手机在 iOS 和 Android 上的 ChatGPT 应用程序中创建 dot。
