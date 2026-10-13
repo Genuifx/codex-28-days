@@ -427,3 +427,17 @@ Day 7/
 当通过 Codex & Work 使用时，我们将 GPT-6.1 Sol 的默认上下文长度从 272k 增加到 500k，即增加了约 80%。
 
 未来我们会走得更高，但它有助于减少压缩的发生以及需要在一段时间内保留大量上下文和细微差别的任务。它经过仔细测试，是我们大多数用户的新选择。如果您想要更高或更低，您仍然可以覆盖它，GPT-6.1 Sol 的最大上下文长度为 1M。
+
+### Day 8: Reset
+
+- Date: Oct 13, 2026 · 01:03 UTC
+- Original post: https://x.com/thsottiaux/status/2109812216212099456
+- Permalink: https://codexy.fyi/#day-8
+
+English (original):
+
+Day 8/ Reset
+
+中文（机器翻译，仅供参考）:
+
+Day 8/ 重置

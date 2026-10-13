@@ -207,6 +207,7 @@ PROTECTED_TERMS = (
     "GPT-6.1",
     "GPT-6",
     "Codex Cloud",
+    "Tailscale",
     "Codex",
     "codex",
     "Devin",

@@ -273,6 +273,20 @@
       "sub": "",
       "qual": "",
       "text_zh": "Day 7/\n\n当通过 Codex & Work 使用时，我们将 GPT-6.1 Sol 的默认上下文长度从 272k 增加到 500k，即增加了约 80%。\n\n未来我们会走得更高，但它有助于减少压缩的发生以及需要在一段时间内保留大量上下文和细微差别的任务。它经过仔细测试，是我们大多数用户的新选择。如果您想要更高或更低，您仍然可以覆盖它，GPT-6.1 Sol 的最大上下文长度为 1M。"
+    },
+    {
+      "id": "2109812216212099456",
+      "text": "Day 8/ Reset",
+      "posted_at": "Tue Oct 13 01:03:25 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2109812216212099456",
+      "likes": 4571,
+      "reposts": 278,
+      "replies": 796,
+      "views": 244072,
+      "day": 8,
+      "sub": "",
+      "qual": "",
+      "text_zh": "Day 8/ 重置"
     }
   ],
   "resets": [
@@ -291,6 +305,14 @@
       "text_zh": "通过 EOD 进行全局重置。愿代币为您带来好处。",
       "url": "https://x.com/thsottiaux/status/2109045392684032299",
       "posted_at": "Sat Oct 10 22:16:20 +0000 2026"
+    },
+    {
+      "day": 8,
+      "id": "2109812216212099456",
+      "text": "Day 8/ Reset",
+      "text_zh": "Day 8/ 重置",
+      "url": "https://x.com/thsottiaux/status/2109812216212099456",
+      "posted_at": "Tue Oct 13 01:03:25 +0000 2026"
     }
   ]
 }
