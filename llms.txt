@@ -285,7 +285,7 @@ https://buff.ly/yFcldrC
 
 引用帖中文（机器翻译，仅供参考）:
 
-Codex 🤝 尾鳞
+Codex 🤝 Tailscale
 
 Codex Cloud 现在可以使用 Tailscale 安全地连接到尾网上的资源。
 
