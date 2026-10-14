@@ -441,3 +441,21 @@ Day 8/ Reset
 中文（机器翻译，仅供参考）:
 
 Day 8/ 重置
+
+### Day 9: We've rolled out optimizations to how we store state on disk for the chatgpt &…
+
+- Date: Oct 13, 2026 · 23:32 UTC
+- Original post: https://x.com/thsottiaux/status/2110151780478927344
+- Permalink: https://codexy.fyi/#day-9
+
+English (original):
+
+Day 9/
+
+We've rolled out optimizations to how we store state on disk for the chatgpt & codex desktop app that should reduce the amount stored on disk by 60%. Small ship but we've heard enough feedback about power users running out of disk space.
+
+中文（机器翻译，仅供参考）:
+
+Day 9/
+
+我们针对 ChatGPT 和 Codex 桌面应用程序在磁盘上存储状态的方式进行了优化，这应将磁盘上存储的数量减少 60%。虽然船很小，但我们已经听到了足够多的关于高级用户磁盘空间不足的反馈。
