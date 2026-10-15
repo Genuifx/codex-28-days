@@ -103,7 +103,12 @@ def fx_status(tid):
     return out
 
 
-DAY_RE = re.compile(r"\s*Day\s*(\d{1,2})(\.\d+)?\s*(?:\([^)]*\)\s*)?/", re.I)
+# Day markers may follow an introduction, but must start their own line.
+# Do not match inline mentions in roundups or Markdown quote lines.
+DAY_RE = re.compile(
+    r"^[ \t]*Day[ \t]*(\d{1,2})(\.\d+)?[ \t]*(?:\(([^)\r\n]*)\)[ \t]*)?/",
+    re.I | re.M,
+)
 DAY_PREFIX_RE = re.compile(r"^\s*Day\s*\d{1,2}(?:\.\d+)?\s*(?:\([^)]*\)\s*)?/\s*", re.I)
 
 
@@ -127,13 +132,13 @@ def day_sort_key(e):
 
 def day_number(text):
     """Int day of a 'Day N/' (or 'Day N.M/') post, e.g. 2 for 'Day 2.1/'."""
-    m = DAY_RE.match(text or "")
+    m = DAY_RE.search(text or "")
     return int(m.group(1)) if m else None
 
 
 def day_sub(text):
     """Sub-day suffix, e.g. '.1' for 'Day 2.1/', '' otherwise."""
-    m = DAY_RE.match(text or "")
+    m = DAY_RE.search(text or "")
     return m.group(2) or "" if m else ""
 
 
@@ -142,13 +147,10 @@ def day_slug(e):
     return f"{e['day']}{e.get('sub') or ''}"
 
 
-QUAL_RE = re.compile(r"\s*Day\s*\d{1,2}(?:\.\d+)?\s*\(([^)]*)\)\s*/", re.I)
-
-
 def day_qual(text):
     """Parenthetical qualifier, e.g. 'dots edition' for 'Day 5 (dots edition)/'."""
-    m = QUAL_RE.match(text or "")
-    return (m.group(1).strip() if m else "") or ""
+    m = DAY_RE.search(text or "")
+    return (m.group(3) or "").strip() if m else ""
 
 
 def day_uid(e):
@@ -1178,7 +1180,7 @@ def render(log, changed):
                         for k, icon in (("likes", "♥"), ("reposts", "↻"), ("replies", "💬"), ("views", "👁")))
         texts, titles = entry_share(e)
         cards.append(f"""<article class="quest{' is-new' if is_new else ''}" id="day-{uid}">
-  {'<span class="new-ship px">' + T('new_ship') + '</span>' if is_new else ''}
+{'  <span class="new-ship px">' + T('new_ship') + '</span>' if is_new else ''}
   <div class="quest-head"><span class="badge px">{badge}</span>
   <time{time_attr}>{when}</time><span class="status px">{status}</span></div>
   {text_html}
@@ -1284,7 +1286,10 @@ def render(log, changed):
 
 def main():
     log = load_log()
-    before = open(DATA_PATH, "rb").read() if os.path.exists(DATA_PATH) else None
+    before = None
+    if os.path.exists(DATA_PATH):
+        with open(DATA_PATH, "rb") as f:
+            before = f.read()
     known_ids = {e["id"] for e in log["entries"]}
     now = datetime.datetime.now(datetime.timezone.utc)
 
@@ -1361,7 +1366,8 @@ def main():
         print(f"translated {translated} entries", flush=True)
 
     save_log(log)
-    after = open(DATA_PATH, "rb").read()
+    with open(DATA_PATH, "rb") as f:
+        after = f.read()
     changed = (before is None) or (before != after)
     # Render before opening INDEX_PATH for writing: render() may read the old timestamp from it.
     page_html = render(log, changed)

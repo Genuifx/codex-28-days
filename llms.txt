@@ -459,3 +459,43 @@ We've rolled out optimizations to how we store state on disk for the chatgpt & c
 Day 9/
 
 我们针对 ChatGPT 和 Codex 桌面应用程序在磁盘上存储状态的方式进行了优化，这应将磁盘上存储的数量减少 60%。虽然船很小，但我们已经听到了足够多的关于高级用户磁盘空间不足的反馈。
+
+### Day 10: The reports of my reset button being lost are greatly exaggerated Day 10/ Reset
+
+- Date: Oct 15, 2026 · 04:55 UTC
+- Original post: https://x.com/thsottiaux/status/2110595484180214059
+- Permalink: https://codexy.fyi/#day-10
+
+English (original):
+
+The reports of my reset button being lost are greatly exaggerated
+
+Day 10/ Reset
+
+中文（机器翻译，仅供参考）:
+
+关于我弄丢了重置按钮的传言被严重夸大了。
+
+Day 10/ 重置
+
+### Day 11: We've landed a series of changes and more compute to very significantly…
+
+- Date: Oct 15, 2026 · 15:11 UTC
+- Original post: https://x.com/thsottiaux/status/2110750421367287996
+- Permalink: https://codexy.fyi/#day-11
+
+English (original):
+
+Day 11/
+
+We've landed a series of changes and more compute to very significantly decrease the occurrence of the disruptive "Selected model is at capacity. Please try a different model". When it does happen, it should also eventually just continue by itself and not just block on it.
+
+Let us know if you still see it out there in the wild and we'll take a look.
+
+中文（机器翻译，仅供参考）:
+
+Day 11/
+
+我们已经落地一系列改进，并增加了算力，以显著减少“所选模型已达到容量上限，请尝试其他模型”这类打断任务的提示。即使再次出现这种情况，任务最终也应该能自动继续，而不是一直卡住。
+
+如果你在实际使用中仍然遇到这种情况，请告诉我们，我们会排查。

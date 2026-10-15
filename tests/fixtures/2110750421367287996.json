@@ -1,0 +1,61 @@
+{
+  "code": 200,
+  "message": "OK",
+  "tweet": {
+    "url": "https://x.com/thsottiaux/status/2110750421367287996",
+    "id": "2110750421367287996",
+    "text": "Day 11/\n\nWe've landed a series of changes and more compute to very significantly decrease the occurrence of the disruptive \"Selected model is at capacity. Please try a different model\". When it does happen, it should also eventually just continue by itself and not just block on it.\n\nLet us know if you still see it out there in the wild and we'll take a look.",
+    "raw_text": {
+      "text": "Day 11/\n\nWe've landed a series of changes and more compute to very significantly decrease the occurrence of the disruptive \"Selected model is at capacity. Please try a different model\". When it does happen, it should also eventually just continue by itself and not just block on it.\n\nLet us know if you still see it out there in the wild and we'll take a look.",
+      "display_text_range": [
+        0,
+        360
+      ],
+      "facets": []
+    },
+    "author": {
+      "screen_name": "thsottiaux",
+      "url": "https://x.com/thsottiaux",
+      "id": "1953337039510003712",
+      "followers": 871888,
+      "following": 75,
+      "likes": 10456,
+      "media_count": 151,
+      "name": "Tibo",
+      "description": "Codex & ChatGPT @OpenAI",
+      "raw_description": {
+        "text": "Codex & ChatGPT @OpenAI",
+        "facets": []
+      },
+      "location": "",
+      "banner_url": "",
+      "avatar_url": "https://pbs.twimg.com/profile_images/2093807917833281537/2yBgpwVV_200x200.jpg",
+      "joined": "Thu Aug 07 06:07:07 +0000 2025",
+      "protected": false,
+      "website": null,
+      "verification": {
+        "verified": true,
+        "verified_at": null,
+        "type": "individual"
+      },
+      "avatar_color": null
+    },
+    "replies": 1418,
+    "retweets": 187,
+    "likes": 6105,
+    "bookmarks": 223,
+    "quotes": 313,
+    "created_at": "Thu Oct 15 15:11:30 +0000 2026",
+    "created_timestamp": 1792077090,
+    "views": 386856,
+    "is_note_tweet": true,
+    "community_note": null,
+    "lang": "en",
+    "replying_to": null,
+    "replying_to_status": null,
+    "twitter_card": "tweet",
+    "color": null,
+    "provider": "twitter",
+    "reposted_by": null
+  }
+}

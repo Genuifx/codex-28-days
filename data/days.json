@@ -301,6 +301,34 @@
       "sub": "",
       "qual": "",
       "text_zh": "Day 9/\n\n我们针对 ChatGPT 和 Codex 桌面应用程序在磁盘上存储状态的方式进行了优化，这应将磁盘上存储的数量减少 60%。虽然船很小，但我们已经听到了足够多的关于高级用户磁盘空间不足的反馈。"
+    },
+    {
+      "id": "2110595484180214059",
+      "text": "The reports of my reset button being lost are greatly exaggerated\n\nDay 10/ Reset",
+      "posted_at": "Thu Oct 15 04:55:51 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2110595484180214059",
+      "likes": 15533,
+      "reposts": 661,
+      "replies": 2054,
+      "views": 1338290,
+      "day": 10,
+      "sub": "",
+      "qual": "",
+      "text_zh": "关于我弄丢了重置按钮的传言被严重夸大了。\n\nDay 10/ 重置"
+    },
+    {
+      "id": "2110750421367287996",
+      "text": "Day 11/\n\nWe've landed a series of changes and more compute to very significantly decrease the occurrence of the disruptive \"Selected model is at capacity. Please try a different model\". When it does happen, it should also eventually just continue by itself and not just block on it.\n\nLet us know if you still see it out there in the wild and we'll take a look.",
+      "posted_at": "Thu Oct 15 15:11:30 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2110750421367287996",
+      "likes": 6105,
+      "reposts": 187,
+      "replies": 1418,
+      "views": 386856,
+      "day": 11,
+      "sub": "",
+      "qual": "",
+      "text_zh": "Day 11/\n\n我们已经落地一系列改进，并增加了算力，以显著减少“所选模型已达到容量上限，请尝试其他模型”这类打断任务的提示。即使再次出现这种情况，任务最终也应该能自动继续，而不是一直卡住。\n\n如果你在实际使用中仍然遇到这种情况，请告诉我们，我们会排查。"
     }
   ],
   "resets": [
@@ -327,6 +355,14 @@
       "text_zh": "Day 8/ 重置",
       "url": "https://x.com/thsottiaux/status/2109812216212099456",
       "posted_at": "Tue Oct 13 01:03:25 +0000 2026"
+    },
+    {
+      "day": 10,
+      "id": "2110595484180214059",
+      "text": "The reports of my reset button being lost are greatly exaggerated\n\nDay 10/ Reset",
+      "text_zh": "关于我弄丢了重置按钮的传言被严重夸大了。\n\nDay 10/ 重置",
+      "url": "https://x.com/thsottiaux/status/2110595484180214059",
+      "posted_at": "Thu Oct 15 04:55:51 +0000 2026"
     }
   ]
 }
