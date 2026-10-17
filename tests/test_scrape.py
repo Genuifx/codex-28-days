@@ -3,6 +3,7 @@ import contextlib
 import io
 import json
 from pathlib import Path
+import re
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -55,6 +56,47 @@ class DayMarkerTests(unittest.TestCase):
         ]:
             with self.subTest(text=text):
                 self.assertIsNone(scrape.day_number(text))
+
+
+class PosterLinkTests(unittest.TestCase):
+    def setUp(self):
+        self.entries = [
+            {"day": 0, "text": "Sprint kickoff"},
+            {"day": 2, "sub": ".1", "text": "Day 2.1/ Sub-day ship"},
+            {"day": 3, "text": "Day 3/ First ship"},
+            {"day": 3, "qual": "encore", "text": "Day 3 (encore)/ Second ship"},
+            {"day": 5, "text": "Day 5/ First ship"},
+            {"day": 5, "qual": "dots edition", "text": "Day 5 (dots edition)/ Second ship"},
+            {"day": 12, "sub": ".2", "qual": "encore", "text": "Day 12.2 (encore)/ Another ship"},
+        ]
+        for index, entry in enumerate(self.entries):
+            entry.update(id=str(index), url=f"https://x.com/thsottiaux/status/{index}")
+
+    def test_poster_urls_use_unique_entry_keys(self):
+        posters = json.loads(scrape.poster_data(self.entries, 12))["entries"]
+        expected_keys = ["0", "2.1", "3", "3-encore", "5", "5-dots-edition", "12.2-encore"]
+        self.assertEqual([poster["key"] for poster in posters], expected_keys)
+        for poster, key in zip(posters, expected_keys):
+            with self.subTest(key=key):
+                self.assertEqual(poster["url"], f"https://codexy.fyi/#day-{key}")
+
+    def test_rendered_posters_link_to_their_own_cards(self):
+        page = scrape.render({"entries": self.entries, "resets": []}, changed=True)
+        posters = json.loads(re.search(
+            r'<script type="application/json" id="poster-data">(.*?)</script>', page, re.S
+        ).group(1))["entries"]
+        cards = {}
+        for anchor, body in re.findall(r'<article[^>]* id="([^"]+)"[^>]*>(.*?)</article>', page, re.S):
+            key = re.search(r'data-poster="([^"]+)"', body).group(1)
+            copy_url = re.search(r'data-copy="([^"]+)"', body).group(1)
+            cards[key] = (anchor, copy_url)
+        self.assertEqual(len(cards), len(self.entries))
+        self.assertEqual(len(posters), len(self.entries))
+        for poster in posters:
+            with self.subTest(key=poster["key"]):
+                anchor, copy_url = cards[poster["key"]]
+                self.assertEqual(poster["url"].split("#", 1)[1], anchor)
+                self.assertEqual(poster["url"], copy_url)
 
 
 class ScrapeFlowTests(unittest.TestCase):

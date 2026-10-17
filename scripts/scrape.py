@@ -853,7 +853,7 @@ def poster_data(entries, latest_day):
             "body": body,
             "body_zh": strip_day_prefix(e.get("text_zh") or "").strip() or body,
             "stats": [fmt_int(e.get(k)) for k in ("likes", "reposts", "replies", "views")],
-            "url": day_url(slug),
+            "url": day_url(day_uid(e)),
         })
     data = {"total": TOTAL_DAYS, "latest": latest_day, "site": f"{SITE_URL}/", "handle": HANDLE,
             "leaf": LEAF_PATH, "entries": items}
