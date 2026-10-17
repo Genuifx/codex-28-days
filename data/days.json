@@ -329,6 +329,20 @@
       "sub": "",
       "qual": "",
       "text_zh": "Day 11/\n\n我们已经落地一系列改进，并增加了算力，以显著减少“所选模型已达到容量上限，请尝试其他模型”这类打断任务的提示。即使再次出现这种情况，任务最终也应该能自动继续，而不是一直卡住。\n\n如果你在实际使用中仍然遇到这种情况，请告诉我们，我们会排查。"
+    },
+    {
+      "id": "2111244596131111253",
+      "text": "Day 12/\n\nWe’ve made improvements to Codex & Work that increase the effective usage you get. We achieved this by reusing context across subagents, keeping context cached longer, and improved request routing that allows us to increase cache hits.",
+      "posted_at": "Fri Oct 16 23:55:11 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2111244596131111253",
+      "likes": 5404,
+      "reposts": 176,
+      "replies": 1006,
+      "views": 371322,
+      "day": 12,
+      "sub": "",
+      "qual": "",
+      "text_zh": "Day 12/\n\n我们对 Codex & Work 进行了改进，提高了您的有效使用率。我们通过跨子代理重用上下文、保持上下文缓存更长时间以及改进请求路由来实现这一点，从而使我们能够增加缓存命中率。"
     }
   ],
   "resets": [
