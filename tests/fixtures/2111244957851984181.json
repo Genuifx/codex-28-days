@@ -1,0 +1,35 @@
+{
+  "code": 200,
+  "tweet": {
+    "id": "2111244957851984181",
+    "url": "https://x.com/thsottiaux/status/2111244957851984181",
+    "text": "We also significantly improved GPT-6 Pro for all pro users\n\nhttps://x.com/OpenAI/status/2111192259073094035",
+    "created_at": "Fri Oct 16 23:56:37 +0000 2026",
+    "likes": 876,
+    "retweets": 18,
+    "replies": 87,
+    "views": 127633,
+    "replying_to": "thsottiaux",
+    "replying_to_status": "2111244596131111253",
+    "author": {
+      "screen_name": "thsottiaux",
+      "name": "Tibo"
+    },
+    "quote": {
+      "id": "2111192259073094035",
+      "url": "https://x.com/OpenAI/status/2111192259073094035",
+      "text": "GPT-6 Astra Pro in ChatGPT got an upgrade with faster responses and improved use of plugins and tools.\n\nAnd now, multiple agents can tackle different parts of a task in parallel. You can follow each agent’s progress and open completed tasks to review their work.\n\nNow available to Pro users in the Chat tab.",
+      "created_at": "Fri Oct 16 20:27:13 +0000 2026",
+      "likes": 6958,
+      "retweets": 359,
+      "replies": 443,
+      "views": 725232,
+      "replying_to": null,
+      "replying_to_status": null,
+      "author": {
+        "screen_name": "OpenAI",
+        "name": "OpenAI"
+      }
+    }
+  }
+}

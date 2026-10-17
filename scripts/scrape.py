@@ -2,15 +2,15 @@
 """Tibo's Codex 28-day ship tracker — daily scraper.
 
 Sources (all free, no keys):
-  1. twiscan.com profile page  -> discovers new tweet ids (+ relative time)
-  2. api.fxtwitter.com /status  -> canonical full text, timestamp, engagement
+  1. twiscan.com + site.twstalker.com profiles -> independent status-id discovery
+  2. api.fxtwitter.com /status -> full text, author, timestamp and reply/quote relations
 
 Output:
-  data/days.json  (append-only log of Day N entries)
+  data/days.json  (append-only Day N entries and nested author follow-ups)
   index.html        (static page rendered from the log; no JS needed to read)
 
 Fail-soft: if the timeline source is unreachable, existing data is kept and the
-script exits 0 so the scheduled run never wipes the site.
+script preserves existing data and reports degraded coverage explicitly.
 """
 import datetime
 import html as htmlmod
@@ -75,10 +75,55 @@ def rel_to_dt(rel, now):
     return now - datetime.timedelta(seconds=n * secs)
 
 
+def parse_status_links(page_html):
+    """Discover IDs only; never classify a post from a mirror's preview text."""
+    ids = dict.fromkeys(re.findall(
+        rf'''href=["'][^"']*/{re.escape(HANDLE)}/status/(\d{{10,}})(?=[/?#"'])''',
+        htmlmod.unescape(page_html), re.I))
+    return [{"id": tid} for tid in ids]
+
+
+def discover_statuses(log, coverage=None):
+    """Union independent timelines; a failed/lagging source is visibly degraded."""
+    sources = (
+        (f"https://twiscan.com/en/x/{HANDLE}", parse_twiscan),
+        (f"https://site.twstalker.com/{HANDLE}", parse_status_links),
+    )
+    candidates = {}
+    coverage = coverage if coverage is not None else {}
+    archived = [post for e in log["entries"] for post in [e, *e.get("followups", [])]]
+    latest_known = max((int(e["id"]) for e in archived), default=0)
+    for url, parser in sources:
+        try:
+            posts = parser(fetch(url))
+            if not posts:
+                raise ValueError("no status IDs found; source may be empty or markup may have changed")
+            newest = max(int(p["id"]) for p in posts)
+            if newest < latest_known:
+                coverage["lagging_sources"] = coverage.get("lagging_sources", 0) + 1
+                print(f"::warning::Discovery source is behind the archive: {url}", file=sys.stderr, flush=True)
+            print(f"discovery: {url}: {len(posts)} IDs, newest {newest}", flush=True)
+            for post in posts:
+                candidates.setdefault(post["id"], post)
+        except Exception as e:  # noqa: BLE001
+            coverage["failed_sources"] = coverage.get("failed_sources", 0) + 1
+            print(f"::warning::Discovery source unavailable: {url}: {e}", file=sys.stderr, flush=True)
+    if not candidates:
+        print("::warning::No discovery sources yielded IDs; existing data preserved, coverage unverified", file=sys.stderr, flush=True)
+    return list(candidates.values())
+
+
 def fx_status(tid):
     """Canonical tweet data from the fxtwitter API."""
     d = json.loads(fetch(f"https://api.fxtwitter.com/{HANDLE}/status/{tid}"))
     t = d.get("tweet") or {}
+    # A requested URL does not prove authorship. Reject error responses,
+    # mismatched IDs and empty text rather than borrowing a neighboring preview.
+    author = (t.get("author") or {}).get("screen_name") or ""
+    if str(t.get("id") or "") != str(tid) or author.lower() != HANDLE.lower():
+        raise ValueError("status ID or author does not match requested post")
+    if not (t.get("text") or "").strip() or not t.get("created_at"):
+        raise ValueError("status has no verified text or timestamp")
     out = {
         "id": str(t.get("id") or tid),
         "text": (t.get("text") or "").strip(),
@@ -89,6 +134,9 @@ def fx_status(tid):
         "replies": t.get("replies") or 0,
         "views": t.get("views") or 0,
     }
+    if t.get("replying_to_status"):
+        out["replying_to_status"] = str(t["replying_to_status"])
+        out["replying_to"] = t.get("replying_to") or ""
     q = t.get("quote")
     if isinstance(q, dict):  # quote-tweet: keep the quoted post for context
         a = q.get("author") or {}
@@ -345,6 +393,7 @@ I18N = {
         "likes": "Likes", "reposts": "Reposts", "replies": "Replies", "views": "Views",
         "view_x": "View on X →",
         "quote_tag": "QUOTING",
+        "followup_tag": "AUTHOR FOLLOW-UP",
         "quote_aria": "Quoted post",
         "share_label": "SHARE",
         "share_x": "SHARE ON X",
@@ -435,6 +484,7 @@ I18N = {
         "likes": "点赞", "reposts": "转发", "replies": "回复", "views": "浏览",
         "view_x": "在 X 上查看原文 →",
         "quote_tag": "引用",
+        "followup_tag": "作者补充",
         "quote_aria": "引用的帖子",
         "share_label": "分享",
         "share_x": "分享到 X",
@@ -1124,7 +1174,45 @@ def render_llms(log):
                     q["text"].strip(), ""]
             if e.get("quote_text_zh"):
                 out += ["引用帖中文（机器翻译，仅供参考）:", "", e["quote_text_zh"].strip(), ""]
+        for followup in e.get("followups", []):
+            out += [f"Author follow-up (reply to {e['url']}): {followup['url']}", "",
+                    followup["text"].strip(), ""]
+            if followup.get("text_zh"):
+                out += ["作者补充中文（机器翻译，仅供参考）:", "", followup["text_zh"].strip(), ""]
+            quote = followup.get("quote") or {}
+            if quote.get("text"):
+                out += [f"Quoted post by @{quote.get('handle')}: {quote.get('url')}", "", quote["text"], ""]
+                if followup.get("quote_text_zh"):
+                    out += ["引用帖中文（机器翻译，仅供参考）:", "", followup["quote_text_zh"], ""]
     return "\n".join(out).rstrip() + "\n"
+
+
+def render_followups(entry):
+    """Keep supplemental author replies within their verified parent's card."""
+    blocks = []
+    for followup in entry.get("followups", []):
+        text = ""
+        for lang in LANGS:
+            body = followup.get("text_zh") if lang == "zh" else followup["text"]
+            body = body or followup["text"]
+            paragraphs = "".join(f"<p>{esc(p)}</p>" for p in body.split("\n") if p.strip())
+            text += f'<div class="quote-text" data-lang="{lang}">{paragraphs}</div>'
+        quote = followup.get("quote") or {}
+        if quote.get("text"):
+            text += (f'<blockquote class="quote"><div class="quote-head">{T("quote_tag")} '
+                     f'<a href="{esc(quote.get("url"))}" target="_blank" rel="noopener">'
+                     f'@{esc(quote.get("handle"))}</a></div>')
+            for lang in LANGS:
+                body = followup.get("quote_text_zh") if lang == "zh" else quote["text"]
+                body = body or quote["text"]
+                paragraphs = "".join(f"<p>{esc(p)}</p>" for p in body.split("\n") if p.strip())
+                text += f'<div class="quote-text" data-lang="{lang}">{paragraphs}</div>'
+            text += "</blockquote>"
+        blocks.append(f'<section class="quote" id="post-{esc(followup["id"])}">'
+                      f'<div class="quote-head"><span class="quote-tag px">{T("followup_tag")}</span> '
+                      f'<a href="{esc(followup["url"])}" target="_blank" rel="noopener">@{HANDLE}</a></div>'
+                      f'{text}</section>')
+    return "\n".join(blocks)
 
 
 def render(log, changed):
@@ -1176,6 +1264,7 @@ def render(log, changed):
                           f'<b>{esc(q.get("name") or q.get("handle"))}</b> {handle}</div>'
                           f'<div class="quote-text" data-lang="en">{q_en}</div>'
                           f'<div class="quote-text" data-lang="zh" lang="zh-CN">{q_zh}</div></blockquote>')
+        text_html += render_followups(e)
         stats = "".join(f'<span title="{I18N["en"][k]}" data-i18n-attr="title:{k}">{icon} {fmt_int(e.get(k))}</span>'
                         for k, icon in (("likes", "♥"), ("reposts", "↻"), ("replies", "💬"), ("views", "👁")))
         texts, titles = entry_share(e)
@@ -1291,7 +1380,7 @@ def main():
         with open(DATA_PATH, "rb") as f:
             before = f.read()
     known_ids = {e["id"] for e in log["entries"]}
-    now = datetime.datetime.now(datetime.timezone.utc)
+    coverage = {}
 
     # Seed the announcement once.
     if ANNOUNCEMENT_ID not in known_ids:
@@ -1304,62 +1393,64 @@ def main():
         except Exception as e:  # noqa: BLE001
             print(f"announcement fetch failed: {e}", file=sys.stderr, flush=True)
 
-    # Discover new Day N tweets from the public timeline mirror.
-    try:
-        page = fetch(f"https://twiscan.com/en/x/{HANDLE}")
-    except Exception as e:  # noqa: BLE001
-        print(f"timeline unreachable, keeping existing data: {e}", file=sys.stderr, flush=True)
-        page = ""
+    # Fetch all candidates first: profile order can place replies before parents.
+    known_followups = {f["id"] for e in log["entries"] for f in e.get("followups", [])}
+    fetched = []
+    for candidate in discover_statuses(log, coverage):
+        tid = candidate["id"]
+        if tid in known_ids or tid in known_followups:
+            continue
+        try:
+            fetched.append(fx_status(tid))
+        except Exception as e:  # noqa: BLE001
+            coverage["failed_statuses"] = coverage.get("failed_statuses", 0) + 1
+            print(f"::warning::Status fetch failed for {tid}: {e}", file=sys.stderr, flush=True)
 
     added = 0
-    if page:
-        for tw in parse_twiscan(page):
-            if tw["id"] in known_ids:
-                continue
-            # Fetch the canonical full text first: twiscan's preview markup has
-            # changed before, so the Day N decision must not depend on it.
-            try:
-                t = fx_status(tw["id"])
-            except Exception as e:  # noqa: BLE001
-                print(f"status fetch failed for {tw['id']}: {e}", file=sys.stderr, flush=True)
-                continue
-            full_text = t["text"] or ""
-            if not full_text:
-                # fxtwitter came back empty: last-resort preview fallback.
-                # Never let the preview override real full text — twiscan
-                # previews can be misattributed to a neighboring tweet
-                # (seen 2026-10-08: a 'Roundup of Day 2' card nearly shipped
-                # as its own Day 2 entry off a neighbor's preview).
-                full_text = tw["preview"]
-            t["text"] = full_text
-            n = day_number(full_text)
-            if n is None or not (1 <= n <= TOTAL_DAYS):
-                continue
-            if not t["posted_at"]:
-                t["posted_at"] = rel_to_dt(tw["relative"], now).strftime("%a %b %d %H:%M:%S %z %Y")
-            t["day"] = n
-            t["sub"] = day_sub(full_text)
-            t["qual"] = day_qual(full_text)
-            log["entries"].append(t)
-            known_ids.add(tw["id"])
-            added += 1
-            print(f"added Day {day_uid(t)}: {tw['id']}", flush=True)
+    for t in fetched:
+        n = day_number(t["text"])
+        if n is None or not (1 <= n <= TOTAL_DAYS):
+            continue
+        t["day"] = n
+        t["sub"] = day_sub(t["text"])
+        t["qual"] = day_qual(t["text"])
+        log["entries"].append(t)
+        known_ids.add(t["id"])
+        added += 1
+        print(f"added Day {day_uid(t)}: {t['id']}", flush=True)
+
+    # Only exact direct author-reply relationships attach context to a Day card.
+    # Standalone announcements, third-party replies and quoted Day markers do not.
+    parents = {e["id"]: e for e in log["entries"] if e["day"] > 0}
+    added_followups = 0
+    for t in fetched:
+        parent = parents.get(t.get("replying_to_status"))
+        if (t["id"] in known_ids or t["id"] in known_followups or parent is None
+                or t.get("replying_to", "").lower() != HANDLE.lower()):
+            continue
+        parent.setdefault("followups", []).append(t)
+        parent["followups"].sort(key=lambda f: int(f["id"]))
+        known_followups.add(t["id"])
+        added_followups += 1
+        print(f"attached author follow-up {t['id']} to Day {day_uid(parent)}", flush=True)
 
     # Chinese machine translation, once per entry (incl. the announcement). Fail-soft: a failure
     # stores "" (page falls back to English) and is retried next run; after the first failure
     # we stop for this run so a blocked endpoint can't stall the job.
     translated = 0
-    for e in sorted(log["entries"], key=lambda e: e["day"]):
+    translatable = [post for e in sorted(log["entries"], key=lambda e: e["day"])
+                    for post in [e, *e.get("followups", [])]]
+    for e in translatable:
         if not e.get("text_zh"):
             e["text_zh"] = translate_entry(e["text"])
             if not e["text_zh"]:
-                print(f"translation unavailable for Day {day_slug(e)}; showing English", file=sys.stderr, flush=True)
+                print(f"translation unavailable for post {e['id']}; showing English", file=sys.stderr, flush=True)
                 break
             translated += 1
         if (e.get("quote") or {}).get("text") and not e.get("quote_text_zh"):
             e["quote_text_zh"] = translate_entry(e["quote"]["text"])
             if not e["quote_text_zh"]:
-                print(f"quote translation unavailable for Day {day_slug(e)}; showing English", file=sys.stderr, flush=True)
+                print(f"quote translation unavailable for post {e['id']}; showing English", file=sys.stderr, flush=True)
                 break
             translated += 1
     if translated:
@@ -1376,8 +1467,15 @@ def main():
     for name, body in (("sitemap.xml", render_sitemap(log)), ("llms.txt", render_llms(log))):
         with open(os.path.join(ROOT, name), "w", encoding="utf-8") as f:
             f.write(body)
-    print(f"done: {added} new, {len(log['entries'])} total entries", flush=True)
+    if coverage:
+        details = ", ".join(f"{key}={value}" for key, value in sorted(coverage.items()))
+        print(f"done with DEGRADED coverage ({details}); no-new is unverified: "
+              f"{added} new days, {added_followups} new follow-ups, {len(log['entries'])} total entries", flush=True)
+    else:
+        print(f"done: {added} new days, {added_followups} new follow-ups, {len(log['entries'])} total entries; "
+              "both discovery sources checked (mirrors can still omit posts)", flush=True)
 
 
 if __name__ == "__main__":
     main()
+

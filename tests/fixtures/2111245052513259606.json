@@ -1,0 +1,35 @@
+{
+  "code": 200,
+  "tweet": {
+    "id": "2111245052513259606",
+    "url": "https://x.com/thsottiaux/status/2111245052513259606",
+    "text": "And update your app to enjoy this gem\n\nhttps://x.com/Gavmn/status/2111136119945396436",
+    "created_at": "Fri Oct 16 23:57:00 +0000 2026",
+    "likes": 510,
+    "retweets": 8,
+    "replies": 51,
+    "views": 111448,
+    "replying_to": "thsottiaux",
+    "replying_to_status": "2111244596131111253",
+    "author": {
+      "screen_name": "thsottiaux",
+      "name": "Tibo"
+    },
+    "quote": {
+      "id": "2111136119945396436",
+      "url": "https://x.com/Gavmn/status/2111136119945396436",
+      "text": "Dots, now on your Home Screen",
+      "created_at": "Fri Oct 16 16:44:08 +0000 2026",
+      "likes": 762,
+      "retweets": 27,
+      "replies": 89,
+      "views": 147820,
+      "replying_to": null,
+      "replying_to_status": null,
+      "author": {
+        "screen_name": "Gavmn",
+        "name": "Gavin Nelson"
+      }
+    }
+  }
+}

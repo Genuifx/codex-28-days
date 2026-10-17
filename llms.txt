@@ -442,6 +442,14 @@ Day 8/ Reset
 
 Day 8/ 重置
 
+Author follow-up (reply to https://x.com/thsottiaux/status/2109812216212099456): https://x.com/thsottiaux/status/2109812360596865224
+
+Global reset landing by EOD PST time. Enjoy
+
+作者补充中文（机器翻译，仅供参考）:
+
+全局重置将在太平洋时间今天结束前上线。尽情享用。
+
 ### Day 9: We've rolled out optimizations to how we store state on disk for the chatgpt &…
 
 - Date: Oct 13, 2026 · 23:32 UTC
@@ -477,6 +485,14 @@ Day 10/ Reset
 关于我弄丢了重置按钮的传言被严重夸大了。
 
 Day 10/ 重置
+
+Author follow-up (reply to https://x.com/thsottiaux/status/2110595484180214059): https://x.com/thsottiaux/status/2110595554036400151
+
+Landing within the next 2 hours
+
+作者补充中文（机器翻译，仅供参考）:
+
+将在接下来的 2 小时内上线。
 
 ### Day 11: We've landed a series of changes and more compute to very significantly…
 
@@ -517,3 +533,51 @@ We’ve made improvements to Codex & Work that increase the effective usage you 
 Day 12/
 
 我们对 Codex & Work 进行了改进，提高了您的有效使用率。我们通过跨子代理重用上下文、保持上下文缓存更长时间以及改进请求路由来实现这一点，从而使我们能够增加缓存命中率。
+
+Author follow-up (reply to https://x.com/thsottiaux/status/2111244596131111253): https://x.com/thsottiaux/status/2111244957851984181
+
+We also significantly improved GPT-6 Pro for all pro users
+
+https://x.com/OpenAI/status/2111192259073094035
+
+作者补充中文（机器翻译，仅供参考）:
+
+我们也为所有 Pro 用户显著改进了 GPT-6 Pro。
+
+https://x.com/OpenAI/status/2111192259073094035
+
+Quoted post by @OpenAI: https://x.com/OpenAI/status/2111192259073094035
+
+GPT-6 Astra Pro in ChatGPT got an upgrade with faster responses and improved use of plugins and tools.
+
+And now, multiple agents can tackle different parts of a task in parallel. You can follow each agent’s progress and open completed tasks to review their work.
+
+Now available to Pro users in the Chat tab.
+
+引用帖中文（机器翻译，仅供参考）:
+
+ChatGPT 中的 GPT-6 Astra Pro 已升级：响应更快，对插件和工具的使用也有所改进。
+
+现在，多个智能体可以并行处理同一任务的不同部分。你可以查看每个智能体的进度，并打开已完成的任务来检查结果。
+
+现已在 Chat 标签页向 Pro 用户开放。
+
+Author follow-up (reply to https://x.com/thsottiaux/status/2111244596131111253): https://x.com/thsottiaux/status/2111245052513259606
+
+And update your app to enjoy this gem
+
+https://x.com/Gavmn/status/2111136119945396436
+
+作者补充中文（机器翻译，仅供参考）:
+
+另外，更新你的应用，就能体验这个好东西。
+
+https://x.com/Gavmn/status/2111136119945396436
+
+Quoted post by @Gavmn: https://x.com/Gavmn/status/2111136119945396436
+
+Dots, now on your Home Screen
+
+引用帖中文（机器翻译，仅供参考）:
+
+dots 现在可以放到你的主屏幕上了。

@@ -1,0 +1,19 @@
+{
+  "code": 200,
+  "tweet": {
+    "id": "2111244596131111253",
+    "url": "https://x.com/thsottiaux/status/2111244596131111253",
+    "text": "Day 12/\n\nWe’ve made improvements to Codex & Work that increase the effective usage you get. We achieved this by reusing context across subagents, keeping context cached longer, and improved request routing that allows us to increase cache hits.",
+    "created_at": "Fri Oct 16 23:55:11 +0000 2026",
+    "likes": 5503,
+    "retweets": 177,
+    "replies": 1018,
+    "views": 382107,
+    "replying_to": null,
+    "replying_to_status": null,
+    "author": {
+      "screen_name": "thsottiaux",
+      "name": "Tibo"
+    }
+  }
+}

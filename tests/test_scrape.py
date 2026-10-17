@@ -14,6 +14,9 @@ FIXTURES = Path(__file__).parent / "fixtures"
 DAY10 = "2110595484180214059"
 DAY11 = "2110750421367287996"
 FOLLOWUP = "2110595554036400151"
+DAY12 = "2111244596131111253"
+PRO = "2111244957851984181"
+HOME_SCREEN = "2111245052513259606"
 
 
 def status_fixture(tweet_id):
@@ -55,6 +58,137 @@ class DayMarkerTests(unittest.TestCase):
 
 
 class ScrapeFlowTests(unittest.TestCase):
+    def test_discovery_failure_is_explicit_and_preserves_existing_data(self):
+        log = {"entries": [{"id": DAY12, "day": 12}], "resets": []}
+        before = json.dumps(log)
+        errors = io.StringIO()
+        with patch.object(scrape, "fetch", side_effect=OSError("source offline")), \
+                contextlib.redirect_stderr(errors):
+            self.assertEqual(scrape.discover_statuses(log), [])
+        self.assertEqual(json.dumps(log), before)
+        self.assertIn("coverage unverified", errors.getvalue())
+        self.assertEqual(errors.getvalue().count("Discovery source unavailable"), 2)
+
+    def test_lagging_source_is_reported_and_ids_remain_strings(self):
+        page = f'<a href="/thsottiaux/status/{DAY11}">post</a>'
+        errors = io.StringIO()
+        with patch.object(scrape, "fetch", return_value=page), \
+                contextlib.redirect_stderr(errors), contextlib.redirect_stdout(io.StringIO()):
+            posts = scrape.discover_statuses({"entries": [{"id": DAY12}]})
+        self.assertEqual(posts, [{"id": DAY11}])
+        self.assertIn("behind the archive", errors.getvalue())
+
+    def test_source_staleness_includes_archived_followups(self):
+        page = f'<a href="/thsottiaux/status/{DAY12}">post</a>'
+        errors, coverage = io.StringIO(), {}
+        log = {"entries": [{"id": DAY12, "followups": [{"id": HOME_SCREEN}]}]}
+        with patch.object(scrape, "fetch", return_value=page), \
+                contextlib.redirect_stderr(errors), contextlib.redirect_stdout(io.StringIO()):
+            scrape.discover_statuses(log, coverage)
+        self.assertEqual(coverage["lagging_sources"], 1)
+
+    def test_secondary_source_recovers_day_and_author_followups(self):
+        self.assert_secondary_source_recovers_followups(preseed=False)
+
+    def test_secondary_source_attaches_followups_to_already_archived_day(self):
+        self.assert_secondary_source_recovers_followups(preseed=True)
+
+    def assert_secondary_source_recovers_followups(self, preseed):
+        fixtures = {tid: status_fixture(tid) for tid in (DAY12, PRO, HOME_SCREEN)}
+        # The primary profile has omitted the day; the fallback includes replies
+        # before their parent, duplicate links, and an unrelated author.
+        unrelated = "2111249810502353152"
+        fixtures[unrelated] = status_fixture(PRO)
+        fixtures[unrelated]["tweet"].update(id=unrelated, replying_to_status="2111249534072529256")
+        links = "".join(f'<a href="/thsottiaux/status/{tid}">View Details</a>'
+                        for tid in (PRO, HOME_SCREEN, DAY12, PRO, unrelated))
+
+        def fetch_fixture(url):
+            if url == "https://twiscan.com/en/x/thsottiaux":
+                return "<html>No recent posts available</html>"
+            if url == "https://site.twstalker.com/thsottiaux":
+                return links
+            prefix = "https://api.fxtwitter.com/thsottiaux/status/"
+            if url.startswith(prefix) and url[len(prefix):] in fixtures:
+                return json.dumps(fixtures[url[len(prefix):]])
+            raise AssertionError(f"Unexpected network request: {url}")
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            data_path = root / "data/days.json"
+            data_path.parent.mkdir()
+            seed = {"handle": "thsottiaux", "total_days": 28, "entries": [{
+                "id": scrape.ANNOUNCEMENT_ID, "day": 0, "text": "Sprint kickoff",
+                "text_zh": "冲刺开始", "url": "https://x.com/thsottiaux/status/" + scrape.ANNOUNCEMENT_ID,
+                "posted_at": "Sun Oct 04 20:33:43 +0000 2026",
+            }], "resets": []}
+            if preseed:
+                source = fixtures[DAY12]["tweet"]
+                seed["entries"].append({"id": DAY12, "day": 12, "text": source["text"],
+                                        "posted_at": source["created_at"], "url": source["url"],
+                                        "text_zh": "已保存的第 12 天译文"})
+            data_path.write_text(json.dumps(seed))
+            with patch.multiple(scrape, ROOT=str(root), DATA_PATH=str(data_path),
+                                INDEX_PATH=str(root / "index.html")), \
+                    patch.object(scrape, "fetch", side_effect=fetch_fixture), \
+                    patch.object(scrape, "translate_entry", side_effect=lambda text: "译文：" + text), \
+                    contextlib.redirect_stdout(io.StringIO()):
+                scrape.main()
+                first = json.loads(data_path.read_text())
+                self.assertEqual([e["id"] for e in first["entries"]], [scrape.ANNOUNCEMENT_ID, DAY12])
+                day = first["entries"][-1]
+                self.assertEqual(day["day"], 12)
+                self.assertEqual({e["id"] for e in day["followups"]}, {PRO, HOME_SCREEN})
+                for e in day["followups"]:
+                    self.assertEqual(e["replying_to_status"], DAY12)
+                    self.assertTrue(e["text_zh"])
+                    self.assertTrue(e["quote_text_zh"])
+                rendered = (root / "index.html").read_text()
+                self.assertIn('id="day-12"', rendered)
+                self.assertIn('2111192259073094035', rendered)
+                self.assertIn('2111136119945396436', rendered)
+                self.assertNotIn(unrelated, rendered)
+                self.assertIn(PRO, (root / "llms.txt").read_text())
+                names = ("data/days.json", "index.html", "sitemap.xml", "llms.txt")
+                before = {name: (root / name).read_bytes() for name in names}
+                scrape.main()
+                self.assertEqual(before, {name: (root / name).read_bytes() for name in names})
+                output = io.StringIO()
+                with patch.object(scrape, "fetch", side_effect=OSError("source offline")), \
+                        contextlib.redirect_stdout(output), contextlib.redirect_stderr(io.StringIO()):
+                    scrape.main()
+                self.assertEqual(before, {name: (root / name).read_bytes() for name in names})
+                self.assertIn("DEGRADED coverage", output.getvalue())
+                self.assertIn("no-new is unverified", output.getvalue())
+                self.assertIn("failed_sources=2", output.getvalue())
+
+                def status_failure(url):
+                    if "fxtwitter" in url:
+                        raise OSError("status offline")
+                    return links
+
+                output = io.StringIO()
+                with patch.object(scrape, "fetch", side_effect=status_failure), \
+                        contextlib.redirect_stdout(output), contextlib.redirect_stderr(io.StringIO()):
+                    scrape.main()
+                self.assertEqual(before, {name: (root / name).read_bytes() for name in names})
+                self.assertIn("failed_statuses=1", output.getvalue())
+
+    def test_status_rejects_wrong_author_and_mismatched_id(self):
+        for change in ({"author": {"screen_name": "someone_else"}}, {"id": PRO}):
+            fixture = status_fixture(DAY12)
+            fixture["tweet"].update(change)
+            with self.subTest(change=change), patch.object(scrape, "fetch", return_value=json.dumps(fixture)):
+                with self.assertRaises(ValueError):
+                    scrape.fx_status(DAY12)
+
+    def test_empty_status_never_uses_misattributed_preview(self):
+        fixture = status_fixture(DAY12)
+        fixture["tweet"]["text"] = ""
+        with patch.object(scrape, "fetch", return_value=json.dumps(fixture)):
+            with self.assertRaises(ValueError):
+                scrape.fx_status(DAY12)
+
     def test_new_posts_are_saved_once_without_ingesting_quote_or_reply(self):
         fixtures = {tid: status_fixture(tid) for tid in (DAY10, DAY11, FOLLOWUP)}
         quote_id = "2110000000000000001"
@@ -108,3 +242,4 @@ class ScrapeFlowTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
