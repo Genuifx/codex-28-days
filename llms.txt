@@ -599,3 +599,26 @@ Dots, now on your Home Screen
 引用帖中文（机器翻译，仅供参考）:
 
 dots 现在可以放到你的主屏幕上了。
+
+### Codex Day 13: Usage-limit reset planned by EOD PST
+
+- Date: Oct 17, 2026 · 16:20 UTC
+- Original post: https://x.com/thsottiaux/status/2111492673890824348
+- Permalink: https://codexy.fyi/updates/2111492673890824348/
+- 中文: https://codexy.fyi/zh/updates/2111492673890824348/
+
+English (original):
+
+Day 13/ Le limit reset
+
+中文（机器翻译，仅供参考）:
+
+Day 13/ 额度重置
+
+Author follow-up (reply to https://x.com/thsottiaux/status/2111492673890824348): https://x.com/thsottiaux/status/2111492738025959922
+
+Landing sometime today by EOD PST
+
+作者补充中文（机器翻译，仅供参考）:
+
+将于今天内生效，最晚在太平洋时间当天结束前（原文：EOD PST）。

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Codex: 28 Days of Shipping</title><link>https://codexy.fyi/</link><description>Every daily Codex ship from Tibo’s 28-day sprint, tracked day by day.</description><language>en</language><atom:link href="https://codexy.fyi/feed.xml" rel="self" type="application/rss+xml" /><item><title>Codex Day 12: More effective usage through context reuse and caching</title><link>https://codexy.fyi/updates/2111244596131111253/</link><guid isPermaLink="false">urn:codexy:x:2111244596131111253:en</guid><pubDate>Fri, 16 Oct 2026 23:55:11 GMT</pubDate><description>Day 12/ We’ve made improvements to Codex &amp;amp; Work that increase the effective usage you get. We achieved this by reusing context across subagents, keeping contex…
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Codex: 28 Days of Shipping</title><link>https://codexy.fyi/</link><description>Every daily Codex ship from Tibo’s 28-day sprint, tracked day by day.</description><language>en</language><atom:link href="https://codexy.fyi/feed.xml" rel="self" type="application/rss+xml" /><item><title>Codex Day 13: Usage-limit reset planned by EOD PST</title><link>https://codexy.fyi/updates/2111492673890824348/</link><guid isPermaLink="false">urn:codexy:x:2111492673890824348:en</guid><pubDate>Sat, 17 Oct 2026 16:20:57 GMT</pubDate><description>Day 13/ Le limit reset
+
+Author follow-up: Landing sometime today by EOD PST
+https://x.com/thsottiaux/status/2111492738025959922
+
+Original post: https://x.com/thsottiaux/status/2111492673890824348</description></item><item><title>Codex Day 12: More effective usage through context reuse and caching</title><link>https://codexy.fyi/updates/2111244596131111253/</link><guid isPermaLink="false">urn:codexy:x:2111244596131111253:en</guid><pubDate>Fri, 16 Oct 2026 23:55:11 GMT</pubDate><description>Day 12/ We’ve made improvements to Codex &amp;amp; Work that increase the effective usage you get. We achieved this by reusing context across subagents, keeping contex…
 
 Author follow-up: And update your app to enjoy this gem https://x.com/Gavmn/status/21111361199453…
 https://x.com/thsottiaux/status/2111245052513259606

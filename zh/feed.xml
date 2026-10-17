@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Codex：28 天连续发布</title><link>https://codexy.fyi/zh/</link><description>逐日记录 Tibo 28 天冲刺中的每一次 Codex 发布。</description><language>zh-CN</language><atom:link href="https://codexy.fyi/zh/feed.xml" rel="self" type="application/rss+xml" /><item><title>Codex 第 12 天：通过上下文复用与缓存提升有效用量</title><link>https://codexy.fyi/zh/updates/2111244596131111253/</link><guid isPermaLink="false">urn:codexy:x:2111244596131111253:zh</guid><pubDate>Fri, 16 Oct 2026 23:55:11 GMT</pubDate><description>Day 12/ 我们对 Codex &amp;amp; Work 进行了改进，提高了您的有效使用率。我们通过跨子代理重用上下文、保持上下文缓存更长时间以及改进请求路由来实现这一点，从而使我们能够增加缓存命中率。
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Codex：28 天连续发布</title><link>https://codexy.fyi/zh/</link><description>逐日记录 Tibo 28 天冲刺中的每一次 Codex 发布。</description><language>zh-CN</language><atom:link href="https://codexy.fyi/zh/feed.xml" rel="self" type="application/rss+xml" /><item><title>Codex 第 13 天：额度重置：计划于太平洋时间当天结束前生效</title><link>https://codexy.fyi/zh/updates/2111492673890824348/</link><guid isPermaLink="false">urn:codexy:x:2111492673890824348:zh</guid><pubDate>Sat, 17 Oct 2026 16:20:57 GMT</pubDate><description>Day 13/ 额度重置
+
+作者补充: 将于今天内生效，最晚在太平洋时间当天结束前（原文：EOD PST）。
+https://x.com/thsottiaux/status/2111492738025959922
+
+原帖：https://x.com/thsottiaux/status/2111492673890824348</description></item><item><title>Codex 第 12 天：通过上下文复用与缓存提升有效用量</title><link>https://codexy.fyi/zh/updates/2111244596131111253/</link><guid isPermaLink="false">urn:codexy:x:2111244596131111253:zh</guid><pubDate>Fri, 16 Oct 2026 23:55:11 GMT</pubDate><description>Day 12/ 我们对 Codex &amp;amp; Work 进行了改进，提高了您的有效使用率。我们通过跨子代理重用上下文、保持上下文缓存更长时间以及改进请求路由来实现这一点，从而使我们能够增加缓存命中率。
 
 作者补充: 另外，更新你的应用，就能体验这个好东西。 https://x.com/Gavmn/status/2111136119945396436
 https://x.com/thsottiaux/status/2111245052513259606

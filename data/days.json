@@ -419,6 +419,35 @@
           "quote_text_zh": "dots 现在可以放到你的主屏幕上了。"
         }
       ]
+    },
+    {
+      "id": "2111492673890824348",
+      "text": "Day 13/ Le limit reset",
+      "posted_at": "Sat Oct 17 16:20:57 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2111492673890824348",
+      "likes": 7228,
+      "reposts": 353,
+      "replies": 879,
+      "views": 334319,
+      "day": 13,
+      "sub": "",
+      "qual": "",
+      "followups": [
+        {
+          "id": "2111492738025959922",
+          "text": "Landing sometime today by EOD PST",
+          "posted_at": "Sat Oct 17 16:21:13 +0000 2026",
+          "url": "https://x.com/thsottiaux/status/2111492738025959922",
+          "likes": 1429,
+          "reposts": 27,
+          "replies": 202,
+          "views": 144674,
+          "replying_to_status": "2111492673890824348",
+          "replying_to": "thsottiaux",
+          "text_zh": "将于今天内生效，最晚在太平洋时间当天结束前（原文：EOD PST）。"
+        }
+      ],
+      "text_zh": "Day 13/ 额度重置"
     }
   ],
   "resets": [
@@ -453,6 +482,14 @@
       "text_zh": "关于我弄丢了重置按钮的传言被严重夸大了。\n\nDay 10/ 重置",
       "url": "https://x.com/thsottiaux/status/2110595484180214059",
       "posted_at": "Thu Oct 15 04:55:51 +0000 2026"
+    },
+    {
+      "day": 13,
+      "id": "2111492673890824348",
+      "text": "Day 13/ Le limit reset",
+      "text_zh": "Day 13/ 额度重置",
+      "url": "https://x.com/thsottiaux/status/2111492673890824348",
+      "posted_at": "Sat Oct 17 16:20:57 +0000 2026"
     }
   ]
 }
