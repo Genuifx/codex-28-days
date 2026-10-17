@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Codex：28 天连续发布</title><link>https://codexy.fyi/zh/</link><description>逐日记录 Tibo 28 天冲刺中的每一次 Codex 发布。</description><language>zh-CN</language><atom:link href="https://codexy.fyi/zh/feed.xml" rel="self" type="application/rss+xml" /><item><title>Codex 第 12 天：通过上下文复用与缓存提升有效用量</title><link>https://codexy.fyi/zh/updates/2111244596131111253/</link><guid isPermaLink="false">urn:codexy:x:2111244596131111253:zh</guid><pubDate>Fri, 16 Oct 2026 23:55:11 GMT</pubDate><description>Day 12/ 我们对 Codex &amp;amp; Work 进行了改进，提高了您的有效使用率。我们通过跨子代理重用上下文、保持上下文缓存更长时间以及改进请求路由来实现这一点，从而使我们能够增加缓存命中率。
+
+作者补充: 另外，更新你的应用，就能体验这个好东西。 https://x.com/Gavmn/status/2111136119945396436
+https://x.com/thsottiaux/status/2111245052513259606
+
+原帖：https://x.com/thsottiaux/status/2111244596131111253</description></item><item><title>Codex 第 11 天：减少模型容量中断，支持自动继续</title><link>https://codexy.fyi/zh/updates/2110750421367287996/</link><guid isPermaLink="false">urn:codexy:x:2110750421367287996:zh</guid><pubDate>Thu, 15 Oct 2026 15:11:30 GMT</pubDate><description>Day 11/ 我们已经落地一系列改进，并增加了算力，以显著减少“所选模型已达到容量上限，请尝试其他模型”这类打断任务的提示。即使再次出现这种情况，任务最终也应该能自动继续，而不是一直卡住。 如果你在实际使用中仍然遇到这种情况，请告诉我们，我们会排查。
+
+原帖：https://x.com/thsottiaux/status/2110750421367287996</description></item><item><title>Codex 第 10 天：Reset：额度重置</title><link>https://codexy.fyi/zh/updates/2110595484180214059/</link><guid isPermaLink="false">urn:codexy:x:2110595484180214059:zh</guid><pubDate>Thu, 15 Oct 2026 04:55:51 GMT</pubDate><description>关于我弄丢了重置按钮的传言被严重夸大了。 Day 10/ 重置
+
+作者补充: 将在接下来的 2 小时内上线。
+https://x.com/thsottiaux/status/2110595554036400151
+
+原帖：https://x.com/thsottiaux/status/2110595484180214059</description></item><item><title>Codex 第 9 天：桌面应用状态数据的磁盘占用预计减少 60%</title><link>https://codexy.fyi/zh/updates/2110151780478927344/</link><guid isPermaLink="false">urn:codexy:x:2110151780478927344:zh</guid><pubDate>Tue, 13 Oct 2026 23:32:43 GMT</pubDate><description>Day 9/ 我们针对 ChatGPT 和 Codex 桌面应用程序在磁盘上存储状态的方式进行了优化，这应将磁盘上存储的数量减少 60%。虽然船很小，但我们已经听到了足够多的关于高级用户磁盘空间不足的反馈。
+
+原帖：https://x.com/thsottiaux/status/2110151780478927344</description></item><item><title>Codex 第 8 天：Reset：额度重置</title><link>https://codexy.fyi/zh/updates/2109812216212099456/</link><guid isPermaLink="false">urn:codexy:x:2109812216212099456:zh</guid><pubDate>Tue, 13 Oct 2026 01:03:25 GMT</pubDate><description>Day 8/ 重置
+
+作者补充: 全局重置将在太平洋时间今天结束前上线。尽情享用。
+https://x.com/thsottiaux/status/2109812360596865224
+
+原帖：https://x.com/thsottiaux/status/2109812216212099456</description></item><item><title>Codex 第 7 天：GPT-6.1 Sol 默认上下文增至 500k</title><link>https://codexy.fyi/zh/updates/2109430343346581527/</link><guid isPermaLink="false">urn:codexy:x:2109430343346581527:zh</guid><pubDate>Sun, 11 Oct 2026 23:45:59 GMT</pubDate><description>Day 7/ 当通过 Codex &amp;amp; Work 使用时，我们将 GPT-6.1 Sol 的默认上下文长度从 272k 增加到 500k，即增加了约 80%。 未来我们会走得更高，但它有助于减少压缩的发生以及需要在一段时间内保留大量上下文和细微差别的任务。它经过仔细测试，是我们大多数用户的新选择。如果您想要更高或更低，…
+
+原帖：https://x.com/thsottiaux/status/2109430343346581527</description></item><item><title>Codex 第 6 天：Reset：额度重置</title><link>https://codexy.fyi/zh/updates/2109045220411351517/</link><guid isPermaLink="false">urn:codexy:x:2109045220411351517:zh</guid><pubDate>Sat, 10 Oct 2026 22:15:39 GMT</pubDate><description>Day 6/ 重置
+
+原帖：https://x.com/thsottiaux/status/2109045220411351517</description></item><item><title>Codex 第 5 天 (dots edition)：在 ChatGPT 手机应用创建 dot 并聊天</title><link>https://codexy.fyi/zh/updates/2108646052178092403/</link><guid isPermaLink="false">urn:codexy:x:2108646052178092403:zh</guid><pubDate>Fri, 09 Oct 2026 19:49:30 GMT</pubDate><description>Day 5 (dots edition)/ 您现在可以完全通过 ChatGPT 移动应用程序创建 dot 并发送短信。令很多人印象深刻的是之前通过桌面/网络应用程序创建了它们。是时候扩大规模了！
+
+原帖：https://x.com/thsottiaux/status/2108646052178092403</description></item><item><title>Codex 第 5 天：桌面应用新增输入预测</title><link>https://codexy.fyi/zh/updates/2108645667451318747/</link><guid isPermaLink="false">urn:codexy:x:2108645667451318747:zh</guid><pubDate>Fri, 09 Oct 2026 19:47:58 GMT</pubDate><description>Day 5/ Composer 在桌面应用程序中进行预测。通常会让人怀疑他们的观点是否正确。包含在 Pro 计划中，无需消耗使用量。
+
+原帖：https://x.com/thsottiaux/status/2108645667451318747</description></item><item><title>Codex 第 4 天：即时转向与 GPT-6.1 Sol ultrafast</title><link>https://codexy.fyi/zh/updates/2108275041276420573/</link><guid isPermaLink="false">urn:codexy:x:2108275041276420573:zh</guid><pubDate>Thu, 08 Oct 2026 19:15:14 GMT</pubDate><description>Day 4/ 我们改进了即时转向，使模型现在对您所做的调整反应更快，让您可以实时修正方向，而不会让模型浪费精力。 同时发布 GPT-6.1 Sol 超快。两者合作得很好。
+
+原帖：https://x.com/thsottiaux/status/2108275041276420573</description></item><item><title>Codex 第 3 天 (encore)：Codex Cloud 再次发布，支持 Tailscale 连接</title><link>https://codexy.fyi/zh/updates/2108084615349170480/</link><guid isPermaLink="false">urn:codexy:x:2108084615349170480:zh</guid><pubDate>Thu, 08 Oct 2026 06:38:33 GMT</pubDate><description>Day 3 (encore)/ 我们默默重新发货了Codex Cloud。现在已经很好了
+
+原帖：https://x.com/thsottiaux/status/2108084615349170480</description></item><item><title>Codex 第 3 天：活跃用户达 4000 万，付费账户获攒下的 Reset</title><link>https://codexy.fyi/zh/updates/2107913674593644711/</link><guid isPermaLink="false">urn:codexy:x:2107913674593644711:zh</guid><pubDate>Wed, 07 Oct 2026 19:19:17 GMT</pubDate><description>Day 3/ 最重要的是聊天中的 GPT-6，但今天也是一个小小的庆祝日，Codex 和 ChatGPT Work 的活跃用户创下了 4000 万新高。 正在把攒下的 reset 额度充进所有付费账户。明天再见！
+
+原帖：https://x.com/thsottiaux/status/2107913674593644711</description></item><item><title>Codex 第 2.4 天：Decisions API 开启公开测试</title><link>https://codexy.fyi/zh/updates/2107574912349303197/</link><guid isPermaLink="false">urn:codexy:x:2107574912349303197:zh</guid><pubDate>Tue, 06 Oct 2026 20:53:10 GMT</pubDate><description>Day 2.4/ 决策 API 已上线。我们将利用这一点以多种有趣的方式改善每个人的体验。实时通用分类器确实开启了一些巨大的可能性。
+
+原帖：https://x.com/thsottiaux/status/2107574912349303197</description></item><item><title>Codex 第 2.3 天：Meetings 插件记录会议与后续事项</title><link>https://codexy.fyi/zh/updates/2107573405553938664/</link><guid isPermaLink="false">urn:codexy:x:2107573405553938664:zh</guid><pubDate>Tue, 06 Oct 2026 20:47:11 GMT</pubDate><description>Day 2.3/ 不必担心记住您与该同事所说的话。只需说出你的心声并构建上下文以加载到 Codex 中即可完成所有工作。
+
+原帖：https://x.com/thsottiaux/status/2107573405553938664</description></item><item><title>Codex 第 2.2 天：OpenAI API 使用档位调整</title><link>https://codexy.fyi/zh/updates/2107548725359104441/</link><guid isPermaLink="false">urn:codexy:x:2107548725359104441:zh</guid><pubDate>Tue, 06 Oct 2026 19:09:07 GMT</pubDate><description>Day 2.2/ 好吧，这个较小，但我们消除了在 API 上构建时的一些障碍。祝构建愉快。
+
+原帖：https://x.com/thsottiaux/status/2107548725359104441</description></item><item><title>Codex 第 2.1 天：Auto-review 向 ChatGPT 登录用户免费开放</title><link>https://codexy.fyi/zh/updates/2107368734981517634/</link><guid isPermaLink="false">urn:codexy:x:2107368734981517634:zh</guid><pubDate>Tue, 06 Oct 2026 07:13:54 GMT</pubDate><description>Day 2.1/ 我们为所有通过 ChatGPT 帐户登录的用户免费提供自动审核。您可以在“设置”&amp;gt;“权限”&amp;gt;“自动审核”中启用它。自动审核改进了默认沙箱设置，默认沙箱设置要求您批准所有内容，这很容易导致决策疲劳，除非您花费大量时间配置特定规则。 它允许您运行长时间任务，同时让第二个代理审查主要代理采取的所有操作。其…
+
+原帖：https://x.com/thsottiaux/status/2107368734981517634</description></item><item><title>Codex 第 1 天：GPT-6 Astra 与 GPT-6.1 Sol 默认速度提升</title><link>https://codexy.fyi/zh/updates/2107158998495748264/</link><guid isPermaLink="false">urn:codexy:x:2107158998495748264:zh</guid><pubDate>Mon, 05 Oct 2026 17:20:29 GMT</pubDate><description>Day 1/ 通过使用“使用 ChatGPT 登录”（包括 OpenCode、Pi、Amp、Devin 等）订阅我们的所有产品和合作伙伴，我们已将 GPT-6 Astra 和 GPT-6.1 Sol 的默认速度优化了约 50%。 您无需进行任何更改，并且应该会在接下来的两个小时内感受到这一点。
+
+原帖：https://x.com/thsottiaux/status/2107158998495748264</description></item><item><title>Codex 冲刺开幕：Codex 28 天连续发布冲刺开幕</title><link>https://codexy.fyi/zh/updates/2106845241357824205/</link><guid isPermaLink="false">urn:codexy:x:2106845241357824205:zh</guid><pubDate>Sun, 04 Oct 2026 20:33:43 GMT</pubDate><description>在接下来的 28 天里，每天我们要么发布一项明显改进且与大多数 Codex/工作用户相关的内容，要么发布完全重置的内容。让改进开始吧。
+
+原帖：https://x.com/thsottiaux/status/2106845241357824205</description></item></channel></rss>

@@ -1,0 +1,458 @@
+{
+  "handle": "thsottiaux",
+  "total_days": 28,
+  "announcement_id": "2106845241357824205",
+  "entries": [
+    {
+      "id": "2106845241357824205",
+      "text": "Over the next 28 days, each day we’ll either ship one thing that is a clear improvement and relevant for most codex/work users or ship a full reset. Let the improvements begin.",
+      "posted_at": "Sun Oct 04 20:33:43 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2106845241357824205",
+      "likes": 25654,
+      "reposts": 1464,
+      "replies": 4442,
+      "views": 6815637,
+      "day": 0,
+      "text_zh": "在接下来的 28 天里，每天我们要么发布一项明显改进且与大多数 Codex/工作用户相关的内容，要么发布完全重置的内容。让改进开始吧。",
+      "quote": {
+        "id": "2106610099720720811",
+        "handle": "thsottiaux",
+        "name": "Tibo",
+        "text": "All right, we’re locking in. Only things being worked on are simplifications, more efficiency for more usage, groundbreaking features or new models. \n\nSometimes you have to invest ahead of the curve, but feedback is clear that you all want things to get simpler. On it.",
+        "created_at": "Sun Oct 04 04:59:21 +0000 2026",
+        "url": "https://x.com/thsottiaux/status/2106610099720720811"
+      },
+      "quote_text_zh": "好吧，我们正在锁定目标。唯一要做的就是简化、提高使用效率、突破性功能或新模型。 \n\n有时你必须提前投资，但反馈很明显，大家都希望事情变得更简单。在它上面。"
+    },
+    {
+      "id": "2107158998495748264",
+      "text": "Day 1/\n\nWe have optimized the default speed to be ~50% faster across GPT-6 Astra and GPT-6.1 Sol through the subscription across all our products and partners using Sign in With ChatGPT (including OpenCode, Pi, Amp, Devin, ...).\n\nNo changes needed on your end and this should be felt within the next two hours.",
+      "posted_at": "Mon Oct 05 17:20:29 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2107158998495748264",
+      "likes": 18428,
+      "reposts": 897,
+      "replies": 2331,
+      "views": 1960910,
+      "day": 1,
+      "text_zh": "Day 1/\n\n通过使用“使用 ChatGPT 登录”（包括 OpenCode、Pi、Amp、Devin 等）订阅我们的所有产品和合作伙伴，我们已将 GPT-6 Astra 和 GPT-6.1 Sol 的默认速度优化了约 50%。\n\n您无需进行任何更改，并且应该会在接下来的两个小时内感受到这一点。",
+      "quote": {
+        "id": "2106845241357824205",
+        "handle": "thsottiaux",
+        "name": "Tibo",
+        "text": "Over the next 28 days, each day we’ll either ship one thing that is a clear improvement and relevant for most codex/work users or ship a full reset. Let the improvements begin.",
+        "created_at": "Sun Oct 04 20:33:43 +0000 2026",
+        "url": "https://x.com/thsottiaux/status/2106845241357824205"
+      },
+      "quote_text_zh": "在接下来的 28 天里，每天我们要么发布一项明显改进且与大多数 Codex/工作用户相关的内容，要么发布完全重置的内容。让改进开始吧。"
+    },
+    {
+      "id": "2107368734981517634",
+      "text": "Day 2.1/\n\nWe have made Auto-review free for all users signed in through a ChatGPT account. You can enable it in settings > permissions > auto-review. Auto-review improves upon the default sandbox setting that requires you to approve everything, which is prone to decision fatigue unless you spend a lot of time configuring specific rules.\n\nIt allows you to run long tasks while having a second agent review all actions taken by the primary agent. Its only goal is to prevent high-risk actions from being taken and to protect against unwanted actions that are not aligned with the original user intent. This  Auto-review feature is now free and does not draw usage from your plan.",
+      "posted_at": "Tue Oct 06 07:13:54 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2107368734981517634",
+      "likes": 4928,
+      "reposts": 299,
+      "replies": 758,
+      "views": 397760,
+      "day": 2,
+      "sub": ".1",
+      "text_zh": "Day 2.1/\n\n我们为所有通过 ChatGPT 帐户登录的用户免费提供自动审核。您可以在“设置”>“权限”>“自动审核”中启用它。自动审核改进了默认沙箱设置，默认沙箱设置要求您批准所有内容，这很容易导致决策疲劳，除非您花费大量时间配置特定规则。\n\n它允许您运行长时间任务，同时让第二个代理审查主要代理采取的所有操作。其唯一目标是防止采取高风险操作，并防止与原始用户意图不一致的不需要的操作。此自动审核功能现在是免费的，不会占用您的计划的使用量。",
+      "quote": {
+        "id": "2107158998495748264",
+        "handle": "thsottiaux",
+        "name": "Tibo",
+        "text": "Day 1/\n\nWe have optimized the default speed to be ~50% faster across GPT-6 Astra and GPT-6.1 Sol through the subscription across all our products and partners using Sign in With ChatGPT (including OpenCode, Pi, Amp, Devin, ...).\n\nNo changes needed on your end and this should be felt within the next two hours.",
+        "created_at": "Mon Oct 05 17:20:29 +0000 2026",
+        "url": "https://x.com/thsottiaux/status/2107158998495748264"
+      },
+      "quote_text_zh": "Day 1/\n\n通过使用“使用 ChatGPT 登录”（包括 OpenCode、Pi、Amp、Devin 等）订阅我们的所有产品和合作伙伴，我们已将 GPT-6 Astra 和 GPT-6.1 Sol 的默认速度优化了约 50%。\n\n您无需进行任何更改，并且应该会在接下来的两个小时内感受到这一点。"
+    },
+    {
+      "id": "2107574912349303197",
+      "text": "Day 2.4/\n\nDecisions API is live. We will use this ourselves to improve the experience for everyone in many fun ways. Realtime general classifier does open some great possibilities.",
+      "posted_at": "Tue Oct 06 20:53:10 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2107574912349303197",
+      "likes": 1998,
+      "reposts": 96,
+      "replies": 220,
+      "views": 197158,
+      "day": 2,
+      "sub": ".4",
+      "text_zh": "Day 2.4/\n\n决策 API 已上线。我们将利用这一点以多种有趣的方式改善每个人的体验。实时通用分类器确实开启了一些巨大的可能性。",
+      "quote": {
+        "id": "2107573382229188645",
+        "handle": "OpenAIDevs",
+        "name": "OpenAI Developers",
+        "text": "Let your app choose the right model, tool, or action in near real-time with Decisions API, now available to all developers in public beta.\n\nThe Decisions API makes decisions up to 10x faster than GPT-6 Luna through the Responses API.",
+        "created_at": "Tue Oct 06 20:47:05 +0000 2026",
+        "url": "https://x.com/OpenAIDevs/status/2107573382229188645"
+      },
+      "quote_text_zh": "让您的应用程序使用 Decisions API 近乎实时地选择正确的模型、工具或操作，现在所有开发人员都可以在公共测试版中使用。\n\nDecisions API 通过 Responses API 做出决策的速度比 GPT-6 Luna 快 10 倍。"
+    },
+    {
+      "id": "2107573405553938664",
+      "text": "Day 2.3/\n\nNever worry about remembering what you were saying with that colleague. Just talk your heart out and build up the context to load up into codex to get it all done.",
+      "posted_at": "Tue Oct 06 20:47:11 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2107573405553938664",
+      "likes": 2286,
+      "reposts": 65,
+      "replies": 372,
+      "views": 256225,
+      "day": 2,
+      "sub": ".3",
+      "text_zh": "Day 2.3/\n\n不必担心记住您与该同事所说的话。只需说出你的心声并构建上下文以加载到 Codex 中即可完成所有工作。",
+      "quote": {
+        "id": "2107567930557026653",
+        "handle": "ChatGPT",
+        "name": "ChatGPT",
+        "text": "Your next meeting comes with a note-taker who can help with the follow-up.\n\nThe Meetings plugin takes notes for you and saves a personalized summary and next steps in ChatGPT Space, based on what ChatGPT knows about you and the work you’ve done together.\n\nKeep notes private or share them with your team, then ask ChatGPT to update a project plan or draft a follow-up.\n\nAvailable in beta for Pro and Business users in the ChatGPT desktop app on macOS. Enterprise is coming soon.\n\nDownload the desktop app, then search for “Meetings” in the plugin directory.\nhttps://chatgpt.com/download/",
+        "created_at": "Tue Oct 06 20:25:26 +0000 2026",
+        "url": "https://x.com/ChatGPT/status/2107567930557026653"
+      },
+      "quote_text_zh": "您的下一次会议将配备一名记录员，他可以帮助您进行后续工作。\n\n会议插件根据 ChatGPT 对您的了解以及你们一起完成的工作，为您做笔记，并在 ChatGPT Space 中保存个性化摘要和后续步骤。\n\n将笔记保密或与您的团队共享，然后要求 ChatGPT 更新项目计划或起草后续计划。\n\n专业版和商业版用户可以在 macOS 上的 ChatGPT 桌面应用程序中使用测试版。企业即将到来。\n\n下载桌面应用程序，然后在插件目录中搜索“Meetings”。\nhttps://chatgpt.com/download/"
+    },
+    {
+      "id": "2107548725359104441",
+      "text": "Day 2.2/\n\nOK this one is smaller, but we removed some friction for when building on the API. Happy building.",
+      "posted_at": "Tue Oct 06 19:09:07 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2107548725359104441",
+      "likes": 2266,
+      "reposts": 59,
+      "replies": 947,
+      "views": 440420,
+      "day": 2,
+      "sub": ".2",
+      "text_zh": "Day 2.2/\n\n好吧，这个较小，但我们消除了在 API 上构建时的一些障碍。祝构建愉快。",
+      "quote": {
+        "id": "2107539647392096384",
+        "handle": "OpenAIDevs",
+        "name": "OpenAI Developers",
+        "text": "We’re making it easier to qualify for higher OpenAI API rate limits.\n\nFive paid usage tiers become three: Build, Launch, and Grow.\n\nYou can qualify for Grow, our new highest tier, with $500 in total API payments—down from $1,000 for the previous highest tier.",
+        "created_at": "Tue Oct 06 18:33:02 +0000 2026",
+        "url": "https://x.com/OpenAIDevs/status/2107539647392096384"
+      },
+      "quote_text_zh": "我们正在让您更容易获得更高 OpenAI API 速率限制的资格。\n\n五个付费使用级别变成了三个：构建、启动和增长。\n\n您只需支付 500 美元的 API 付款总额即可获得 Grow（我们新的最高级别）的资格，而之前最高级别的支付金额为 1,000 美元。"
+    },
+    {
+      "id": "2107913674593644711",
+      "text": "Day 3/\n\nThe big one is GPT-6 in Chat, but today is also a little celebration day with a new high of 40M active users across Codex and ChatGPT Work.\n\nLoading a banked reset in everyone's paid accounts. See you again tomorrow!",
+      "posted_at": "Wed Oct 07 19:19:17 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2107913674593644711",
+      "likes": 14980,
+      "reposts": 544,
+      "replies": 1126,
+      "views": 703307,
+      "quote": {
+        "id": "2107575657014468879",
+        "handle": "thsottiaux",
+        "name": "Tibo",
+        "text": "Roundup of Day 2/\n\n2.1/ Approve for me (auto-review) is now included and does not use usage. Can be between 2-10% of plan when used. Also better for you.\n2.2/ Simplified API for builders.\n2.3/ Meeting notes integrated.\n2.4/ Decisions API live for builders. Will use in the app to improve the experience.",
+        "created_at": "Tue Oct 06 20:56:08 +0000 2026",
+        "url": "https://x.com/thsottiaux/status/2107575657014468879"
+      },
+      "day": 3,
+      "sub": "",
+      "text_zh": "Day 3/\n\n最重要的是聊天中的 GPT-6，但今天也是一个小小的庆祝日，Codex 和 ChatGPT Work 的活跃用户创下了 4000 万新高。\n\n正在把攒下的 reset 额度充进所有付费账户。明天再见！",
+      "quote_text_zh": "第二天综述/\n\n2.1/ Approve for me (Auto-review) 现在已包含并且不使用用法。使用时可以为计划的 2-10%。对你也更好。\n2.2/ 为构建者简化的 API。\n2.3/ 整合会议记录。\n2.4/ Decisions API 为构建者而生。将在应用程序中使用以改善体验。"
+    },
+    {
+      "id": "2108275041276420573",
+      "text": "Day 4/\n\nWe have improved steering to be instant, leading to the model now reacting much faster to adjustments you make, allowing you to course-correct direction in realtime and not have the model waste effort.\n\nAlso releasing GPT-6.1 Sol ultrafast. The two work very well together.",
+      "posted_at": "Thu Oct 08 19:15:14 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2108275041276420573",
+      "likes": 7439,
+      "reposts": 228,
+      "replies": 1362,
+      "views": 655958,
+      "quote": {
+        "id": "2108262812489531498",
+        "handle": "OpenAIDevs",
+        "name": "OpenAI Developers",
+        "text": "Ultrafast is rolling out today for GPT-6.1 Sol in the API, Codex, and ChatGPT Work.\n\nNear-Astra intelligence at up to 8x faster speeds than Sol Standard, so you can build as fast as the ideas come.",
+        "created_at": "Thu Oct 08 18:26:38 +0000 2026",
+        "url": "https://x.com/OpenAIDevs/status/2108262812489531498"
+      },
+      "day": 4,
+      "sub": "",
+      "text_zh": "Day 4/\n\n我们改进了即时转向，使模型现在对您所做的调整反应更快，让您可以实时修正方向，而不会让模型浪费精力。\n\n同时发布 GPT-6.1 Sol 超快。两者合作得很好。",
+      "quote_text_zh": "Ultrafast 现已在 API、Codex 和 ChatGPT Work 中针对 GPT-6.1、Sol 推出。\n\n接近 Astra 的智能速度比 Sol 标准快 8 倍，因此您可以根据想法快速构建。"
+    },
+    {
+      "id": "2108646052178092403",
+      "text": "Day 5 (dots edition)/\n\nYou can now create and text your dot entirely from the ChatGPT mobile app. Impressed so many created them via the desktop/web app previously. Time to scale!",
+      "posted_at": "Fri Oct 09 19:49:30 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2108646052178092403",
+      "likes": 2260,
+      "reposts": 74,
+      "replies": 1417,
+      "views": 360426,
+      "quote": {
+        "id": "2108636745915052037",
+        "handle": "ChatGPT",
+        "name": "ChatGPT",
+        "text": "Fresh updates for dots.\n\nFirst up: you can now create your dot straight from your phone in the ChatGPT app on iOS and Android.",
+        "created_at": "Fri Oct 09 19:12:31 +0000 2026",
+        "url": "https://x.com/ChatGPT/status/2108636745915052037"
+      },
+      "day": 5,
+      "sub": "",
+      "qual": "dots edition",
+      "text_zh": "Day 5 (dots edition)/\n\n您现在可以完全通过 ChatGPT 移动应用程序创建 dot 并发送短信。令很多人印象深刻的是之前通过桌面/网络应用程序创建了它们。是时候扩大规模了！",
+      "quote_text_zh": "dots 的最新更新。\n\n首先：您现在可以直接从手机在 iOS 和 Android 上的 ChatGPT 应用程序中创建 dot。"
+    },
+    {
+      "id": "2108645667451318747",
+      "text": "Day 5/\n\nComposer predictions in the desktop app. Often leads to a double take with how on point they are. Included in the Pro plans without consuming usage.",
+      "posted_at": "Fri Oct 09 19:47:58 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2108645667451318747",
+      "likes": 4022,
+      "reposts": 122,
+      "replies": 1040,
+      "views": 483213,
+      "quote": {
+        "id": "2108624138369929725",
+        "handle": "OpenAIDevs",
+        "name": "OpenAI Developers",
+        "text": "Now in beta: composer predictions in Codex for Pro users.\n\nCodex can now suggest your next message based on your conversation and how you talk to it.\n\nOne of the most loved new features we've ever tested internally.",
+        "created_at": "Fri Oct 09 18:22:25 +0000 2026",
+        "url": "https://x.com/OpenAIDevs/status/2108624138369929725"
+      },
+      "day": 5,
+      "sub": "",
+      "qual": "",
+      "text_zh": "Day 5/\n\nComposer 在桌面应用程序中进行预测。通常会让人怀疑他们的观点是否正确。包含在 Pro 计划中，无需消耗使用量。",
+      "quote_text_zh": "现在处于测试阶段：专业用户在 Codex 中进行 Composer 预测。\n\nCodex 现在可以根据您的对话以及您与之交谈的方式建议您的下一条消息。\n\n这是我们内部测试过的最受欢迎的新功能之一。"
+    },
+    {
+      "id": "2108084615349170480",
+      "text": "Day 3 (encore)/\n\nWe silently re-shipped codex cloud. It’s pretty good now",
+      "posted_at": "Thu Oct 08 06:38:33 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2108084615349170480",
+      "likes": 7178,
+      "reposts": 184,
+      "replies": 1131,
+      "views": 972572,
+      "quote": {
+        "id": "2107836671605551217",
+        "handle": "Tailscale",
+        "name": "Tailscale",
+        "text": "Codex 🤝 Tailscale\n\nCodex Cloud can now securely connect to resources on your tailnet with Tailscale.\n\nUseful tools should be easy to build with, combine, and turn into something even more useful.\n\nSee how it works → \nhttps://buff.ly/yFcldrC",
+        "created_at": "Wed Oct 07 14:13:18 +0000 2026",
+        "url": "https://x.com/Tailscale/status/2107836671605551217"
+      },
+      "day": 3,
+      "sub": "",
+      "qual": "encore",
+      "text_zh": "Day 3 (encore)/\n\n我们默默重新发货了Codex Cloud。现在已经很好了",
+      "quote_text_zh": "Codex 🤝 Tailscale\n\nCodex Cloud 现在可以使用 Tailscale 安全地连接到尾网上的资源。\n\n有用的工具应该易于构建、组合并变成更有用的东西。\n\n看看它是如何工作的 → \nhttps://buff.ly/yFcldrC"
+    },
+    {
+      "id": "2109045220411351517",
+      "text": "Day 6/ Reset",
+      "posted_at": "Sat Oct 10 22:15:39 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2109045220411351517",
+      "likes": 5142,
+      "reposts": 228,
+      "replies": 698,
+      "views": 198992,
+      "day": 6,
+      "sub": "",
+      "qual": "",
+      "text_zh": "Day 6/ 重置"
+    },
+    {
+      "id": "2109430343346581527",
+      "text": "Day 7/\n\nWe have increased default context length for GPT-6.1 Sol to 500k when used through Codex & Work, up from 272k or an ~ 80% increase.\n\nWe will go higher in the future, but it helps reduce occurrence of compactions and with tasks that require keeping a lot of context and nuance over periods of time. It was carefully tested and is the new sweet spot for most of our users. You can still override it if you want to be higher our lower, with maximum context length of GPT-6.1 Sol of 1M.",
+      "posted_at": "Sun Oct 11 23:45:59 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2109430343346581527",
+      "likes": 7116,
+      "reposts": 343,
+      "replies": 978,
+      "views": 575160,
+      "day": 7,
+      "sub": "",
+      "qual": "",
+      "text_zh": "Day 7/\n\n当通过 Codex & Work 使用时，我们将 GPT-6.1 Sol 的默认上下文长度从 272k 增加到 500k，即增加了约 80%。\n\n未来我们会走得更高，但它有助于减少压缩的发生以及需要在一段时间内保留大量上下文和细微差别的任务。它经过仔细测试，是我们大多数用户的新选择。如果您想要更高或更低，您仍然可以覆盖它，GPT-6.1 Sol 的最大上下文长度为 1M。"
+    },
+    {
+      "id": "2109812216212099456",
+      "text": "Day 8/ Reset",
+      "posted_at": "Tue Oct 13 01:03:25 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2109812216212099456",
+      "likes": 4571,
+      "reposts": 278,
+      "replies": 796,
+      "views": 244072,
+      "day": 8,
+      "sub": "",
+      "qual": "",
+      "text_zh": "Day 8/ 重置",
+      "followups": [
+        {
+          "id": "2109812360596865224",
+          "text": "Global reset landing by EOD PST time. Enjoy",
+          "posted_at": "Tue Oct 13 01:03:59 +0000 2026",
+          "url": "https://x.com/thsottiaux/status/2109812360596865224",
+          "likes": 3588,
+          "reposts": 119,
+          "replies": 674,
+          "views": 2400129,
+          "replying_to_status": "2109812216212099456",
+          "replying_to": "thsottiaux",
+          "text_zh": "全局重置将在太平洋时间今天结束前上线。尽情享用。"
+        }
+      ]
+    },
+    {
+      "id": "2110151780478927344",
+      "text": "Day 9/\n\nWe've rolled out optimizations to how we store state on disk for the chatgpt & codex desktop app that should reduce the amount stored on disk by 60%. Small ship but we've heard enough feedback about power users running out of disk space.",
+      "posted_at": "Tue Oct 13 23:32:43 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2110151780478927344",
+      "likes": 12861,
+      "reposts": 383,
+      "replies": 3091,
+      "views": 1253439,
+      "day": 9,
+      "sub": "",
+      "qual": "",
+      "text_zh": "Day 9/\n\n我们针对 ChatGPT 和 Codex 桌面应用程序在磁盘上存储状态的方式进行了优化，这应将磁盘上存储的数量减少 60%。虽然船很小，但我们已经听到了足够多的关于高级用户磁盘空间不足的反馈。"
+    },
+    {
+      "id": "2110595484180214059",
+      "text": "The reports of my reset button being lost are greatly exaggerated\n\nDay 10/ Reset",
+      "posted_at": "Thu Oct 15 04:55:51 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2110595484180214059",
+      "likes": 15533,
+      "reposts": 661,
+      "replies": 2054,
+      "views": 1338290,
+      "day": 10,
+      "sub": "",
+      "qual": "",
+      "text_zh": "关于我弄丢了重置按钮的传言被严重夸大了。\n\nDay 10/ 重置",
+      "followups": [
+        {
+          "id": "2110595554036400151",
+          "text": "Landing within the next 2 hours",
+          "posted_at": "Thu Oct 15 04:56:07 +0000 2026",
+          "url": "https://x.com/thsottiaux/status/2110595554036400151",
+          "likes": 3810,
+          "reposts": 120,
+          "replies": 508,
+          "views": 1424169,
+          "replying_to_status": "2110595484180214059",
+          "replying_to": "thsottiaux",
+          "text_zh": "将在接下来的 2 小时内上线。"
+        }
+      ]
+    },
+    {
+      "id": "2110750421367287996",
+      "text": "Day 11/\n\nWe've landed a series of changes and more compute to very significantly decrease the occurrence of the disruptive \"Selected model is at capacity. Please try a different model\". When it does happen, it should also eventually just continue by itself and not just block on it.\n\nLet us know if you still see it out there in the wild and we'll take a look.",
+      "posted_at": "Thu Oct 15 15:11:30 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2110750421367287996",
+      "likes": 6105,
+      "reposts": 187,
+      "replies": 1418,
+      "views": 386856,
+      "day": 11,
+      "sub": "",
+      "qual": "",
+      "text_zh": "Day 11/\n\n我们已经落地一系列改进，并增加了算力，以显著减少“所选模型已达到容量上限，请尝试其他模型”这类打断任务的提示。即使再次出现这种情况，任务最终也应该能自动继续，而不是一直卡住。\n\n如果你在实际使用中仍然遇到这种情况，请告诉我们，我们会排查。"
+    },
+    {
+      "id": "2111244596131111253",
+      "text": "Day 12/\n\nWe’ve made improvements to Codex & Work that increase the effective usage you get. We achieved this by reusing context across subagents, keeping context cached longer, and improved request routing that allows us to increase cache hits.",
+      "posted_at": "Fri Oct 16 23:55:11 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2111244596131111253",
+      "likes": 5404,
+      "reposts": 176,
+      "replies": 1006,
+      "views": 371322,
+      "day": 12,
+      "sub": "",
+      "qual": "",
+      "text_zh": "Day 12/\n\n我们对 Codex & Work 进行了改进，提高了您的有效使用率。我们通过跨子代理重用上下文、保持上下文缓存更长时间以及改进请求路由来实现这一点，从而使我们能够增加缓存命中率。",
+      "followups": [
+        {
+          "id": "2111244957851984181",
+          "text": "We also significantly improved GPT-6 Pro for all pro users\n\nhttps://x.com/OpenAI/status/2111192259073094035",
+          "posted_at": "Fri Oct 16 23:56:37 +0000 2026",
+          "url": "https://x.com/thsottiaux/status/2111244957851984181",
+          "likes": 886,
+          "reposts": 18,
+          "replies": 89,
+          "views": 130036,
+          "replying_to_status": "2111244596131111253",
+          "replying_to": "thsottiaux",
+          "quote": {
+            "id": "2111192259073094035",
+            "handle": "OpenAI",
+            "name": "OpenAI",
+            "text": "GPT-6 Astra Pro in ChatGPT got an upgrade with faster responses and improved use of plugins and tools.\n\nAnd now, multiple agents can tackle different parts of a task in parallel. You can follow each agent’s progress and open completed tasks to review their work.\n\nNow available to Pro users in the Chat tab.",
+            "created_at": "Fri Oct 16 20:27:13 +0000 2026",
+            "url": "https://x.com/OpenAI/status/2111192259073094035"
+          },
+          "text_zh": "我们也为所有 Pro 用户显著改进了 GPT-6 Pro。\n\nhttps://x.com/OpenAI/status/2111192259073094035",
+          "quote_text_zh": "ChatGPT 中的 GPT-6 Astra Pro 已升级：响应更快，对插件和工具的使用也有所改进。\n\n现在，多个智能体可以并行处理同一任务的不同部分。你可以查看每个智能体的进度，并打开已完成的任务来检查结果。\n\n现已在 Chat 标签页向 Pro 用户开放。"
+        },
+        {
+          "id": "2111245052513259606",
+          "text": "And update your app to enjoy this gem\n\nhttps://x.com/Gavmn/status/2111136119945396436",
+          "posted_at": "Fri Oct 16 23:57:00 +0000 2026",
+          "url": "https://x.com/thsottiaux/status/2111245052513259606",
+          "likes": 516,
+          "reposts": 8,
+          "replies": 51,
+          "views": 113462,
+          "replying_to_status": "2111244596131111253",
+          "replying_to": "thsottiaux",
+          "quote": {
+            "id": "2111136119945396436",
+            "handle": "Gavmn",
+            "name": "Gavin Nelson",
+            "text": "Dots, now on your Home Screen",
+            "created_at": "Fri Oct 16 16:44:08 +0000 2026",
+            "url": "https://x.com/Gavmn/status/2111136119945396436"
+          },
+          "text_zh": "另外，更新你的应用，就能体验这个好东西。\n\nhttps://x.com/Gavmn/status/2111136119945396436",
+          "quote_text_zh": "dots 现在可以放到你的主屏幕上了。"
+        }
+      ]
+    }
+  ],
+  "resets": [
+    {
+      "day": 2,
+      "id": "2107676072871600470",
+      "text": "We shipped four things that were deemed good to great and some math proofs, but the vote is clear and the community demands a reset. I did calibrate it and it *seems* that the game is rigged in reset's favor, but such are the rules at the moment.  Therefore ... the reset has been processed. Enjoy!",
+      "text_zh": "我们发布了四件被认为从优秀到优秀的东西以及一些数学证明，但投票结果很明确，社区要求重新设置。我确实校准了它，并且“似乎”游戏被操纵以利于重置，但这就是目前的规则。  因此...重置已处理。享受！",
+      "url": "https://x.com/thsottiaux/status/2107676072871600470",
+      "posted_at": "Wed Oct 07 03:35:09 +0000 2026"
+    },
+    {
+      "day": 6,
+      "id": "2109045392684032299",
+      "text": "Global reset by EOD. May the tokens do good things for you.",
+      "text_zh": "通过 EOD 进行全局重置。愿代币为您带来好处。",
+      "url": "https://x.com/thsottiaux/status/2109045392684032299",
+      "posted_at": "Sat Oct 10 22:16:20 +0000 2026"
+    },
+    {
+      "day": 8,
+      "id": "2109812216212099456",
+      "text": "Day 8/ Reset",
+      "text_zh": "Day 8/ 重置",
+      "url": "https://x.com/thsottiaux/status/2109812216212099456",
+      "posted_at": "Tue Oct 13 01:03:25 +0000 2026"
+    },
+    {
+      "day": 10,
+      "id": "2110595484180214059",
+      "text": "The reports of my reset button being lost are greatly exaggerated\n\nDay 10/ Reset",
+      "text_zh": "关于我弄丢了重置按钮的传言被严重夸大了。\n\nDay 10/ 重置",
+      "url": "https://x.com/thsottiaux/status/2110595484180214059",
+      "posted_at": "Thu Oct 15 04:55:51 +0000 2026"
+    }
+  ]
+}

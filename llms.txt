@@ -12,11 +12,12 @@
 
 ## Ship log
 
-### Kickoff announcement: Over the next 28 days, each day we’ll either ship one thing that is a clear…
+### Codex sprint kickoff: The 28-day Codex shipping sprint begins
 
 - Date: Oct 04, 2026 · 20:33 UTC
 - Original post: https://x.com/thsottiaux/status/2106845241357824205
-- Permalink: https://codexy.fyi/#day-0
+- Permalink: https://codexy.fyi/updates/2106845241357824205/
+- 中文: https://codexy.fyi/zh/updates/2106845241357824205/
 
 English (original):
 
@@ -38,11 +39,12 @@ Sometimes you have to invest ahead of the curve, but feedback is clear that you 
 
 有时你必须提前投资，但反馈很明显，大家都希望事情变得更简单。在它上面。
 
-### Day 1: We have optimized the default speed to be ~50% faster across GPT-6 Astra and…
+### Codex Day 1: Faster default speeds for GPT-6 Astra and GPT-6.1 Sol
 
 - Date: Oct 05, 2026 · 17:20 UTC
 - Original post: https://x.com/thsottiaux/status/2107158998495748264
-- Permalink: https://codexy.fyi/#day-1
+- Permalink: https://codexy.fyi/updates/2107158998495748264/
+- 中文: https://codexy.fyi/zh/updates/2107158998495748264/
 
 English (original):
 
@@ -68,11 +70,12 @@ Over the next 28 days, each day we’ll either ship one thing that is a clear im
 
 在接下来的 28 天里，每天我们要么发布一项明显改进且与大多数 Codex/工作用户相关的内容，要么发布完全重置的内容。让改进开始吧。
 
-### Day 2.1: We have made Auto-review free for all users signed in through a ChatGPT…
+### Codex Day 2.1: Auto-review is free for ChatGPT-signed-in users
 
 - Date: Oct 06, 2026 · 07:13 UTC
 - Original post: https://x.com/thsottiaux/status/2107368734981517634
-- Permalink: https://codexy.fyi/#day-2.1
+- Permalink: https://codexy.fyi/updates/2107368734981517634/
+- 中文: https://codexy.fyi/zh/updates/2107368734981517634/
 
 English (original):
 
@@ -106,11 +109,12 @@ Day 1/
 
 您无需进行任何更改，并且应该会在接下来的两个小时内感受到这一点。
 
-### Day 2.2: OK this one is smaller, but we removed some friction for when building on the…
+### Codex Day 2.2: OpenAI API usage tiers simplified
 
 - Date: Oct 06, 2026 · 19:09 UTC
 - Original post: https://x.com/thsottiaux/status/2107548725359104441
-- Permalink: https://codexy.fyi/#day-2.2
+- Permalink: https://codexy.fyi/updates/2107548725359104441/
+- 中文: https://codexy.fyi/zh/updates/2107548725359104441/
 
 English (original):
 
@@ -140,11 +144,12 @@ You can qualify for Grow, our new highest tier, with $500 in total API payments�
 
 您只需支付 500 美元的 API 付款总额即可获得 Grow（我们新的最高级别）的资格，而之前最高级别的支付金额为 1,000 美元。
 
-### Day 2.3: Never worry about remembering what you were saying with that colleague. Just…
+### Codex Day 2.3: Meetings plugin adds notes and follow-up context
 
 - Date: Oct 06, 2026 · 20:47 UTC
 - Original post: https://x.com/thsottiaux/status/2107573405553938664
-- Permalink: https://codexy.fyi/#day-2.3
+- Permalink: https://codexy.fyi/updates/2107573405553938664/
+- 中文: https://codexy.fyi/zh/updates/2107573405553938664/
 
 English (original):
 
@@ -184,11 +189,12 @@ https://chatgpt.com/download/
 下载桌面应用程序，然后在插件目录中搜索“Meetings”。
 https://chatgpt.com/download/
 
-### Day 2.4: Decisions API is live. We will use this ourselves to improve the experience for…
+### Codex Day 2.4: Decisions API enters public beta
 
 - Date: Oct 06, 2026 · 20:53 UTC
 - Original post: https://x.com/thsottiaux/status/2107574912349303197
-- Permalink: https://codexy.fyi/#day-2.4
+- Permalink: https://codexy.fyi/updates/2107574912349303197/
+- 中文: https://codexy.fyi/zh/updates/2107574912349303197/
 
 English (original):
 
@@ -214,11 +220,12 @@ The Decisions API makes decisions up to 10x faster than GPT-6 Luna through the R
 
 Decisions API 通过 Responses API 做出决策的速度比 GPT-6 Luna 快 10 倍。
 
-### Day 3: The big one is GPT-6 in Chat, but today is also a little celebration day with a…
+### Codex Day 3: 40M active users and a banked reset for paid accounts
 
 - Date: Oct 07, 2026 · 19:19 UTC
 - Original post: https://x.com/thsottiaux/status/2107913674593644711
-- Permalink: https://codexy.fyi/#day-3
+- Permalink: https://codexy.fyi/updates/2107913674593644711/
+- 中文: https://codexy.fyi/zh/updates/2107913674593644711/
 
 English (original):
 
@@ -254,11 +261,12 @@ Roundup of Day 2/
 2.3/ 整合会议记录。
 2.4/ Decisions API 为构建者而生。将在应用程序中使用以改善体验。
 
-### Day 3: We silently re-shipped codex cloud. It’s pretty good now
+### Codex Day 3 (encore): Codex Cloud re-ships with Tailscale connectivity
 
 - Date: Oct 08, 2026 · 06:38 UTC
 - Original post: https://x.com/thsottiaux/status/2108084615349170480
-- Permalink: https://codexy.fyi/#day-3-encore
+- Permalink: https://codexy.fyi/updates/2108084615349170480/
+- 中文: https://codexy.fyi/zh/updates/2108084615349170480/
 
 English (original):
 
@@ -294,11 +302,12 @@ Codex Cloud 现在可以使用 Tailscale 安全地连接到尾网上的资源。
 看看它是如何工作的 → 
 https://buff.ly/yFcldrC
 
-### Day 4: We have improved steering to be instant, leading to the model now reacting much…
+### Codex Day 4: Instant steering and GPT-6.1 Sol ultrafast
 
 - Date: Oct 08, 2026 · 19:15 UTC
 - Original post: https://x.com/thsottiaux/status/2108275041276420573
-- Permalink: https://codexy.fyi/#day-4
+- Permalink: https://codexy.fyi/updates/2108275041276420573/
+- 中文: https://codexy.fyi/zh/updates/2108275041276420573/
 
 English (original):
 
@@ -328,11 +337,12 @@ Ultrafast 现已在 API、Codex 和 ChatGPT Work 中针对 GPT-6.1、Sol 推出�
 
 接近 Astra 的智能速度比 Sol 标准快 8 倍，因此您可以根据想法快速构建。
 
-### Day 5: Composer predictions in the desktop app. Often leads to a double take with how…
+### Codex Day 5: Composer predictions arrive in the desktop app
 
 - Date: Oct 09, 2026 · 19:47 UTC
 - Original post: https://x.com/thsottiaux/status/2108645667451318747
-- Permalink: https://codexy.fyi/#day-5
+- Permalink: https://codexy.fyi/updates/2108645667451318747/
+- 中文: https://codexy.fyi/zh/updates/2108645667451318747/
 
 English (original):
 
@@ -362,11 +372,12 @@ Codex 现在可以根据您的对话以及您与之交谈的方式建议您的�
 
 这是我们内部测试过的最受欢迎的新功能之一。
 
-### Day 5: You can now create and text your dot entirely from the ChatGPT mobile app…
+### Codex Day 5 (dots edition): Create and message your dot in the ChatGPT mobile app
 
 - Date: Oct 09, 2026 · 19:49 UTC
 - Original post: https://x.com/thsottiaux/status/2108646052178092403
-- Permalink: https://codexy.fyi/#day-5-dots-edition
+- Permalink: https://codexy.fyi/updates/2108646052178092403/
+- 中文: https://codexy.fyi/zh/updates/2108646052178092403/
 
 English (original):
 
@@ -392,11 +403,12 @@ dots 的最新更新。
 
 首先：您现在可以直接从手机在 iOS 和 Android 上的 ChatGPT 应用程序中创建 dot。
 
-### Day 6: Reset
+### Codex Day 6: Reset
 
 - Date: Oct 10, 2026 · 22:15 UTC
 - Original post: https://x.com/thsottiaux/status/2109045220411351517
-- Permalink: https://codexy.fyi/#day-6
+- Permalink: https://codexy.fyi/updates/2109045220411351517/
+- 中文: https://codexy.fyi/zh/updates/2109045220411351517/
 
 English (original):
 
@@ -406,11 +418,12 @@ Day 6/ Reset
 
 Day 6/ 重置
 
-### Day 7: We have increased default context length for GPT-6.1 Sol to 500k when used…
+### Codex Day 7: GPT-6.1 Sol default context increases to 500k
 
 - Date: Oct 11, 2026 · 23:45 UTC
 - Original post: https://x.com/thsottiaux/status/2109430343346581527
-- Permalink: https://codexy.fyi/#day-7
+- Permalink: https://codexy.fyi/updates/2109430343346581527/
+- 中文: https://codexy.fyi/zh/updates/2109430343346581527/
 
 English (original):
 
@@ -428,11 +441,12 @@ Day 7/
 
 未来我们会走得更高，但它有助于减少压缩的发生以及需要在一段时间内保留大量上下文和细微差别的任务。它经过仔细测试，是我们大多数用户的新选择。如果您想要更高或更低，您仍然可以覆盖它，GPT-6.1 Sol 的最大上下文长度为 1M。
 
-### Day 8: Reset
+### Codex Day 8: Reset
 
 - Date: Oct 13, 2026 · 01:03 UTC
 - Original post: https://x.com/thsottiaux/status/2109812216212099456
-- Permalink: https://codexy.fyi/#day-8
+- Permalink: https://codexy.fyi/updates/2109812216212099456/
+- 中文: https://codexy.fyi/zh/updates/2109812216212099456/
 
 English (original):
 
@@ -450,11 +464,12 @@ Global reset landing by EOD PST time. Enjoy
 
 全局重置将在太平洋时间今天结束前上线。尽情享用。
 
-### Day 9: We've rolled out optimizations to how we store state on disk for the chatgpt &…
+### Codex Day 9: Desktop state storage expected to shrink by 60%
 
 - Date: Oct 13, 2026 · 23:32 UTC
 - Original post: https://x.com/thsottiaux/status/2110151780478927344
-- Permalink: https://codexy.fyi/#day-9
+- Permalink: https://codexy.fyi/updates/2110151780478927344/
+- 中文: https://codexy.fyi/zh/updates/2110151780478927344/
 
 English (original):
 
@@ -468,11 +483,12 @@ Day 9/
 
 我们针对 ChatGPT 和 Codex 桌面应用程序在磁盘上存储状态的方式进行了优化，这应将磁盘上存储的数量减少 60%。虽然船很小，但我们已经听到了足够多的关于高级用户磁盘空间不足的反馈。
 
-### Day 10: The reports of my reset button being lost are greatly exaggerated Day 10/ Reset
+### Codex Day 10: Reset
 
 - Date: Oct 15, 2026 · 04:55 UTC
 - Original post: https://x.com/thsottiaux/status/2110595484180214059
-- Permalink: https://codexy.fyi/#day-10
+- Permalink: https://codexy.fyi/updates/2110595484180214059/
+- 中文: https://codexy.fyi/zh/updates/2110595484180214059/
 
 English (original):
 
@@ -494,11 +510,12 @@ Landing within the next 2 hours
 
 将在接下来的 2 小时内上线。
 
-### Day 11: We've landed a series of changes and more compute to very significantly…
+### Codex Day 11: Fewer model-capacity interruptions and automatic continuation
 
 - Date: Oct 15, 2026 · 15:11 UTC
 - Original post: https://x.com/thsottiaux/status/2110750421367287996
-- Permalink: https://codexy.fyi/#day-11
+- Permalink: https://codexy.fyi/updates/2110750421367287996/
+- 中文: https://codexy.fyi/zh/updates/2110750421367287996/
 
 English (original):
 
@@ -516,11 +533,12 @@ Day 11/
 
 如果你在实际使用中仍然遇到这种情况，请告诉我们，我们会排查。
 
-### Day 12: We’ve made improvements to Codex & Work that increase the effective usage you…
+### Codex Day 12: More effective usage through context reuse and caching
 
 - Date: Oct 16, 2026 · 23:55 UTC
 - Original post: https://x.com/thsottiaux/status/2111244596131111253
-- Permalink: https://codexy.fyi/#day-12
+- Permalink: https://codexy.fyi/updates/2111244596131111253/
+- 中文: https://codexy.fyi/zh/updates/2111244596131111253/
 
 English (original):
 

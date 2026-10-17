@@ -4,6 +4,7 @@ import io
 import json
 from pathlib import Path
 import re
+import shutil
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -78,7 +79,7 @@ class PosterLinkTests(unittest.TestCase):
         self.assertEqual([poster["key"] for poster in posters], expected_keys)
         for poster, key in zip(posters, expected_keys):
             with self.subTest(key=key):
-                self.assertEqual(poster["url"], f"https://codexy.fyi/#day-{key}")
+                self.assertEqual(poster["url"], scrape.entry_url(self.entries[expected_keys.index(key)]))
 
     def test_rendered_posters_link_to_their_own_cards(self):
         page = scrape.render({"entries": self.entries, "resets": []}, changed=True)
@@ -95,7 +96,7 @@ class PosterLinkTests(unittest.TestCase):
         for poster in posters:
             with self.subTest(key=poster["key"]):
                 anchor, copy_url = cards[poster["key"]]
-                self.assertEqual(poster["url"].split("#", 1)[1], anchor)
+                self.assertEqual("day-" + poster["key"], anchor)
                 self.assertEqual(poster["url"], copy_url)
 
 
@@ -170,6 +171,9 @@ class ScrapeFlowTests(unittest.TestCase):
                                         "posted_at": source["created_at"], "url": source["url"],
                                         "text_zh": "已保存的第 12 天译文"})
             data_path.write_text(json.dumps(seed))
+            (root / "data/titles.json").write_text("{}")
+            (root / "assets/og").mkdir(parents=True)
+            shutil.copyfile(Path(__file__).parents[1] / "assets/og/cover.png", root / "assets/og/cover.png")
             with patch.multiple(scrape, ROOT=str(root), DATA_PATH=str(data_path),
                                 INDEX_PATH=str(root / "index.html")), \
                     patch.object(scrape, "fetch", side_effect=fetch_fixture), \
@@ -191,7 +195,9 @@ class ScrapeFlowTests(unittest.TestCase):
                 self.assertIn('2111136119945396436', rendered)
                 self.assertNotIn(unrelated, rendered)
                 self.assertIn(PRO, (root / "llms.txt").read_text())
-                names = ("data/days.json", "index.html", "sitemap.xml", "llms.txt")
+                names = tuple(str(p.relative_to(root)) for p in root.rglob("*") if p.is_file())
+                self.assertTrue((root / "zh/feed.xml").exists())
+                self.assertEqual(len(list(root.rglob("*.html"))), 2 + 2 * len(first["entries"]))
                 before = {name: (root / name).read_bytes() for name in names}
                 scrape.main()
                 self.assertEqual(before, {name: (root / name).read_bytes() for name in names})
@@ -262,6 +268,9 @@ class ScrapeFlowTests(unittest.TestCase):
                 "posted_at": "Sun Oct 04 20:33:43 +0000 2026",
             }], "resets": []}
             data_path.write_text(json.dumps(seed))
+            (root / "data/titles.json").write_text("{}")
+            (root / "assets/og").mkdir(parents=True)
+            shutil.copyfile(Path(__file__).parents[1] / "assets/og/cover.png", root / "assets/og/cover.png")
             with patch.multiple(scrape, ROOT=str(root), DATA_PATH=str(data_path),
                                 INDEX_PATH=str(root / "index.html")), \
                     patch.object(scrape, "fetch", side_effect=fetch_fixture), \
@@ -276,7 +285,9 @@ class ScrapeFlowTests(unittest.TestCase):
                 self.assertEqual(entries[DAY10]["day"], 10)
                 self.assertEqual(entries[DAY11]["day"], 11)
                 self.assertEqual(entries[DAY11]["posted_at"], "Thu Oct 15 15:11:30 +0000 2026")
-                names = ("data/days.json", "index.html", "sitemap.xml", "llms.txt")
+                names = tuple(str(p.relative_to(root)) for p in root.rglob("*") if p.is_file())
+                self.assertTrue((root / "zh/feed.xml").exists())
+                self.assertEqual(len(list(root.rglob("*.html"))), 2 + 2 * len(first["entries"]))
                 before = {name: (root / name).read_bytes() for name in names}
                 scrape.main()
                 self.assertEqual(before, {name: (root / name).read_bytes() for name in names})

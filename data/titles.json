@@ -1,0 +1,132 @@
+{
+  "2106845241357824205": {
+    "en": "The 28-day Codex shipping sprint begins",
+    "zh": "Codex 28 天连续发布冲刺开幕",
+    "source_ids": [
+      "2106845241357824205"
+    ]
+  },
+  "2107158998495748264": {
+    "en": "Faster default speeds for GPT-6 Astra and GPT-6.1 Sol",
+    "zh": "GPT-6 Astra 与 GPT-6.1 Sol 默认速度提升",
+    "source_ids": [
+      "2107158998495748264"
+    ]
+  },
+  "2107368734981517634": {
+    "en": "Auto-review is free for ChatGPT-signed-in users",
+    "zh": "Auto-review 向 ChatGPT 登录用户免费开放",
+    "source_ids": [
+      "2107368734981517634"
+    ]
+  },
+  "2107574912349303197": {
+    "en": "Decisions API enters public beta",
+    "zh": "Decisions API 开启公开测试",
+    "source_ids": [
+      "2107574912349303197",
+      "2107573382229188645"
+    ]
+  },
+  "2107573405553938664": {
+    "en": "Meetings plugin adds notes and follow-up context",
+    "zh": "Meetings 插件记录会议与后续事项",
+    "source_ids": [
+      "2107573405553938664",
+      "2107567930557026653"
+    ]
+  },
+  "2107548725359104441": {
+    "en": "OpenAI API usage tiers simplified",
+    "zh": "OpenAI API 使用档位调整",
+    "source_ids": [
+      "2107548725359104441",
+      "2107539647392096384"
+    ]
+  },
+  "2107913674593644711": {
+    "en": "40M active users and a banked reset for paid accounts",
+    "zh": "活跃用户达 4000 万，付费账户获攒下的 Reset",
+    "source_ids": [
+      "2107913674593644711"
+    ]
+  },
+  "2108275041276420573": {
+    "en": "Instant steering and GPT-6.1 Sol ultrafast",
+    "zh": "即时转向与 GPT-6.1 Sol ultrafast",
+    "source_ids": [
+      "2108275041276420573"
+    ]
+  },
+  "2108646052178092403": {
+    "en": "Create and message your dot in the ChatGPT mobile app",
+    "zh": "在 ChatGPT 手机应用创建 dot 并聊天",
+    "source_ids": [
+      "2108646052178092403"
+    ]
+  },
+  "2108645667451318747": {
+    "en": "Composer predictions arrive in the desktop app",
+    "zh": "桌面应用新增输入预测",
+    "source_ids": [
+      "2108645667451318747"
+    ]
+  },
+  "2108084615349170480": {
+    "en": "Codex Cloud re-ships with Tailscale connectivity",
+    "zh": "Codex Cloud 再次发布，支持 Tailscale 连接",
+    "source_ids": [
+      "2108084615349170480",
+      "2107836671605551217"
+    ]
+  },
+  "2109045220411351517": {
+    "en": "Reset",
+    "zh": "Reset：额度重置",
+    "source_ids": [
+      "2109045220411351517"
+    ]
+  },
+  "2109430343346581527": {
+    "en": "GPT-6.1 Sol default context increases to 500k",
+    "zh": "GPT-6.1 Sol 默认上下文增至 500k",
+    "source_ids": [
+      "2109430343346581527"
+    ]
+  },
+  "2109812216212099456": {
+    "en": "Reset",
+    "zh": "Reset：额度重置",
+    "source_ids": [
+      "2109812216212099456"
+    ]
+  },
+  "2110151780478927344": {
+    "en": "Desktop state storage expected to shrink by 60%",
+    "zh": "桌面应用状态数据的磁盘占用预计减少 60%",
+    "source_ids": [
+      "2110151780478927344"
+    ]
+  },
+  "2110595484180214059": {
+    "en": "Reset",
+    "zh": "Reset：额度重置",
+    "source_ids": [
+      "2110595484180214059"
+    ]
+  },
+  "2110750421367287996": {
+    "en": "Fewer model-capacity interruptions and automatic continuation",
+    "zh": "减少模型容量中断，支持自动继续",
+    "source_ids": [
+      "2110750421367287996"
+    ]
+  },
+  "2111244596131111253": {
+    "en": "More effective usage through context reuse and caching",
+    "zh": "通过上下文复用与缓存提升有效用量",
+    "source_ids": [
+      "2111244596131111253"
+    ]
+  }
+}

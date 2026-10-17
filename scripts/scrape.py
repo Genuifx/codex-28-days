@@ -13,11 +13,17 @@ Fail-soft: if the timeline source is unreachable, existing data is kept and the
 script preserves existing data and reports degraded coverage explicitly.
 """
 import datetime
+import email.utils
+import xml.etree.ElementTree as ET
+from functools import partial
 import html as htmlmod
 import json
 import os
 import re
 import sys
+import tempfile
+from pathlib import Path
+import struct
 import urllib.parse
 import urllib.request
 
@@ -347,7 +353,7 @@ def translate_entry(text):
 LANGS = ("en", "zh")
 MT_NOTE_ZH = "中文由机器翻译，仅供参考"
 _LEDE_LINK = f'<a href="https://x.com/{HANDLE}" target="_blank" rel="noopener">Tibo (@{HANDLE})</a>'
-_FOOT_LINKS = ('<a href="data/days.json">raw JSON</a> · '
+_FOOT_LINKS = ('<a href="/data/days.json">raw JSON</a> · '
                '<a href="https://github.com/Genuifx/codex-28-days">GitHub</a>')
 _FOOT_HANDLE = f'<a href="https://x.com/{HANDLE}" target="_blank" rel="noopener">@{HANDLE}</a>'
 
@@ -544,10 +550,10 @@ def tr(lang, key, v=None):
     return fill(I18N[lang][key], v)
 
 
-def T(key, v=None, html=False):
-    """<span data-i18n> with the English default inside (what no-JS visitors and crawlers see)."""
+def T(key, v=None, html=False, lang="en"):
+    """<span data-i18n> with the requested language inside (readable without JavaScript)."""
     attrs = f' data-i18n="{key}"' + (f' data-i18n-v="{esc(json.dumps(v, ensure_ascii=False))}"' if v else "")
-    return f'<span{attrs}{" data-i18n-html" if html else ""}>{tr("en", key, v) if html else esc(tr("en", key, v))}</span>'
+    return f'<span{attrs}{" data-i18n-html" if html else ""}>{tr(lang, key, v) if html else esc(tr(lang, key, v))}</span>'
 
 
 def i18n_json():
@@ -686,7 +692,7 @@ html.pm-open,html.pm-open body{overflow:hidden}
 .pm-act{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 .pm-act .tag{min-height:44px;padding:10px 16px 9px}
 
-/* Language: no-JS = English; html[data-lang] is set before first paint */
+/* Language: static html[data-lang] matches each explicit page URL. */
 html:not([data-lang=zh]) [data-lang=zh]:not(html),html[data-lang=zh] [data-lang=en]:not(html){display:none!important}
 html[data-lang=zh]{--px:"Press Start 2P",var(--cjk),sans-serif;
 --px-xs:clamp(11px,10.6px + .12vw,12px);--px-s:clamp(12px,11.4px + .25vw,13px);--px-m:clamp(13px,12.4px + .2vw,14px)}
@@ -770,6 +776,52 @@ def day_url(day):
     return f"{SITE_URL}/#day-{day}"
 
 
+def check_lang(lang):
+    if lang not in LANGS:
+        raise ValueError("language must be en or zh")
+    return lang
+
+
+def home_path(lang="en"):
+    return "/zh/" if check_lang(lang) == "zh" else "/"
+
+
+def entry_path(e, lang="en"):
+    """Immutable source ID, never a mutable Day label or title."""
+    check_lang(lang)
+    tid = e.get("id")
+    if not isinstance(tid, str) or not re.fullmatch(r"[0-9]+", tid):
+        raise ValueError("entry id must be an ASCII numeric string")
+    return home_path(lang) + "updates/" + tid + "/"
+
+
+def entry_url(e, lang="en"):
+    return SITE_URL + entry_path(e, lang)
+
+
+def load_titles(path=None):
+    with open(path or os.path.join(ROOT, "data", "titles.json"), encoding="utf-8") as f:
+        return json.load(f)
+
+
+def excerpt(text, limit):
+    text = " ".join((text or "").split())
+    return text if len(text) <= limit else text[:limit - 1].rstrip() + "…"
+
+
+def entry_title(e, lang="en", titles=None):
+    check_lang(lang)
+    item = (load_titles() if titles is None else titles).get(e["id"], {})
+    if lang == "zh" and not (item.get("zh") or e.get("text_zh")):
+        return entry_title(e, "en", titles)
+    body = item.get(lang) or excerpt(strip_day_prefix(e.get("text_zh") if lang == "zh" else e.get("text")),
+                                     60 if lang == "zh" else 80)
+    label = tr(lang, "share_kickoff") if e["day"] == 0 else tr(lang, "share_day", {"d": day_slug(e)})
+    if e.get("qual"):
+        label += " (" + e["qual"] + ")"
+    return label + ("：" if lang == "zh" else ": ") + body
+
+
 def tweet_intent(text, url):
     q = urllib.parse.urlencode({"text": text, "url": url}, quote_via=urllib.parse.quote)
     return f"https://twitter.com/intent/tweet?{q}"
@@ -809,32 +861,25 @@ def share_blurb_zh(e, limit=60):
     return f"{prefix}：{body}"
 
 
-def entry_share(e):
-    """(texts, titles) per language for one entry."""
-    texts = {"en": share_blurb(e), "zh": share_blurb_zh(e)}
-    titles = {}
-    for lang in LANGS:
-        head = tr(lang, "share_kickoff") if e["day"] == 0 else tr(lang, "share_day", {"d": day_slug(e)})
-        titles[lang] = head + tr(lang, "share_title_tail")
-    return texts, titles
+def entry_share(e, titles=None):
+    texts = {lang: entry_title(e, lang, titles) for lang in LANGS}
+    return texts, dict(texts)
 
 
-def share_tags(texts, url, titles, poster, poster_key="poster"):
-    """X intent link (works without JS) + copy / native-share / poster buttons revealed by JS.
-    English is rendered inline; data-i18n-alt carries per-language attribute values for JS."""
-    alt_x = {"href": {lang: tweet_intent(texts[lang], url) for lang in LANGS}}
-    alt_s = {"data-title": titles, "data-text": texts}
-    j = lambda o: esc(json.dumps(o, ensure_ascii=False))  # noqa: E731
-    return (f'<a class="tag" href="{esc(tweet_intent(texts["en"], url))}" target="_blank" rel="noopener" '
-            f'data-i18n="share_x" data-i18n-alt="{j(alt_x)}">{tr("en", "share_x")}</a>'
-            f'<button type="button" class="tag" data-copy="{esc(url)}" data-i18n="copy" hidden>{tr("en", "copy")}</button>'
-            f'<button type="button" class="tag" data-share data-title="{esc(titles["en"])}" data-text="{esc(texts["en"])}" '
-            f'data-url="{esc(url)}" data-i18n="native_share" data-i18n-alt="{j(alt_s)}" hidden>{tr("en", "native_share")}</button>'
+def share_tags(texts, urls, titles, poster, poster_key="poster", lang="en"):
+    """All share targets are correct in the initial server-rendered HTML."""
+    check_lang(lang)
+    url = urls[lang]
+    return (f'<a class="tag" href="{esc(tweet_intent(texts[lang], url))}" target="_blank" rel="noopener" '
+            f'data-i18n="share_x">{tr(lang, "share_x")}</a>'
+            f'<button type="button" class="tag" data-copy="{esc(url)}" data-i18n="copy" hidden>{tr(lang, "copy")}</button>'
+            f'<button type="button" class="tag" data-share data-title="{esc(titles[lang])}" data-text="{esc(texts[lang])}" '
+            f'data-url="{esc(url)}" data-i18n="native_share" hidden>{tr(lang, "native_share")}</button>'
             f'<button type="button" class="tag" data-poster="{esc(poster)}" data-i18n="{poster_key}" hidden>'
-            f'{tr("en", poster_key)}</button>')
+            f'{tr(lang, poster_key)}</button>')
 
 
-def poster_data(entries, latest_day):
+def poster_data(entries, latest_day, lang="en"):
     """Everything the canvas poster renderer needs, embedded as JSON (no fetch). *_zh fields
     are used in Chinese mode."""
     items = []
@@ -853,40 +898,29 @@ def poster_data(entries, latest_day):
             "body": body,
             "body_zh": strip_day_prefix(e.get("text_zh") or "").strip() or body,
             "stats": [fmt_int(e.get(k)) for k in ("likes", "reposts", "replies", "views")],
-            "url": day_url(day_uid(e)),
+            "url": entry_url(e, lang),
         })
-    data = {"total": TOTAL_DAYS, "latest": latest_day, "site": f"{SITE_URL}/", "handle": HANDLE,
+    data = {"total": TOTAL_DAYS, "latest": latest_day, "site": SITE_URL + home_path(lang), "handle": HANDLE,
             "leaf": LEAF_PATH, "entries": items}
     # Safe inside <script type="application/json">: no "</" can close the tag early.
-    return json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    return script_json(data)
 
 
-# Runs in <head> (after the I18N const): picks the language before first paint so the
-# CSS can hide the other language's post text. Priority: manual choice > navigator.language.
+# URL language is authoritative; client code only supports existing interactions.
 LANG_JS = """(function(){
-var d=document,h=d.documentElement,K='codex28-lang';
-function stored(){try{var s=localStorage.getItem(K);return s==='en'||s==='zh'?s:null}catch(e){return null}}
-function detect(){var n=navigator,l=(n.languages&&n.languages[0])||n.language||n.userLanguage||'';return /^zh/i.test(l)?'zh':'en'}
+var h=document.documentElement;
 function lang(){return h.getAttribute('data-lang')==='zh'?'zh':'en'}
-function fill(s,v){return v?String(s).replace(/\\{(\\w+)\\}/g,function(m,k){return Object.prototype.hasOwnProperty.call(v,k)?v[k]:m}):s}
-function t(k,v,l){var a=I18N[l||lang()]||I18N.en,s=Object.prototype.hasOwnProperty.call(a,k)?a[k]:I18N.en[k];return fill(s==null?k:s,v)}
-function each(s,f){Array.prototype.forEach.call(d.querySelectorAll(s),f)}
-function set(l){h.setAttribute('data-lang',l);h.lang=l==='zh'?'zh-CN':'en'}
-function apply(l){l=l||lang();set(l);d.title=t('doc_title',null,l);
-each('[data-i18n]',function(el){var v=null,j=el.getAttribute('data-i18n-v');if(j){try{v=JSON.parse(j)}catch(e){}}
-var s=t(el.getAttribute('data-i18n'),v,l);if(el.hasAttribute('data-i18n-html'))el.innerHTML=s;else el.textContent=s});
-each('[data-i18n-attr]',function(el){el.getAttribute('data-i18n-attr').split(',').forEach(function(p){p=p.split(':');el.setAttribute(p[0],t(p[1],null,l))})});
-each('[data-i18n-alt]',function(el){var m;try{m=JSON.parse(el.getAttribute('data-i18n-alt'))}catch(e){return}
-for(var a in m)if(m[a]&&m[a][l]!=null)el.setAttribute(a,m[a][l])});
-return l}
-set(stored()||detect());
-window.i18n={t:t,lang:lang,apply:apply,toggle:function(){var l=lang()==='zh'?'en':'zh';try{localStorage.setItem(K,l)}catch(e){}apply(l)}};
+function t(k,v,l){var a=I18N[l||lang()]||I18N.en,s=a[k]||I18N.en[k]||k;
+return v?String(s).replace(/\\{(\\w+)\\}/g,function(m,k){return Object.prototype.hasOwnProperty.call(v,k)?v[k]:m}):s}
+window.i18n={t:t,lang:lang};
 })();"""
 
 JS = """(function(){
 var d=document,n=navigator,I=window.i18n;
 function each(s,f){Array.prototype.forEach.call(d.querySelectorAll(s),f)}
-if(I){I.apply();var lt=d.querySelector('[data-lang-toggle]');if(lt){lt.hidden=false;lt.addEventListener('click',function(){I.toggle()})}}
+var lt=d.querySelector('[data-lang-toggle]');
+function languageLink(){if(lt&&lt.hasAttribute('data-home-toggle'))lt.href=lt.getAttribute('data-home-toggle')+location.hash}
+languageLink();addEventListener('hashchange',languageLink);
 function flash(b,k){var o=b.getAttribute('data-i18n');b.textContent=I?I.t(k):k;b.disabled=true;
 setTimeout(function(){b.textContent=I&&o?I.t(o):b.textContent;b.disabled=false},1600)}
 if(n.clipboard&&window.isSecureContext){each('[data-copy]',function(b){b.hidden=false;b.addEventListener('click',function(){
@@ -1104,52 +1138,90 @@ def parse_dt(s):
 
 
 def entry_headline(e):
-    """'Codex Day 1: We have optimized the default speed to be ~50% faster…' (<110 chars)."""
-    return share_blurb(e, limit=80)
+    return entry_title(e)
 
 
-def json_ld(entries):
-    """schema.org WebSite + ItemList of BlogPosting (one per day) + FAQPage, English."""
-    posts = []
-    for i, e in enumerate(sorted(entries, key=day_sort_key), 1):
-        iso, _ = fmt_date(e.get("posted_at", ""))
-        post = {"@type": "BlogPosting", "headline": entry_headline(e), "url": day_url(day_uid(e)),
-                "inLanguage": "en", "articleBody": e["text"],
-                "author": {"@type": "Person", "name": "Tibo", "url": f"https://x.com/{HANDLE}"},
-                "sameAs": e["url"]}
-        if iso:
-            post["datePublished"] = iso
-        posts.append({"@type": "ListItem", "position": i, "item": post})
+def post_schema(e, lang="en", titles=None):
+    iso, _ = fmt_date(e.get("posted_at", ""))
+    post = {"@type": "BlogPosting", "headline": entry_title(e, lang, titles), "url": entry_url(e, lang),
+            "inLanguage": "zh-CN" if lang == "zh" else "en",
+            "articleBody": (e.get("text_zh") or e["text"]) if lang == "zh" else e["text"],
+            "author": {"@type": "Person", "name": "Tibo", "url": f"https://x.com/{HANDLE}"},
+            "sameAs": e["url"]}
+    if iso:
+        post["datePublished"] = iso
+    return post
+
+
+def script_json(value):
+    return json.dumps(value, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")
+
+
+def entry_json_ld(e, lang="en", titles=None):
+    return script_json({"@context": "https://schema.org", **post_schema(e, lang, titles)})
+
+
+def json_ld(entries, lang="en", titles=None):
+    posts = [{"@type": "ListItem", "position": i, "item": post_schema(e, lang, titles)}
+             for i, e in enumerate(sorted(entries, key=day_sort_key), 1)]
     graph = [
-        {"@type": "WebSite", "@id": f"{SITE_URL}/#website", "url": f"{SITE_URL}/",
-         "name": I18N["en"]["site_title"], "description": I18N["en"]["p_sub"], "inLanguage": ["en", "zh-CN"]},
-        {"@type": "ItemList", "name": "Codex 28-day sprint ship log", "numberOfItems": len(posts),
-         "itemListElement": posts},
+        {"@type": "WebSite", "@id": SITE_URL + home_path(lang) + "#website", "url": SITE_URL + home_path(lang),
+         "name": tr(lang, "site_title"), "description": tr(lang, "p_sub"), "inLanguage": "zh-CN" if lang == "zh" else "en"},
+        {"@type": "ItemList", "name": tr(lang, "log_title"), "numberOfItems": len(posts), "itemListElement": posts},
         {"@type": "FAQPage", "mainEntity": [
-            {"@type": "Question", "name": tr("en", f"faq_q{i}"),
-             "acceptedAnswer": {"@type": "Answer", "text": tr("en", f"faq_a{i}")}}
+            {"@type": "Question", "name": tr(lang, f"faq_q{i}"),
+             "acceptedAnswer": {"@type": "Answer", "text": tr(lang, f"faq_a{i}")}}
             for i in range(1, FAQ_N + 1)]},
     ]
-    doc = {"@context": "https://schema.org", "@graph": graph}
-    # Safe inside <script>: no "</" can close the tag early.
-    return json.dumps(doc, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    return script_json({"@context": "https://schema.org", "@graph": graph})
 
 
 def render_sitemap(log):
-    """Single-URL sitemap: fragments (#day-N) are ignored by crawlers, so only the home page."""
-    dts = [d for d in (parse_dt(e.get("posted_at")) for e in log["entries"]) if d]
-    lastmod = f"\n    <lastmod>{max(dts):%Y-%m-%d}</lastmod>" if dts else ""
-    return f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>{esc(SITE_URL)}/</loc>{lastmod}
-    <changefreq>daily</changefreq>
-  </url>
-</urlset>
-"""
+    urls = [SITE_URL + home_path(lang) for lang in LANGS]
+    urls += [entry_url(e, lang) for e in sorted(log["entries"], key=day_sort_key) for lang in LANGS]
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+            "".join(f'  <url><loc>{esc(url)}</loc></url>\n' for url in urls) + '</urlset>\n')
 
 
-def render_llms(log):
+def publication_key(e):
+    return (parse_dt(e.get("posted_at")) or datetime.datetime.min.replace(tzinfo=datetime.timezone.utc), e["id"])
+
+
+def render_feed(log, lang="en", titles=None):
+    check_lang(lang)
+    rss = ET.Element("rss", {"version": "2.0", "xmlns:atom": "http://www.w3.org/2005/Atom"})
+    channel = ET.SubElement(rss, "channel")
+    for name, value in (("title", tr(lang, "site_title")), ("link", SITE_URL + home_path(lang)),
+                        ("description", tr(lang, "p_sub")), ("language", "zh-CN" if lang == "zh" else "en")):
+        ET.SubElement(channel, name).text = value
+    ET.SubElement(channel, "atom:link", {"href": SITE_URL + home_path(lang) + "feed.xml", "rel": "self", "type": "application/rss+xml"})
+    for e in sorted(log["entries"], key=publication_key, reverse=True):
+        item = ET.SubElement(channel, "item")
+        ET.SubElement(item, "title").text = entry_title(e, lang, titles)
+        ET.SubElement(item, "link").text = entry_url(e, lang)
+        ET.SubElement(item, "guid", {"isPermaLink": "false"}).text = f'urn:codexy:x:{e["id"]}:{lang}'
+        published = parse_dt(e.get("posted_at"))
+        if published:
+            ET.SubElement(item, "pubDate").text = email.utils.format_datetime(published, usegmt=True)
+        body = (e.get("text_zh") or e["text"]) if lang == "zh" else e["text"]
+        summary = excerpt(body, 160)
+        if lang == "zh" and not e.get("text_zh"):
+            summary = "暂无中文译文 · " + summary
+        followups = e.get("followups", [])
+        if followups:
+            latest = max(followups, key=publication_key)
+            text = (latest.get("text_zh") or latest["text"]) if lang == "zh" else latest["text"]
+            fallback = "（暂无中文译文）" if lang == "zh" and not latest.get("text_zh") else ""
+            summary += "\n\n" + ("作者补充" if lang == "zh" else "Author follow-up") + fallback + ": " + excerpt(text, 80) + "\n" + latest["url"]
+        summary += "\n\n" + ("原帖：" if lang == "zh" else "Original post: ") + e["url"]
+        # RSS descriptions may be interpreted as HTML by feed readers. Escape the
+        # plain source first; ElementTree then handles the separate XML layer.
+        ET.SubElement(item, "description").text = esc(summary)
+    return '<?xml version="1.0" encoding="UTF-8"?>\n' + ET.tostring(rss, encoding="unicode") + "\n"
+
+
+def render_llms(log, titles=None):
     """llms.txt: plain-text digest for AI crawlers — every post in full English + Chinese MT."""
     entries = sorted(log["entries"], key=day_sort_key)
     out = [f"# {I18N['en']['site_title']}", "",
@@ -1163,8 +1235,8 @@ def render_llms(log):
     for e in entries:
         _, pretty = fmt_date(e.get("posted_at", ""))
         title = "Kickoff announcement" if e["day"] == 0 else f"Day {day_slug(e)}"
-        out += [f"### {title}: {strip_day_prefix(entry_headline(e).split(': ', 1)[-1])}", "",
-                f"- Date: {pretty}", f"- Original post: {e['url']}", f"- Permalink: {day_url(day_uid(e))}", "",
+        out += [f"### {entry_title(e, titles=titles)}", "",
+                f"- Date: {pretty}", f"- Original post: {e['url']}", f"- Permalink: {entry_url(e)}", f"- 中文: {entry_url(e, 'zh')}", "",
                 "English (original):", "", e["text"].strip(), ""]
         if e.get("text_zh"):
             out += ["中文（机器翻译，仅供参考）:", "", e["text_zh"].strip(), ""]
@@ -1187,97 +1259,82 @@ def render_llms(log):
     return "\n".join(out).rstrip() + "\n"
 
 
-def render_followups(entry):
-    """Keep supplemental author replies within their verified parent's card."""
+def bilingual_body(original, translated, css="text"):
+    """Keep source text intact and visibly label each missing Chinese translation."""
     blocks = []
-    for followup in entry.get("followups", []):
-        text = ""
-        for lang in LANGS:
-            body = followup.get("text_zh") if lang == "zh" else followup["text"]
-            body = body or followup["text"]
-            paragraphs = "".join(f"<p>{esc(p)}</p>" for p in body.split("\n") if p.strip())
-            text += f'<div class="quote-text" data-lang="{lang}">{paragraphs}</div>'
-        quote = followup.get("quote") or {}
-        if quote.get("text"):
-            text += (f'<blockquote class="quote"><div class="quote-head">{T("quote_tag")} '
-                     f'<a href="{esc(quote.get("url"))}" target="_blank" rel="noopener">'
-                     f'@{esc(quote.get("handle"))}</a></div>')
-            for lang in LANGS:
-                body = followup.get("quote_text_zh") if lang == "zh" else quote["text"]
-                body = body or quote["text"]
-                paragraphs = "".join(f"<p>{esc(p)}</p>" for p in body.split("\n") if p.strip())
-                text += f'<div class="quote-text" data-lang="{lang}">{paragraphs}</div>'
-            text += "</blockquote>"
-        blocks.append(f'<section class="quote" id="post-{esc(followup["id"])}">'
-                      f'<div class="quote-head"><span class="quote-tag px">{T("followup_tag")}</span> '
-                      f'<a href="{esc(followup["url"])}" target="_blank" rel="noopener">@{HANDLE}</a></div>'
-                      f'{text}</section>')
+    for lang, body in (("en", original), ("zh", translated or original)):
+        fallback = lang == "zh" and not translated
+        note = '<p class="mt-note">暂无中文译文</p>' if fallback else ""
+        paragraphs = "".join(f"<p>{esc(p)}</p>" for p in (body or "").split("\n") if p.strip())
+        blocks.append(f'<div class="{css}" data-lang="{lang}" lang="{"en" if lang == "en" or fallback else "zh-CN"}">{note}{paragraphs}</div>')
+    return "".join(blocks)
+
+
+def render_quote(post, lang="en"):
+    q = post.get("quote") or {}
+    if not q.get("text"):
+        return ""
+    handle = f"@{esc(q.get('handle'))}"
+    if q.get("url"):
+        handle = f'<a href="{esc(q["url"])}" target="_blank" rel="noopener">{handle}</a>'
+    return (f'<blockquote class="quote" aria-label="{esc(tr(lang, "quote_aria"))}">'
+            f'<div class="quote-head"><span class="quote-tag px">{T("quote_tag", lang=lang)}</span>'
+            f'<b>{esc(q.get("name") or q.get("handle"))}</b> {handle}</div>'
+            f'{bilingual_body(q["text"], post.get("quote_text_zh"), "quote-text")}</blockquote>')
+
+
+def render_followups(entry, lang="en"):
+    blocks = []
+    for f in entry.get("followups", []):
+        blocks.append(f'<section class="quote" id="post-{esc(f["id"])}">'
+                      f'<div class="quote-head"><span class="quote-tag px">{T("followup_tag", lang=lang)}</span> '
+                      f'<a href="{esc(f["url"])}" target="_blank" rel="noopener">@{HANDLE}</a></div>'
+                      f'{bilingual_body(f["text"], f.get("text_zh"), "quote-text")}{render_quote(f, lang)}</section>')
     return "\n".join(blocks)
 
 
-def render(log, changed):
-    entries = sorted(log["entries"], key=day_sort_key)
-    latest_day = max([e["day"] for e in entries if e["day"] > 0], default=0)
-    now = None
-    # Keep the previous timestamp when data is unchanged so idle runs produce no diff.
-    if not changed and os.path.exists(INDEX_PATH):
-        with open(INDEX_PATH, encoding="utf-8") as f:
-            m = re.search(r"(?:updated|更新于) (\d{4}-\d{2}-\d{2} \d{2}:\d{2} UTC)", f.read())
-        if m:
-            now = m.group(1)
-    if now is None:
-        now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-    leaf_svg = (f'<svg class="leaf {{cls}}" viewBox="0 0 100 100" aria-hidden="true" focusable="false">'
-                f'<path d="{LEAF_PATH}"/></svg>')
-    favicon = ("data:image/svg+xml," + f"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>"
-               f"<path fill='%23d23b2e' d='{LEAF_PATH}'/></svg>").replace(" ", "%20")
-
-    cards = []
-    for e in sorted(entries, key=day_sort_key, reverse=True):
-        is_new = e["day"] > 0 and e["day"] == latest_day
-        slug = day_slug(e)
-        uid = day_uid(e)
-        badge = T("badge_ann") if e["day"] == 0 else T("badge_day", {"d2": slug.zfill(2), "d": slug})
-        status = T("st_start" if e["day"] == 0 else "st_cleared")
-        iso, pretty = fmt_date(e.get("posted_at", ""))
-        pretty_zh = fmt_date_zh(e.get("posted_at", ""))
-        time_attr = f' datetime="{esc(iso)}"' if iso else ""
-        when = (f'<span data-lang="en">{esc(pretty)}</span><span data-lang="zh">{esc(pretty_zh)}</span>'
-                if pretty_zh else esc(pretty))
-        paras = "".join(f"<p>{esc(p)}</p>" for p in e["text"].split("\n") if p.strip())
-        if e.get("text_zh"):  # untranslated (or failed) entries just show English in both modes
-            paras_zh = "".join(f"<p>{esc(p)}</p>" for p in e["text_zh"].split("\n") if p.strip())
-            text_html = (f'<div class="text" data-lang="en">{paras}</div>\n'
-                         f'  <div class="text" data-lang="zh" lang="zh-CN">{paras_zh}</div>')
-        else:
-            text_html = f'<div class="text">{paras}</div>'
-        q = e.get("quote") or {}
-        if q.get("text"):
-            q_en = "".join(f"<p>{esc(p)}</p>" for p in q["text"].split("\n") if p.strip())
-            q_zh = ("".join(f"<p>{esc(p)}</p>" for p in e["quote_text_zh"].split("\n") if p.strip())
-                    if e.get("quote_text_zh") else q_en)
-            handle = f"@{esc(q.get('handle'))}"
-            if q.get("url"):
-                handle = f'<a href="{esc(q["url"])}" target="_blank" rel="noopener">{handle}</a>'
-            text_html += (f'\n  <blockquote class="quote" aria-label="{I18N["en"]["quote_aria"]}" data-i18n-attr="aria-label:quote_aria">'
-                          f'<div class="quote-head"><span class="quote-tag px">{T("quote_tag")}</span>'
-                          f'<b>{esc(q.get("name") or q.get("handle"))}</b> {handle}</div>'
-                          f'<div class="quote-text" data-lang="en">{q_en}</div>'
-                          f'<div class="quote-text" data-lang="zh" lang="zh-CN">{q_zh}</div></blockquote>')
-        text_html += render_followups(e)
-        stats = "".join(f'<span title="{I18N["en"][k]}" data-i18n-attr="title:{k}">{icon} {fmt_int(e.get(k))}</span>'
-                        for k, icon in (("likes", "♥"), ("reposts", "↻"), ("replies", "💬"), ("views", "👁")))
-        texts, titles = entry_share(e)
-        cards.append(f"""<article class="quest{' is-new' if is_new else ''}" id="day-{uid}">
-{'  <span class="new-ship px">' + T('new_ship') + '</span>' if is_new else ''}
+def render_entry(e, latest_day, lang="en", titles=None):
+    check_lang(lang)
+    t = partial(T, lang=lang)
+    is_new = e["day"] > 0 and e["day"] == latest_day
+    slug, uid = day_slug(e), day_uid(e)
+    badge = t("badge_ann") if e["day"] == 0 else t("badge_day", {"d2": slug.zfill(2), "d": slug})
+    status = t("st_start" if e["day"] == 0 else "st_cleared")
+    iso, pretty = fmt_date(e.get("posted_at", ""))
+    when = fmt_date_zh(e.get("posted_at")) if lang == "zh" else pretty
+    time_attr = f' datetime="{esc(iso)}"' if iso else ""
+    text_html = bilingual_body(e["text"], e.get("text_zh")) + render_quote(e, lang) + render_followups(e, lang)
+    stats = "".join(f'<span title="{tr(lang, k)}">{icon} {fmt_int(e.get(k))}</span>'
+                    for k, icon in (("likes", "♥"), ("reposts", "↻"), ("replies", "💬"), ("views", "👁")))
+    texts, share_titles = entry_share(e, titles)
+    return f"""<article class="quest{' is-new' if is_new else ''}" id="day-{uid}">
+{'  <span class="new-ship px">' + t('new_ship') + '</span>' if is_new else ''}
   <div class="quest-head"><span class="badge px">{badge}</span>
-  <time{time_attr}>{when}</time><span class="status px">{status}</span></div>
+  <time{time_attr}>{esc(when or pretty)}</time><span class="status px">{status}</span></div>
+  <h2 class="entry-title"><a href="{entry_path(e, lang)}">{esc(entry_title(e, lang, titles))}</a></h2>
   {text_html}
   <div class="meta">{stats}
-  <a class="orig" href="{esc(e['url'])}" target="_blank" rel="noopener">{T('view_x')}</a></div>
-  <div class="share"><span class="share-label px">{T('share_label')}</span>{share_tags(texts, day_url(uid), titles, uid)}</div>
-</article>""")
-    cards_html = "\n".join(cards) if cards else f'<p class="empty">{T("empty")}</p>'
+  <a class="orig" href="{esc(e['url'])}" target="_blank" rel="noopener">{t('view_x')}</a></div>
+  <div class="share"><span class="share-label px">{t('share_label')}</span>{share_tags(texts, {l: entry_url(e, l) for l in LANGS}, share_titles, uid, lang=lang)}</div>
+</article>"""
+
+
+def latest_source_time(log):
+    posts = [p for e in log.get("entries", []) + log.get("resets", []) for p in [e, *e.get("followups", [])]]
+    dates = [dt for dt in (parse_dt(p.get("posted_at")) for p in posts) if dt]
+    return max(dates).strftime("%Y-%m-%d %H:%M UTC") if dates else None
+
+
+def render(log, changed, lang="en", titles=None):
+    check_lang(lang)
+    t = partial(T, lang=lang)
+    entries = sorted(log["entries"], key=day_sort_key)
+    latest_day = max([e["day"] for e in entries], default=0)
+    now = latest_source_time(log) or ("更新时间未知" if lang == "zh" else "update time unknown")
+    leaf_svg = (f'<svg class="leaf {{cls}}" viewBox="0 0 100 100" aria-hidden="true" focusable="false">'
+                f'<path d="{LEAF_PATH}"/></svg>')
+    cards = [render_entry(e, latest_day, lang, titles) for e in reversed(entries)]
+    cards_html = "\n".join(cards) if cards else f'<p class="empty">{t("empty")}</p>'
     reset_days = sorted({r["day"] for r in log.get("resets", []) if isinstance(r.get("day"), int)})
     def _seg(d):
         cls = "cur" if d == latest_day else ("on" if d < latest_day else "")
@@ -1286,91 +1343,201 @@ def render(log, changed):
         return f'<i class="{cls}"></i>' if cls else "<i></i>"
     segs = "".join(_seg(d) for d in range(1, TOTAL_DAYS + 1))
     if reset_days:
-        prog_reset = " " + T("prog_reset", {"days": ", ".join(str(d) for d in reset_days)})
+        prog_reset = " " + t("prog_reset", {"days": ", ".join(str(d) for d in reset_days)})
     else:
         prog_reset = ""
     leaves = "".join(leaf_svg.format(cls=c) for c in ("l1", "l2", "l3", "l4"))
     n_entries = len(entries)
-    faq_html = "\n".join(f'<div class="faq-item"><h3>{T(f"faq_q{i}")}</h3><p>{T(f"faq_a{i}")}</p></div>'
+    faq_html = "\n".join(f'<div class="faq-item"><h3>{t(f"faq_q{i}")}</h3><p>{t(f"faq_a{i}")}</p></div>'
                          for i in range(1, FAQ_N + 1))
 
+    body = f"""<section class="hero">
+<div class="leaves" aria-hidden="true">{leaves}</div>
+<div class="hero-inner">
+<p class="kicker px">{t('kicker')}</p>
+<h1 data-i18n="h1" data-i18n-html>{I18N[lang]['h1']}</h1>
+<p class="lede" data-i18n="lede" data-i18n-html>{I18N[lang]['lede']}</p>
+<p class="hook">{t('hook')}</p>
+<p class="save-line"><span class="px">{t('save_tag')}</span>{t('save_line')}</p>
+<div class="xp">
+<div class="xp-row"><span class="xp-label px">XP</span><span class="xp-count px">{t('xp_count', {'n': f'{latest_day:02d}', 't': TOTAL_DAYS})}</span></div>
+<div class="xp-bar" style="--n:{TOTAL_DAYS};--half:{(TOTAL_DAYS + 1) // 2}" role="progressbar" aria-label="{I18N[lang]['xp_aria']}" data-i18n-attr="aria-label:xp_aria" aria-valuemin="0" aria-valuemax="{TOTAL_DAYS}" aria-valuenow="{latest_day}">{segs}</div>
+<p class="prog">{t('prog', {'d': latest_day, 't': TOTAL_DAYS, 'now': now})}{prog_reset}</p>
+</div>
+</div>
+</section>
+<section aria-labelledby="log-title">
+<div class="log-head"><h2 id="log-title" class="px">{t('log_title')}</h2><span class="px">{t('log_count_1' if n_entries == 1 else 'log_count', {'n': n_entries})}</span></div>
+<p class="mt-note" data-lang="zh" lang="zh-CN">{MT_NOTE_ZH}</p>
+{cards_html}
+</section>
+<section class="share-site" id="share" aria-labelledby="share-title">
+<h2 id="share-title" class="px">{t('invite_title')}</h2>
+<p>{t('invite_body')}</p>
+<div class="share">{share_tags({l: tr(l, 'site_share') for l in LANGS}, {l: SITE_URL + home_path(l) for l in LANGS}, {l: tr(l, 'site_title') for l in LANGS}, "site", "site_poster", lang=lang)}</div>
+</section>
+<section class="faq" id="faq" aria-labelledby="faq-title">
+<h2 id="faq-title" class="px">{t('faq_title')}</h2>
+{faq_html}
+</section>
+"""
+    return page_shell(body, entries, latest_day, lang, titles)
+
+
+def render_detail(log, e, lang="en", titles=None):
+    check_lang(lang)
+    entries = sorted(log["entries"], key=day_sort_key)
+    position = next(i for i, item in enumerate(entries) if item["id"] == e["id"])
+    latest_day = max([item["day"] for item in entries], default=0)
+    back = "返回时间线" if lang == "zh" else "Back to timeline"
+    nav = []
+    for offset, label in ((-1, "上一条" if lang == "zh" else "Previous update"), (1, "下一条" if lang == "zh" else "Next update")):
+        i = position + offset
+        if 0 <= i < len(entries):
+            item = entries[i]
+            nav.append(f'<a class="tag" href="{entry_path(item, lang)}">{label}: {esc(entry_title(item, lang, titles))}</a>')
+    title = entry_title(e, lang, titles)
+    card = render_entry(e, latest_day, lang, titles)
+    # The page H1 carries the same title; avoid a duplicate heading inside its card.
+    card = re.sub(r'  <h2 class="entry-title">.*?</h2>\n', '', card, count=1)
+    body = f"""<section class="detail-intro">
+<p><a href="{home_path(lang)}#day-{day_uid(e)}">← {back}</a></p>
+<h1 class="detail-title">{esc(title)}</h1>
+<p class="mt-note">{MT_NOTE_ZH if lang == 'zh' else 'Unofficial fan tracker · Original source preserved below.'}</p>
+</section>
+{card}
+<nav class="detail-nav" aria-label="{'相邻更新' if lang == 'zh' else 'Adjacent updates'}">{''.join(nav)}</nav>
+"""
+    return page_shell(body, [e], latest_day, lang, titles, e)
+
+
+def page_shell(body, entries, latest_day, lang="en", titles=None, detail=None):
+    t = partial(T, lang=lang)
+    title = entry_title(detail, lang, titles) if detail else tr(lang, "doc_title")
+    description = excerpt((detail.get("text_zh") or detail["text"]) if lang == "zh" else detail["text"], 160) if detail else tr(lang, "p_sub")
+    paths = {l: entry_path(detail, l) if detail else home_path(l) for l in LANGS}
+    alternate = "en" if lang == "zh" else "zh"
+    canonical = SITE_URL + paths[lang]
+    favicon = ("data:image/svg+xml," + f"<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>"
+               f"<path fill='%23d23b2e' d='{LEAF_PATH}'/></svg>").replace(" ", "%20")
+    toggle_home = f' data-home-toggle="{paths[alternate]}"' if detail is None else ""
     return f"""<!DOCTYPE html>
-<html lang="en" data-lang="en">
+<html lang="{'zh-CN' if lang == 'zh' else 'en'}" data-lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Codex: 28 Days of Shipping — tracking @{HANDLE}</title>
-<meta name="description" content="Unofficial daily tracker of Tibo (@{HANDLE}, OpenAI Codex lead)'s 28-day shipping sprint: every Codex improvement, day by day, Oct 5 – Nov 1 2026.">
-<meta property="og:title" content="Codex: 28 Days of Shipping">
-<meta property="og:description" content="Every daily Codex ship from Tibo's 28-day sprint, tracked day by day.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="{SITE_URL}/">
-<meta property="og:site_name" content="Codex: 28 Days of Shipping">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Codex: 28 Days of Shipping">
-<meta name="twitter:description" content="Every daily Codex ship from Tibo's 28-day sprint, tracked day by day.">
-<link rel="canonical" href="{SITE_URL}/">
+<title>{esc(title)}</title>
+<meta name="description" content="{esc(description)}">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(description)}">
+<meta property="og:type" content="{'article' if detail else 'website'}">
+<meta property="og:url" content="{canonical}">
+<meta property="og:site_name" content="{esc(tr(lang, 'site_title'))}">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="{SITE_URL}/assets/og/cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{esc(tr(lang, 'site_title'))}">
+<meta name="twitter:image" content="{SITE_URL}/assets/og/cover.png">
+<meta name="twitter:image:alt" content="{esc(tr(lang, 'site_title'))}">
+<link rel="alternate" type="application/rss+xml" title="Codexy RSS" href="{SITE_URL + home_path(lang)}feed.xml">
+<meta name="twitter:title" content="{esc(title)}">
+<meta name="twitter:description" content="{esc(description)}">
+<link rel="canonical" href="{canonical}">
+<link rel="alternate" hreflang="en" href="{SITE_URL + paths['en']}">
+<link rel="alternate" hreflang="zh-CN" href="{SITE_URL + paths['zh']}">
+<link rel="alternate" hreflang="x-default" href="{SITE_URL + paths['en']}">
 <meta name="theme-color" content="#faf8f3">
 <link rel="icon" href="{favicon}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{{"token": "{CF_BEACON_TOKEN}"}}'></script>
-<script type="application/ld+json">{json_ld(entries)}</script>
-<style>{CSS}</style>
+<script type="application/ld+json">{entry_json_ld(detail, lang, titles) if detail else json_ld(entries, lang, titles)}</script>
+<style>{CSS}
+/* Incremental content only: preserve all existing homepage styling. */
+.entry-title{{font-size:1.15em;line-height:1.45;margin:0 0 16px;overflow-wrap:anywhere}}
+.entry-title a{{text-decoration:none}}.entry-title a:hover{{text-decoration:underline}}
+.detail-intro{{padding:36px 0 20px}}.detail-title{{font-size:clamp(28px,6vw,40px);line-height:1.2;letter-spacing:-.03em;overflow-wrap:anywhere}}
+.detail-nav{{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}}.detail-nav .tag{{white-space:normal}}
+a.lang-tag{{text-decoration:none}}
+</style>
 <script>const I18N={i18n_json()};</script>
 <script>{LANG_JS}</script>
 </head>
 <body>
 <header class="hud">
 <div class="wrap">
-<p class="hud-title px">{T('hud_title', html=True)}</p>
-<div class="hud-right"><a class="hud-share px" href="#share">{T('hud_share')}</a>
-<button type="button" class="lang-tag px" data-lang-toggle aria-label="{esc(I18N['en']['lang_aria'])}" data-i18n-attr="aria-label:lang_aria,title:lang_aria" hidden><span class="lt-zh" lang="zh-CN">中</span><span class="lt-en" lang="en">EN</span></button>
-<span class="hud-lv px">{T('hud_lv', {'lv': f'{latest_day:02d}', 't': TOTAL_DAYS}, html=True)}</span></div>
+<p class="hud-title px">{t('hud_title', html=True)}</p>
+<div class="hud-right"><a class="hud-share px" href="{'#day-' + day_uid(detail) if detail else '#share'}">{t('hud_share')}</a>
+<a class="lang-tag px" href="{paths[alternate]}" data-lang-toggle{toggle_home} aria-label="{esc(tr(lang, 'lang_aria'))}"><span class="lt-zh" lang="zh-CN">中</span><span class="lt-en" lang="en">EN</span></a>
+<span class="hud-lv px">{t('hud_lv', {'lv': f'{latest_day:02d}', 't': TOTAL_DAYS}, html=True)}</span></div>
 </div>
 </header>
 <main class="wrap">
-<section class="hero">
-<div class="leaves" aria-hidden="true">{leaves}</div>
-<div class="hero-inner">
-<p class="kicker px">{T('kicker')}</p>
-<h1 data-i18n="h1" data-i18n-html>{I18N['en']['h1']}</h1>
-<p class="lede" data-i18n="lede" data-i18n-html>{I18N['en']['lede']}</p>
-<p class="hook">{T('hook')}</p>
-<p class="save-line"><span class="px">{T('save_tag')}</span>{T('save_line')}</p>
-<div class="xp">
-<div class="xp-row"><span class="xp-label px">XP</span><span class="xp-count px">{T('xp_count', {'n': f'{latest_day:02d}', 't': TOTAL_DAYS})}</span></div>
-<div class="xp-bar" style="--n:{TOTAL_DAYS};--half:{(TOTAL_DAYS + 1) // 2}" role="progressbar" aria-label="{I18N['en']['xp_aria']}" data-i18n-attr="aria-label:xp_aria" aria-valuemin="0" aria-valuemax="{TOTAL_DAYS}" aria-valuenow="{latest_day}">{segs}</div>
-<p class="prog">{T('prog', {'d': latest_day, 't': TOTAL_DAYS, 'now': now})}{prog_reset}</p>
-</div>
-</div>
-</section>
-<section aria-labelledby="log-title">
-<div class="log-head"><h2 id="log-title" class="px">{T('log_title')}</h2><span class="px">{T('log_count_1' if n_entries == 1 else 'log_count', {'n': n_entries})}</span></div>
-<p class="mt-note" data-lang="zh" lang="zh-CN">{MT_NOTE_ZH}</p>
-{cards_html}
-</section>
-<section class="share-site" id="share" aria-labelledby="share-title">
-<h2 id="share-title" class="px">{T('invite_title')}</h2>
-<p>{T('invite_body')}</p>
-<div class="share">{share_tags({l: tr(l, 'site_share') for l in LANGS}, f"{SITE_URL}/", {l: tr(l, 'site_title') for l in LANGS}, "site", "site_poster")}</div>
-</section>
-<section class="faq" id="faq" aria-labelledby="faq-title">
-<h2 id="faq-title" class="px">{T('faq_title')}</h2>
-{faq_html}
-</section>
+{body}
 <footer class="site-foot">
-<p class="px">{T('foot_saved')}</p>
-<p data-i18n="foot" data-i18n-html>{I18N['en']['foot']}</p>
+<p class="px">{t('foot_saved')}</p>
+<p><a class="tag" href="{home_path(lang)}feed.xml">{'订阅 RSS' if lang == 'zh' else 'SUBSCRIBE VIA RSS'}</a></p>
+<p data-i18n="foot" data-i18n-html>{I18N[lang]['foot']}</p>
 </footer>
 </main>
-<script type="application/json" id="poster-data">{poster_data(entries, latest_day)}</script>
+<script type="application/json" id="poster-data">{poster_data(entries, latest_day, lang)}</script>
 <script>{JS}</script>
 <script>{POSTER_JS}</script>
 </body>
 </html>
 """
+
+
+def build_outputs(log, titles):
+    """Pure, deterministic rendering of every text artifact; no network or writes."""
+    entries = sorted(log["entries"], key=day_sort_key)
+    ids = [e["id"] for e in entries]
+    if len(set(ids)) != len(ids):
+        raise ValueError("duplicate entry id")
+    outputs = {}
+    for lang in LANGS:
+        prefix = home_path(lang).lstrip("/")
+        outputs[prefix + "index.html"] = render(log, False, lang, titles).encode("utf-8")
+        outputs[prefix + "feed.xml"] = render_feed(log, lang, titles).encode("utf-8")
+        for e in entries:
+            outputs[entry_path(e, lang).lstrip("/") + "index.html"] = render_detail(log, e, lang, titles).encode("utf-8")
+    outputs["sitemap.xml"] = render_sitemap(log).encode("utf-8")
+    outputs["llms.txt"] = render_llms(log, titles).encode("utf-8")
+    for name in ("feed.xml", "zh/feed.xml", "sitemap.xml"):
+        ET.fromstring(outputs[name])
+    return outputs
+
+
+def write_site(log, changed, output_root=None):
+    """Render and validate everything before touching published files.
+
+    Git publishes the resulting set together only after this function succeeds.
+    An optional preview destination keeps unrelated files and gets a raw-data copy.
+    """
+    source = Path(ROOT).resolve()
+    target = Path(output_root or ROOT).resolve()
+    outputs = build_outputs(log, load_titles())
+    png = (source / "assets/og/cover.png").read_bytes()
+    if png[:8] != b"\x89PNG\r\n\x1a\n" or len(png) < 24 or struct.unpack(">II", png[16:24]) != (1200, 630):
+        raise ValueError("preview image must be a 1200×630 PNG")
+    outputs["assets/og/cover.png"] = png
+    if target != source:
+        outputs["data/days.json"] = Path(DATA_PATH).read_bytes()
+    # Stage a complete validated set first. Render/validation failures leave all
+    # existing outputs untouched; failed filesystem writes stop publication.
+    target.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix=".codexy-build-", dir=target) as stage_dir:
+        stage = Path(stage_dir)
+        for name, content in outputs.items():
+            path = stage / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(content)
+        for name in outputs:
+            destination = target / name
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            os.replace(stage / name, destination)
 
 
 def main():
@@ -1460,13 +1627,7 @@ def main():
     with open(DATA_PATH, "rb") as f:
         after = f.read()
     changed = (before is None) or (before != after)
-    # Render before opening INDEX_PATH for writing: render() may read the old timestamp from it.
-    page_html = render(log, changed)
-    with open(INDEX_PATH, "w", encoding="utf-8") as f:
-        f.write(page_html)
-    for name, body in (("sitemap.xml", render_sitemap(log)), ("llms.txt", render_llms(log))):
-        with open(os.path.join(ROOT, name), "w", encoding="utf-8") as f:
-            f.write(body)
+    write_site(log, changed)
     if coverage:
         details = ", ".join(f"{key}={value}" for key, value in sorted(coverage.items()))
         print(f"done with DEGRADED coverage ({details}); no-new is unverified: "

@@ -14,16 +14,30 @@ Unofficial daily tracker of Tibo ([@thsottiaux](https://x.com/thsottiaux), OpenA
 | Tweet text + engagement | api.fxtwitter.com per-status API (no key) | $0 |
 | Domain | username.github.io subdomain | $0 |
 
-Pipeline: `scripts/scrape.py` unions status IDs from two independent public timeline mirrors, then verifies each exact ID, author, full text and timestamp via the fxtwitter API. Only the author's own line-start `Day N/` text creates a day entry. Direct author replies to an archived Day post are stored in that entry's `followups` array, with exact reply/quote relationships and English/Chinese text; they do not increase the day count. Standalone announcements and replies to other threads are not assigned an invented day. The script re-renders the static `index.html` and `llms.txt`; GitHub Pages rebuilds on push.
+Pipeline: `scripts/scrape.py` unions status IDs from two independent public timeline mirrors, then verifies each exact ID, author, full text and timestamp via the fxtwitter API. Only the author's own line-start `Day N/` text creates a day entry. Direct author replies to an archived Day post are stored in that entry's `followups` array, with exact reply/quote relationships and English/Chinese text; they do not increase the day count. Standalone announcements and replies to other threads are not assigned an invented day. The script re-renders the bilingual static pages, feeds, sitemap and `llms.txt`; GitHub Pages rebuilds on push.
 
 Fail-soft by design: unavailable, empty, or archive-lagging discovery sources emit visible workflow warnings. Existing data is preserved and another source can continue. Mirrors can still lag or omit posts, so a successful run is not a guarantee of complete X coverage. Mirror previews are never used to classify posts, because a preview can belong to a neighboring card.
 
 ## Run locally
 
 ```bash
-python3 scripts/scrape.py   # updates data/days.json + index.html
+python3 scripts/scrape.py   # fetch, translate and rebuild all publishing outputs
+python3 -B -m scripts.build --output /tmp/codexy-preview  # saved data only, no network
+python3 -m http.server 8000 --directory /tmp/codexy-preview
 python3 -B -m unittest discover -v  # isolated regression suite (no network)
 ```
+
+## Static publishing
+
+- English home: `/`; Chinese home: `/zh/`.
+- Stable source-ID detail pages: `/updates/{post-id}/` and `/zh/updates/{post-id}/`.
+- RSS: [`/feed.xml`](https://codexy.fyi/feed.xml) and [`/zh/feed.xml`](https://codexy.fyi/zh/feed.xml).
+- Old `#day-*` timeline and `#post-*` follow-up anchors remain available.
+- `data/days.json` is the source archive. `data/titles.json` stores reviewed short titles and the source IDs supporting them. Missing titles use conservative excerpts; missing Chinese translations show labeled English text.
+- `python3 -B -m scripts.build` rebuilds the repository in place without changing the source JSON. `--output DIR` creates an offline preview with a raw JSON copy and the checked-in OG image. Neither command fetches or translates anything.
+- Generated files are `index.html`, `zh/index.html`, both `updates/` trees, both feeds, `sitemap.xml`, and `llms.txt`. The shared `assets/og/cover.png` is generated once from `cover.svg`, not by the daily job.
+- Source timestamps drive the update label. Identical inputs generate identical output bytes. All rendering and XML/image validation finishes before publication files are replaced; failed builds stop the workflow before a push.
+- The daily workflow stages every generated output and reruns tests after both clean rebases and conflict recovery. Concurrent remote changes are never force-pushed away.
 
 ## Reuse as a template
 

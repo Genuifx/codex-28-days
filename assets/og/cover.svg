@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Codex: 28 Days of Shipping</title>
+  <desc id="description">Unofficial tracker of Tibo's 28-day Codex shipping sprint, in English and Chinese.</desc>
+  <!-- Reuses scripts/scrape.py's site colors, font stack, hero line break,
+       red Shipping accent, white HUD, pixel brand, and original LEAF_PATH.
+       Only fixed copy is included: no latest Day, live count, or dated status.
+       Pixel lettering is outlined from the site's Press Start 2P font, so
+       export does not depend on a network request or a font fallback.
+       Press Start 2P: Copyright 2012 The Press Start 2P Project Authors
+       (cody@zone38.net), SIL Open Font License 1.1, https://openfontlicense.org/.
+       These are rendered glyph outlines, not an embedded font distribution. -->
+  <style>
+    .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif; }
+    .headline { font-size: 80px; font-weight: 800; letter-spacing: -2.4px; fill: #2b1712; }
+    .lede { font-size: 27px; font-weight: 400; fill: #6f564d; }
+  </style>
+  <defs><path id="leaf" d="M50 2 58 20 66 15 63 38 78 26 82 34 96 30 88 48 95 52 72 68 75 76 54 73 53 98 47 98 46 73 25 76 28 68 5 52 12 48 4 30 18 34 22 26 37 38 34 15 42 20Z"/></defs>
+  <rect width="1200" height="630" fill="#faf8f3"/>
+  <rect width="1200" height="80" fill="#fff"/>
+  <path d="M0 79.5H1200" stroke="#e7ddd0"/>
+  <g aria-label="CODEX " fill="#2b1712">
+<path transform="translate(96.0000 51) scale(0.01400000 -0.01400000)" d="M250 125V250H125V375H0V750H125V875H250V1000H750V875H875V750H625V875H375V750H250V375H375V250H625V375H875V250H750V125Z"/>
+<path transform="translate(110.5000 51) scale(0.01400000 -0.01400000)" d="M125 125V250H0V875H125V1000H750V875H875V250H750V125ZM250 250H625V875H250Z"/>
+<path transform="translate(125.0000 51) scale(0.01400000 -0.01400000)" d="M0 125V1000H625V875H750V750H875V375H750V250H625V125ZM250 250H500V375H625V750H500V875H250Z"/>
+<path transform="translate(139.5000 51) scale(0.01400000 -0.01400000)" d="M0 125V1000H875V875H250V625H750V500H250V250H875V125Z"/>
+<path transform="translate(154.0000 51) scale(0.01400000 -0.01400000)" d="M0 125V375H125V500H250V625H125V750H0V1000H250V750H375V625H500V750H625V1000H875V750H750V625H625V500H750V375H875V125H625V375H500V500H375V375H250V125Z"/>
+</g>
+<g aria-label="//" fill="#d23b2e">
+<path transform="translate(183.0000 51) scale(0.01400000 -0.01400000)" d="M875 1000V875H750V1000ZM625 875H750V750H625ZM500 750H625V625H500ZM375 625H500V500H375ZM250 500H375V375H250ZM125 375H250V250H125ZM0 250H125V125H0Z"/>
+<path transform="translate(197.5000 51) scale(0.01400000 -0.01400000)" d="M875 1000V875H750V1000ZM625 875H750V750H625ZM500 750H625V625H500ZM375 625H500V500H375ZM250 500H375V375H250ZM125 375H250V250H125ZM0 250H125V125H0Z"/>
+</g>
+<g aria-label=" 28-DAY SPRINT" fill="#2b1712">
+<path transform="translate(226.5000 51) scale(0.01400000 -0.01400000)" d="M0 125V375H125V500H250V625H500V750H625V875H250V750H0V875H125V1000H750V875H875V625H750V500H625V375H375V250H875V125Z"/>
+<path transform="translate(241.0000 51) scale(0.01400000 -0.01400000)" d="M125 125V250H0V500H125V625H0V875H125V1000H625V875H750V625H625V500H875V250H750V125ZM375 625H625V875H250V750H375ZM125 250H625V375H375V500H125Z"/>
+<path transform="translate(255.5000 51) scale(0.01400000 -0.01400000)" d="M125 500V625H875V500Z"/>
+<path transform="translate(270.0000 51) scale(0.01400000 -0.01400000)" d="M0 125V1000H625V875H750V750H875V375H750V250H625V125ZM250 250H500V375H625V750H500V875H250Z"/>
+<path transform="translate(284.5000 51) scale(0.01400000 -0.01400000)" d="M0 125V750H125V875H250V1000H625V875H750V750H875V125H625V375H250V125ZM250 500H625V750H500V875H375V750H250Z"/>
+<path transform="translate(299.0000 51) scale(0.01400000 -0.01400000)" d="M375 125V500H250V625H125V1000H375V625H625V1000H875V625H750V500H625V125Z"/>
+<path transform="translate(328.0000 51) scale(0.01400000 -0.01400000)" d="M125 125V250H0V375H250V250H625V500H125V625H0V875H125V1000H750V875H875V750H625V875H250V625H750V500H875V250H750V125Z"/>
+<path transform="translate(342.5000 51) scale(0.01400000 -0.01400000)" d="M0 125V1000H750V875H875V500H750V375H250V125ZM250 500H625V875H250Z"/>
+<path transform="translate(357.0000 51) scale(0.01400000 -0.01400000)" d="M0 125V1000H750V875H875V500H625V375H750V250H875V125H500V250H375V375H250V125ZM250 500H500V625H625V875H250Z"/>
+<path transform="translate(371.5000 51) scale(0.01400000 -0.01400000)" d="M125 125V250H375V875H125V1000H875V875H625V250H875V125Z"/>
+<path transform="translate(386.0000 51) scale(0.01400000 -0.01400000)" d="M0 125V1000H250V875H375V750H500V625H625V1000H875V125H625V375H500V500H375V625H250V125Z"/>
+<path transform="translate(400.5000 51) scale(0.01400000 -0.01400000)" d="M375 125V875H125V1000H875V875H625V125Z"/>
+</g>
+  <g class="sans">
+    <text class="headline" x="96" y="237">Codex: 28 Days</text>
+    <text class="headline" x="96" y="324">of <tspan fill="#d23b2e">Shipping</tspan></text>
+    <text class="lede" x="96" y="402">Unofficial daily tracker of Tibo's 28-day</text>
+    <text class="lede" x="96" y="446">Codex shipping sprint. English and Chinese.</text>
+  </g>
+  <g aria-hidden="true">
+    <use href="#leaf" transform="translate(964 159) rotate(-18 36 36) scale(.72)" fill="#d23b2e" opacity=".85"/>
+    <use href="#leaf" transform="translate(1070 279) rotate(28 21 21) scale(.42)" fill="#e98b7d" opacity=".85"/>
+    <use href="#leaf" transform="translate(992 411) rotate(64 27 27) scale(.54)" fill="#d23b2e" opacity=".6"/>
+  </g>
+  <path d="M96 510.5H1104" stroke="#e7ddd0"/>
+  <g aria-label="codexy.fyi" fill="#a92d1f">
+<path transform="translate(96.0000 552) scale(0.01600000 -0.01600000)" d="M125 125V250H0V625H125V750H875V625H250V250H875V125Z"/>
+<path transform="translate(112.5000 552) scale(0.01600000 -0.01600000)" d="M125 125V250H0V625H125V750H750V625H875V250H750V125ZM250 250H625V625H250Z"/>
+<path transform="translate(129.0000 552) scale(0.01600000 -0.01600000)" d="M125 125V250H0V625H125V750H625V1000H875V125ZM250 250H625V625H250Z"/>
+<path transform="translate(145.5000 552) scale(0.01600000 -0.01600000)" d="M125 125V250H0V625H125V750H750V625H875V375H250V250H750V125ZM250 500H625V625H250Z"/>
+<path transform="translate(162.0000 552) scale(0.01600000 -0.01600000)" d="M0 125V250H125V375H250V500H125V625H0V750H250V625H375V500H500V625H625V750H875V625H750V500H625V375H750V250H875V125H625V250H500V375H375V250H250V125Z"/>
+<path transform="translate(178.5000 552) scale(0.01600000 -0.01600000)" d="M125 0V125H625V250H125V375H0V750H250V375H625V750H875V125H750V0Z"/>
+<path transform="translate(195.0000 552) scale(0.01600000 -0.01600000)" d="M250 125V375H500V125Z"/>
+<path transform="translate(211.5000 552) scale(0.01600000 -0.01600000)" d="M375 125V625H125V750H375V875H500V1000H875V875H625V750H875V625H625V125Z"/>
+<path transform="translate(228.0000 552) scale(0.01600000 -0.01600000)" d="M125 0V125H625V250H125V375H0V750H250V375H625V750H875V125H750V0Z"/>
+<path transform="translate(244.5000 552) scale(0.01600000 -0.01600000)" d="M375 875V1000H625V875ZM125 125V250H375V625H250V750H625V250H875V125Z"/>
+</g>
+</svg>
