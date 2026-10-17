@@ -141,6 +141,14 @@ class PublishPageTests(unittest.TestCase):
         poster = json.loads(re.search(r'id="poster-data">(.*?)</script>', page, re.S)[1])
         self.assertEqual(poster['entries'][0]['url'], scrape.entry_url(e, 'zh'))
 
+    def test_detail_header_share_jumps_to_the_actual_controls(self):
+        for lang in scrape.LANGS:
+            e = self.log['entries'][-1]
+            page = scrape.render_detail(self.log, e, lang, self.titles)
+            self.assertIn('<a class="hud-share px" href="#share">', page)
+            self.assertRegex(page, r'<div class="share" id="share">.*?data-copy="' + re.escape(scrape.entry_url(e, lang)))
+            self.assertEqual(page.count('id="share"'), 1)
+
     def test_all_share_surfaces_use_the_current_locale(self):
         for lang in scrape.LANGS:
             self.assertTrue(hasattr(scrape, 'render_detail'), 'detail rendering is missing')

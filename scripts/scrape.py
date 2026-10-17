@@ -1398,6 +1398,7 @@ def render_detail(log, e, lang="en", titles=None):
             nav.append(f'<a class="tag" href="{entry_path(item, lang)}">{label}: {esc(entry_title(item, lang, titles))}</a>')
     title = entry_title(e, lang, titles)
     card = render_entry(e, latest_day, lang, titles)
+    card = card.replace('<div class="share">', '<div class="share" id="share">', 1)
     # The page H1 carries the same title; avoid a duplicate heading inside its card.
     card = re.sub(r'  <h2 class="entry-title">.*?</h2>\n', '', card, count=1)
     body = f"""<section class="detail-intro">
@@ -1469,7 +1470,7 @@ a.lang-tag{{text-decoration:none}}
 <header class="hud">
 <div class="wrap">
 <p class="hud-title px">{t('hud_title', html=True)}</p>
-<div class="hud-right"><a class="hud-share px" href="{'#day-' + day_uid(detail) if detail else '#share'}">{t('hud_share')}</a>
+<div class="hud-right"><a class="hud-share px" href="#share">{t('hud_share')}</a>
 <a class="lang-tag px" href="{paths[alternate]}" data-lang-toggle{toggle_home} aria-label="{esc(tr(lang, 'lang_aria'))}"><span class="lt-zh" lang="zh-CN">中</span><span class="lt-en" lang="en">EN</span></a>
 <span class="hud-lv px">{t('hud_lv', {'lv': f'{latest_day:02d}', 't': TOTAL_DAYS}, html=True)}</span></div>
 </div>
