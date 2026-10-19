@@ -622,3 +622,22 @@ Landing sometime today by EOD PST
 作者补充中文（机器翻译，仅供参考）:
 
 将于今天内生效，最晚在太平洋时间当天结束前（原文：EOD PST）。
+
+### Codex Day 14: Edit previous messages in desktop threads
+
+- Date: Oct 19, 2026 · 01:18 UTC
+- Original post: https://x.com/thsottiaux/status/2111990254408434095
+- Permalink: https://codexy.fyi/updates/2111990254408434095/
+- 中文: https://codexy.fyi/zh/updates/2111990254408434095/
+
+English (original):
+
+Day 14/
+
+Small quality of life improvement. You can now edit previous messages within a thread in the desktop app. Long time requested, and took way too long to get that one out.
+
+中文（机器翻译，仅供参考）:
+
+Day 14/
+
+一项小小的体验改进：现在可以在桌面应用中编辑同一对话内之前发送的消息了。大家期待这个功能很久了，我们也确实花了太长时间才推出。
