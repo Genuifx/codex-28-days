@@ -641,3 +641,30 @@ Small quality of life improvement. You can now edit previous messages within a t
 Day 14/
 
 一项小小的体验改进：现在可以在桌面应用中编辑同一对话内之前发送的消息了。大家期待这个功能很久了，我们也确实花了太长时间才推出。
+
+### Codex Day 15: We're cooked
+
+- Date: Oct 19, 2026 · 19:45 UTC
+- Original post: https://x.com/thsottiaux/status/2112268918681485431
+- Permalink: https://codexy.fyi/updates/2112268918681485431/
+- 中文: https://codexy.fyi/zh/updates/2112268918681485431/
+
+English (original):
+
+Day 15/ We're cooked
+
+中文（机器翻译，仅供参考）:
+
+Day 15/ 我们完了（We're cooked）
+
+Quoted post by OpenAI Developers (@OpenAIDevs): https://x.com/OpenAIDevs/status/2112242739198959913
+
+Here’s what we’re cooking with Codex:
+
+https://x.com/i/broadcasts/1RKZzBELBbXKB
+
+引用帖中文（机器翻译，仅供参考）:
+
+来看看我们正在用 Codex 做些什么：
+
+https://x.com/i/broadcasts/1RKZzBELBbXKB
