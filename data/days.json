@@ -485,6 +485,29 @@
       "qual": "",
       "text_zh": "Day 15/ 我们完了（We're cooked）",
       "quote_text_zh": "来看看我们正在用 Codex 做些什么：\n\nhttps://x.com/i/broadcasts/1RKZzBELBbXKB"
+    },
+    {
+      "id": "2112432076767289678",
+      "text": "Day 15/ Nevermind, we're still cooking... and reset. Enjoy.",
+      "posted_at": "Tue Oct 20 06:33:48 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2112432076767289678",
+      "likes": 9798,
+      "reposts": 428,
+      "replies": 2568,
+      "views": 859212,
+      "quote": {
+        "id": "2112268918681485431",
+        "handle": "thsottiaux",
+        "name": "Tibo",
+        "text": "Day 15/ We're cooked",
+        "created_at": "Mon Oct 19 19:45:28 +0000 2026",
+        "url": "https://x.com/thsottiaux/status/2112268918681485431"
+      },
+      "day": 15,
+      "sub": "",
+      "qual": "",
+      "text_zh": "Day 15/ 没关系，我们还在做饭……然后重置。享受。",
+      "quote_text_zh": "Day 15/ 我们煮熟了"
     }
   ],
   "resets": [
