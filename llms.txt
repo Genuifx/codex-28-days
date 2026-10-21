@@ -691,3 +691,38 @@ Day 15/ We're cooked
 引用帖中文（机器翻译，仅供参考）:
 
 Day 15/ 我们煮熟了
+
+### Codex Day 16: You can now cache for 12h in the API and for logged in users across Codex & Wor…
+
+- Date: Oct 21, 2026 · 01:10 UTC
+- Original post: https://x.com/thsottiaux/status/2112712984644784534
+- Permalink: https://codexy.fyi/updates/2112712984644784534/
+- 中文: https://codexy.fyi/zh/updates/2112712984644784534/
+
+English (original):
+
+Day 16/
+
+You can now cache for 12h in the API and for logged in users across Codex & Work we keep cache forever and you don’t have any penalty for coming back to an old conversation or resuming after a few hours and are now guaranteed to hit the cache.
+
+中文（机器翻译，仅供参考）:
+
+Day 16/
+
+您现在可以在 API 中缓存 12 小时，对于通过 Codex & Work 登录的用户，我们会永久保留缓存，并且您不会因返回旧对话或在几个小时后恢复而受到任何惩罚，并且现在保证会命中缓存。
+
+Quoted post by OpenAI Developers (@OpenAIDevs): https://x.com/OpenAIDevs/status/2112603916076781778
+
+You can now choose 12-hour prompt caching in the API.
+
+Persistent agents, like dots, reuse context throughout the day. 
+
+You can keep shared instructions, tools, and context cached longer and pay the lower cached-input rate, even when requests are hours apart.
+
+引用帖中文（机器翻译，仅供参考）:
+
+您现在可以在 API 中选择 12 小时提示缓存。
+
+持久代理（例如 dots）全天重复使用上下文。 
+
+即使请求相隔数小时，您也可以将共享指令、工具和上下文缓存更长时间，并支付较低的缓存输入费率。

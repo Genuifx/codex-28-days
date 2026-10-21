@@ -508,6 +508,29 @@
       "qual": "",
       "text_zh": "Day 15/ 没关系，我们还在做饭……然后重置。享受。",
       "quote_text_zh": "Day 15/ 我们煮熟了"
+    },
+    {
+      "id": "2112712984644784534",
+      "text": "Day 16/\n\nYou can now cache for 12h in the API and for logged in users across Codex & Work we keep cache forever and you don’t have any penalty for coming back to an old conversation or resuming after a few hours and are now guaranteed to hit the cache.",
+      "posted_at": "Wed Oct 21 01:10:02 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2112712984644784534",
+      "likes": 4701,
+      "reposts": 237,
+      "replies": 927,
+      "views": 300283,
+      "quote": {
+        "id": "2112603916076781778",
+        "handle": "OpenAIDevs",
+        "name": "OpenAI Developers",
+        "text": "You can now choose 12-hour prompt caching in the API.\n\nPersistent agents, like dots, reuse context throughout the day. \n\nYou can keep shared instructions, tools, and context cached longer and pay the lower cached-input rate, even when requests are hours apart.",
+        "created_at": "Tue Oct 20 17:56:38 +0000 2026",
+        "url": "https://x.com/OpenAIDevs/status/2112603916076781778"
+      },
+      "day": 16,
+      "sub": "",
+      "qual": "",
+      "text_zh": "Day 16/\n\n您现在可以在 API 中缓存 12 小时，对于通过 Codex & Work 登录的用户，我们会永久保留缓存，并且您不会因返回旧对话或在几个小时后恢复而受到任何惩罚，并且现在保证会命中缓存。",
+      "quote_text_zh": "您现在可以在 API 中选择 12 小时提示缓存。\n\n持久代理（例如 dots）全天重复使用上下文。 \n\n即使请求相隔数小时，您也可以将共享指令、工具和上下文缓存更长时间，并支付较低的缓存输入费率。"
     }
   ],
   "resets": [
