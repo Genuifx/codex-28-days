@@ -726,3 +726,30 @@ You can keep shared instructions, tools, and context cached longer and pay the l
 持久代理（例如 dots）全天重复使用上下文。 
 
 即使请求相隔数小时，您也可以将共享指令、工具和上下文缓存更长时间，并支付较低的缓存输入费率。
+
+### Codex Day 17: Reset
+
+- Date: Oct 22, 2026 · 06:55 UTC
+- Original post: https://x.com/thsottiaux/status/2113162277688070445
+- Permalink: https://codexy.fyi/updates/2113162277688070445/
+- 中文: https://codexy.fyi/zh/updates/2113162277688070445/
+
+English (original):
+
+Day 17/ Bet you thought we forgot, but no, it’s reset day today.
+
+Also good time to remind you to get Daybreak Blue access, it only takes 15 mins and you don’t want to have to do it in the middle of an incident.
+
+中文（机器翻译，仅供参考）:
+
+Day 17/ 我打赌你以为我们忘了，但没有，今天是重置日。
+
+这也是提醒你去获取 Daybreak Blue 访问权限的好时机，只要 15 分钟，你不会想在事故进行到一半的时候才去做。
+
+Author follow-up (reply to https://x.com/thsottiaux/status/2113162277688070445): https://x.com/thsottiaux/status/2113162413008884099
+
+Lands tomorrow before 10am PST.
+
+作者补充中文（机器翻译，仅供参考）:
+
+将于明天太平洋时间上午 10 点前上线。
