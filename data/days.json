@@ -531,6 +531,35 @@
       "qual": "",
       "text_zh": "Day 16/\n\n您现在可以在 API 中缓存 12 小时，对于通过 Codex & Work 登录的用户，我们会永久保留缓存，并且您不会因返回旧对话或在几个小时后恢复而受到任何惩罚，并且现在保证会命中缓存。",
       "quote_text_zh": "您现在可以在 API 中选择 12 小时提示缓存。\n\n持久代理（例如 dots）全天重复使用上下文。 \n\n即使请求相隔数小时，您也可以将共享指令、工具和上下文缓存更长时间，并支付较低的缓存输入费率。"
+    },
+    {
+      "id": "2113162277688070445",
+      "text": "Day 17/ Bet you thought we forgot, but no, it’s reset day today.\n\nAlso good time to remind you to get Daybreak Blue access, it only takes 15 mins and you don’t want to have to do it in the middle of an incident.",
+      "posted_at": "Thu Oct 22 06:55:22 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2113162277688070445",
+      "likes": 10409,
+      "reposts": 485,
+      "replies": 1776,
+      "views": 1247118,
+      "day": 17,
+      "sub": "",
+      "qual": "",
+      "followups": [
+        {
+          "id": "2113162413008884099",
+          "text": "Lands tomorrow before 10am PST.",
+          "posted_at": "Thu Oct 22 06:55:54 +0000 2026",
+          "url": "https://x.com/thsottiaux/status/2113162413008884099",
+          "likes": 2373,
+          "reposts": 93,
+          "replies": 660,
+          "views": 681844,
+          "replying_to_status": "2113162277688070445",
+          "replying_to": "thsottiaux",
+          "text_zh": "将于明天太平洋时间上午 10 点前上线。"
+        }
+      ],
+      "text_zh": "Day 17/ 我打赌你以为我们忘了，但没有，今天是重置日。\n\n这也是提醒你去获取 Daybreak Blue 访问权限的好时机，只要 15 分钟，你不会想在事故进行到一半的时候才去做。"
     }
   ],
   "resets": [
@@ -573,6 +602,14 @@
       "text_zh": "Day 13/ 额度重置",
       "url": "https://x.com/thsottiaux/status/2111492673890824348",
       "posted_at": "Sat Oct 17 16:20:57 +0000 2026"
+    },
+    {
+      "day": 17,
+      "id": "2113162277688070445",
+      "text": "Day 17/ Bet you thought we forgot, but no, it’s reset day today.\n\nAlso good time to remind you to get Daybreak Blue access, it only takes 15 mins and you don’t want to have to do it in the middle of an incident.",
+      "text_zh": "Day 17/ 我打赌你以为我们忘了，但没有，今天是重置日。\n\n这也是提醒你去获取 Daybreak Blue 访问权限的好时机，只要 15 分钟，你不会想在事故进行到一半的时候才去做。",
+      "url": "https://x.com/thsottiaux/status/2113162277688070445",
+      "posted_at": "Thu Oct 22 06:55:22 +0000 2026"
     }
   ]
 }
