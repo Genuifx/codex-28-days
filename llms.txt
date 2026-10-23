@@ -753,3 +753,26 @@ Lands tomorrow before 10am PST.
 作者补充中文（机器翻译，仅供参考）:
 
 将于明天太平洋时间上午 10 点前上线。
+
+### Codex Day 18: Decisions API is GA, and a reset
+
+- Date: Oct 23, 2026 · 04:46 UTC
+- Original post: https://x.com/thsottiaux/status/2113492187770175603
+- Permalink: https://codexy.fyi/updates/2113492187770175603/
+- 中文: https://codexy.fyi/zh/updates/2113492187770175603/
+
+English (original):
+
+Day 18/ Decisions API is GA, OpenResponses joined the Linux Foundation, we shipped some performance improvements and Uber is going all-in on codex & work. But yes… that’s a reset!
+
+中文（机器翻译，仅供参考）:
+
+Day 18/ Decisions API 已正式发布，OpenResponses 加入了 Linux 基金会，我们发布了一些性能改进，Uber 也全面投入 Codex 和 Work。不过没错……这次是重置！
+
+Author follow-up (reply to https://x.com/thsottiaux/status/2113492187770175603): https://x.com/thsottiaux/status/2113492502355562875
+
+Landing tomorrow before 10am PST together with a small ship.
+
+作者补充中文（机器翻译，仅供参考）:
+
+将于明天太平洋时间上午 10 点前，与一项小发布一起上线。

@@ -560,6 +560,35 @@
         }
       ],
       "text_zh": "Day 17/ 我打赌你以为我们忘了，但没有，今天是重置日。\n\n这也是提醒你去获取 Daybreak Blue 访问权限的好时机，只要 15 分钟，你不会想在事故进行到一半的时候才去做。"
+    },
+    {
+      "id": "2113492187770175603",
+      "text": "Day 18/ Decisions API is GA, OpenResponses joined the Linux Foundation, we shipped some performance improvements and Uber is going all-in on codex & work. But yes… that’s a reset!",
+      "posted_at": "Fri Oct 23 04:46:19 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2113492187770175603",
+      "likes": 8946,
+      "reposts": 348,
+      "replies": 1327,
+      "views": 1107784,
+      "day": 18,
+      "sub": "",
+      "qual": "",
+      "followups": [
+        {
+          "id": "2113492502355562875",
+          "text": "Landing tomorrow before 10am PST together with a small ship.",
+          "posted_at": "Fri Oct 23 04:47:34 +0000 2026",
+          "url": "https://x.com/thsottiaux/status/2113492502355562875",
+          "likes": 2531,
+          "reposts": 93,
+          "replies": 402,
+          "views": 555302,
+          "replying_to_status": "2113492187770175603",
+          "replying_to": "thsottiaux",
+          "text_zh": "将于明天太平洋时间上午 10 点前，与一项小发布一起上线。"
+        }
+      ],
+      "text_zh": "Day 18/ Decisions API 已正式发布，OpenResponses 加入了 Linux 基金会，我们发布了一些性能改进，Uber 也全面投入 Codex 和 Work。不过没错……这次是重置！"
     }
   ],
   "resets": [
@@ -610,6 +639,14 @@
       "text_zh": "Day 17/ 我打赌你以为我们忘了，但没有，今天是重置日。\n\n这也是提醒你去获取 Daybreak Blue 访问权限的好时机，只要 15 分钟，你不会想在事故进行到一半的时候才去做。",
       "url": "https://x.com/thsottiaux/status/2113162277688070445",
       "posted_at": "Thu Oct 22 06:55:22 +0000 2026"
+    },
+    {
+      "day": 18,
+      "id": "2113492187770175603",
+      "text": "Day 18/ Decisions API is GA, OpenResponses joined the Linux Foundation, we shipped some performance improvements and Uber is going all-in on codex & work. But yes… that’s a reset!",
+      "text_zh": "Day 18/ Decisions API 已正式发布，OpenResponses 加入了 Linux 基金会，我们发布了一些性能改进，Uber 也全面投入 Codex 和 Work。不过没错……这次是重置！",
+      "url": "https://x.com/thsottiaux/status/2113492187770175603",
+      "posted_at": "Fri Oct 23 04:46:19 +0000 2026"
     }
   ]
 }
