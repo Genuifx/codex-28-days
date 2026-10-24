@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Codex：28 天连续发布</title><link>https://codexy.fyi/zh/</link><description>逐日记录 Tibo 28 天冲刺中的每一次 Codex 发布。</description><language>zh-CN</language><atom:link href="https://codexy.fyi/zh/feed.xml" rel="self" type="application/rss+xml" /><item><title>Codex 第 18 天：Decisions API 正式发布，并迎来 Reset</title><link>https://codexy.fyi/zh/updates/2113492187770175603/</link><guid isPermaLink="false">urn:codexy:x:2113492187770175603:zh</guid><pubDate>Fri, 23 Oct 2026 04:46:19 GMT</pubDate><description>Day 18/ Decisions API 已正式发布，OpenResponses 加入了 Linux 基金会，我们发布了一些性能改进，Uber 也全面投入 Codex 和 Work。不过没错……这次是重置！
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Codex：28 天连续发布</title><link>https://codexy.fyi/zh/</link><description>逐日记录 Tibo 28 天冲刺中的每一次 Codex 发布。</description><language>zh-CN</language><atom:link href="https://codexy.fyi/zh/feed.xml" rel="self" type="application/rss+xml" /><item><title>Codex 第 19 天：dot 通话更快，改推理不再失效缓存，并更新 CLI</title><link>https://codexy.fyi/zh/updates/2113770573994299544/</link><guid isPermaLink="false">urn:codexy:x:2113770573994299544:zh</guid><pubDate>Fri, 23 Oct 2026 23:12:31 GMT</pubDate><description>Day 19/ 一些小更新。dots 的通话连接快了很多；在 Codex 和 Work 里，对话中途更改推理不再使缓存失效。我们也更新了 Codex CLI。
+
+作者补充: 关于 Codex CLI 的更新。我们新增了可复用的提示预设、可在行内调整的模型和权限设置，以及企业 MCP 登录。我们也修复了恢复长会话时的失败，并加入了…
+https://x.com/thsottiaux/status/2113770862860222611
+
+原帖：https://x.com/thsottiaux/status/2113770573994299544</description></item><item><title>Codex 第 18 天：Decisions API 正式发布，并迎来 Reset</title><link>https://codexy.fyi/zh/updates/2113492187770175603/</link><guid isPermaLink="false">urn:codexy:x:2113492187770175603:zh</guid><pubDate>Fri, 23 Oct 2026 04:46:19 GMT</pubDate><description>Day 18/ Decisions API 已正式发布，OpenResponses 加入了 Linux 基金会，我们发布了一些性能改进，Uber 也全面投入 Codex 和 Work。不过没错……这次是重置！
 
 作者补充: 将于明天太平洋时间上午 10 点前，与一项小发布一起上线。
 https://x.com/thsottiaux/status/2113492502355562875

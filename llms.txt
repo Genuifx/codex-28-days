@@ -776,3 +776,30 @@ Landing tomorrow before 10am PST together with a small ship.
 作者补充中文（机器翻译，仅供参考）:
 
 将于明天太平洋时间上午 10 点前，与一项小发布一起上线。
+
+### Codex Day 19: Faster dot calls, cache-safe reasoning changes, and CLI updates
+
+- Date: Oct 23, 2026 · 23:12 UTC
+- Original post: https://x.com/thsottiaux/status/2113770573994299544
+- Permalink: https://codexy.fyi/updates/2113770573994299544/
+- 中文: https://codexy.fyi/zh/updates/2113770573994299544/
+
+English (original):
+
+Day 19/ Small updates. Calls connect much faster for dots, changing reasoning in codex & work mid conversation does not invalidate cache anymore and a we've also updated the codex cli.
+
+中文（机器翻译，仅供参考）:
+
+Day 19/ 一些小更新。dots 的通话连接快了很多；在 Codex 和 Work 里，对话中途更改推理不再使缓存失效。我们也更新了 Codex CLI。
+
+Author follow-up (reply to https://x.com/thsottiaux/status/2113770573994299544): https://x.com/thsottiaux/status/2113770862860222611
+
+On codex cli updates. We've added reusable prompt presets, inline model and permission settings, and enterprise MCP sign-in. We've also fixed failures when resuming long sessions and added Windows corporate-proxy authentication.
+
+Surprisingly the CLI has grown 2X in usage since devday.
+
+作者补充中文（机器翻译，仅供参考）:
+
+关于 Codex CLI 的更新。我们新增了可复用的提示预设、可在行内调整的模型和权限设置，以及企业 MCP 登录。我们也修复了恢复长会话时的失败，并加入了 Windows 企业代理身份验证。
+
+没想到自 DevDay 以来，CLI 的使用量已经达到原来的 2 倍。

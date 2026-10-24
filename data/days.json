@@ -589,6 +589,35 @@
         }
       ],
       "text_zh": "Day 18/ Decisions API 已正式发布，OpenResponses 加入了 Linux 基金会，我们发布了一些性能改进，Uber 也全面投入 Codex 和 Work。不过没错……这次是重置！"
+    },
+    {
+      "id": "2113770573994299544",
+      "text": "Day 19/ Small updates. Calls connect much faster for dots, changing reasoning in codex & work mid conversation does not invalidate cache anymore and a we've also updated the codex cli.",
+      "posted_at": "Fri Oct 23 23:12:31 +0000 2026",
+      "url": "https://x.com/thsottiaux/status/2113770573994299544",
+      "likes": 4259,
+      "reposts": 125,
+      "replies": 708,
+      "views": 334769,
+      "day": 19,
+      "sub": "",
+      "qual": "",
+      "followups": [
+        {
+          "id": "2113770862860222611",
+          "text": "On codex cli updates. We've added reusable prompt presets, inline model and permission settings, and enterprise MCP sign-in. We've also fixed failures when resuming long sessions and added Windows corporate-proxy authentication.\n\nSurprisingly the CLI has grown 2X in usage since devday.",
+          "posted_at": "Fri Oct 23 23:13:40 +0000 2026",
+          "url": "https://x.com/thsottiaux/status/2113770862860222611",
+          "likes": 883,
+          "reposts": 19,
+          "replies": 128,
+          "views": 123368,
+          "replying_to_status": "2113770573994299544",
+          "replying_to": "thsottiaux",
+          "text_zh": "关于 Codex CLI 的更新。我们新增了可复用的提示预设、可在行内调整的模型和权限设置，以及企业 MCP 登录。我们也修复了恢复长会话时的失败，并加入了 Windows 企业代理身份验证。\n\n没想到自 DevDay 以来，CLI 的使用量已经达到原来的 2 倍。"
+        }
+      ],
+      "text_zh": "Day 19/ 一些小更新。dots 的通话连接快了很多；在 Codex 和 Work 里，对话中途更改推理不再使缓存失效。我们也更新了 Codex CLI。"
     }
   ],
   "resets": [
